@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Rendering.PostProcessing;
 
 public class Ouch : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class Ouch : MonoBehaviour
     private float barSize;
     [Space]
     public CameraShake CameraShake;
-    public Image Screen;
+    public PostProcessVolume Screen;
     [Space]
     public float duration = 0.2f;
     public float magnitude = 0.1f;
@@ -43,7 +44,7 @@ public class Ouch : MonoBehaviour
         Rigid = GetComponent<Rigidbody>();
         Scene currentScene = SceneManager.GetActiveScene();
         string sceneName = currentScene.name;
-        Screen.color = new Color(1, 1, 1, 0);
+        Screen.weight = 0;
 
         //load
         
@@ -303,7 +304,7 @@ public class Ouch : MonoBehaviour
         for (float i = 1; i >= 0; i -= Time.deltaTime / Sec)
         {
             // set color with i as alpha
-            Screen.color = new Color(1, 1, 1, i);
+            Screen.weight = i;
             yield return null;
         }
     }

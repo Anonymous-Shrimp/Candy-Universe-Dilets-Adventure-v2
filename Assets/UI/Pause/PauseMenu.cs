@@ -7,12 +7,14 @@ public class PauseMenu : MonoBehaviour {
 
     public static bool isPaused = false;
     public GameObject pauseMenu;
+    [HideInInspector]
+    public bool canPause = true;
     private void Start()
     {
         isPaused = false;
     }
     void Update () {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && canPause)
         {
             if (isPaused)
             {
@@ -40,6 +42,10 @@ public class PauseMenu : MonoBehaviour {
 
         Time.timeScale = 1f;
         isPaused = false;
+        Cursor.visible = false;
+        Screen.lockCursor = true;
+        Cursor.visible = true;
+        Screen.lockCursor = false;
     }
     void Pause()
     {
