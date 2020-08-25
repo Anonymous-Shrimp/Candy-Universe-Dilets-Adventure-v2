@@ -11,6 +11,7 @@ public class miniMap : MonoBehaviour
     public float camSizeNormal;
     public float camSizeZoom;
     public Camera cam;
+    public GameObject northArrow;
 
     public Animator anim;
     // Start is called before the first frame update
@@ -25,6 +26,7 @@ public class miniMap : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
+            
             followingCharacter = !followingCharacter;
         }
         if (Input.GetKeyDown(KeyCode.Q))
@@ -33,17 +35,21 @@ public class miniMap : MonoBehaviour
         }
         if (followingCharacter)
         {
+            northArrow.layer = 9;
+            transform.eulerAngles = new Vector3(0, Dilet.transform.eulerAngles.y, 0);
             transform.position = Dilet.transform.position;
             cam.orthographicSize = camSizeNormal;
         }
         else
         {
+            northArrow.layer = 11;
+            transform.eulerAngles = new Vector3(0,0, 0);
             transform.position = zoomOutPos;
             cam.orthographicSize = camSizeZoom;
         }
        
         
         
-        transform.eulerAngles = new Vector3(0, Dilet.transform.eulerAngles.y, 0);
+        
     }
 }

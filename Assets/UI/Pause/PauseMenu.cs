@@ -32,8 +32,16 @@ public class PauseMenu : MonoBehaviour {
         }
         else
         {
-            Cursor.visible = false;
-            Screen.lockCursor = true;
+            if (canPause)
+            {
+                Cursor.visible = false;
+                Screen.lockCursor = true;
+            }
+            else
+            {
+                Cursor.visible = true;
+                Screen.lockCursor = false;
+            }
         }
 	}
     public void Resume()
@@ -44,11 +52,12 @@ public class PauseMenu : MonoBehaviour {
         isPaused = false;
         Cursor.visible = false;
         Screen.lockCursor = true;
-        Cursor.visible = true;
-        Screen.lockCursor = false;
     }
     void Pause()
     {
+
+        Cursor.visible = true;
+        Screen.lockCursor = false;
         pauseMenu.SetActive(true);
 
         Time.timeScale = 0f;

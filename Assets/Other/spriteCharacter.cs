@@ -7,6 +7,7 @@ public class spriteCharacter : MonoBehaviour
     public Transform sprite;
     public float multiplier;
     public Camera cam;
+
     
     // Update is called once per frame
     void Update()

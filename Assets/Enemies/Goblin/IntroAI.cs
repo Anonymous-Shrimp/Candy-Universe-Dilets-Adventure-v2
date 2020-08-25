@@ -35,7 +35,7 @@ public class IntroAI : MonoBehaviour {
             }
             else
             {
-                Application.LoadLevel("Overworld 3");
+                FindObjectOfType<loading>().LoadLevel(3);
             }
             
         }
@@ -50,7 +50,7 @@ public class IntroAI : MonoBehaviour {
             }
             else
             {
-                Application.LoadLevel("Overworld 3");
+                FindObjectOfType<loading>().LoadLevel(3);
             }
         }
 

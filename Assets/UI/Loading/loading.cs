@@ -20,13 +20,14 @@ public class loading : MonoBehaviour
     public void LoadSameLevel()
     {
         StartCoroutine(LoadAsynchronously(SceneManager.GetActiveScene().buildIndex));
+
     }
 
 
     IEnumerator LoadAsynchronously(int sceneIndex)
     {
 
-        if(!(SceneManager.GetActiveScene().buildIndex == 0))
+        if(pause != null)
         {
             pause.Resume();
         }
@@ -61,9 +62,14 @@ public class loading : MonoBehaviour
             pause.canPause = true;
         }
     }
+    public void quit()
+    {
+        Application.Quit();
+    }
     // Start is called before the first frame update
     void Start()
     {
+        loadingScreen.SetActive(true);
         StartCoroutine(wait(1));
     }
 
