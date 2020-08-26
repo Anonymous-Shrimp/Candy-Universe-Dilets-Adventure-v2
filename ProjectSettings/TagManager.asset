@@ -27,6 +27,13 @@ TagManager:
   - Boulder
   - BoulderEnd
   - Candy
+  - RockArea
+  - FireArea
+  - IceArea
+  - ThunderArea
+  - WaterArea
+  - PoyoArea
+  - NanArea
   layers:
   - Default
   - TransparentFX

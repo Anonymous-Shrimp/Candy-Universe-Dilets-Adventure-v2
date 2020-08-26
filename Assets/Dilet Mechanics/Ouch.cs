@@ -37,7 +37,7 @@ public class Ouch : MonoBehaviour
     public GameObject rockGate;
     [Space]
     public timePlace timeInPlace;
-    
+    public Animator animationArea;
     Rigidbody Rigid;
     
     void Start()
@@ -291,10 +291,59 @@ public class Ouch : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Candy"))
         {
-            health = 100;
+            health += 40;
             Destroy(collision.gameObject);
         }
-        
+        if (collision.gameObject.CompareTag("FireArea"))
+        {
+            if(animationArea != null)
+            {
+                animationArea.SetTrigger("Fire");
+            }
+        }
+        if (collision.gameObject.CompareTag("IceArea"))
+        {
+            if (animationArea != null)
+            {
+                animationArea.SetTrigger("Ice");
+            }
+        }
+        if (collision.gameObject.CompareTag("RockArea"))
+        {
+            if (animationArea != null)
+            {
+                animationArea.SetTrigger("Rock");
+            }
+        }
+        if (collision.gameObject.CompareTag("NanArea"))
+        {
+            if (animationArea != null)
+            {
+                animationArea.SetTrigger("Nan");
+            }
+        }
+        if (collision.gameObject.CompareTag("PoyoArea"))
+        {
+            if (animationArea != null)
+            {
+                animationArea.SetTrigger("Poyo");
+            }
+        }
+        if (collision.gameObject.CompareTag("WaterArea"))
+        {
+            if (animationArea != null)
+            {
+                animationArea.SetTrigger("Water");
+            }
+        }
+        if (collision.gameObject.CompareTag("ThunderArea"))
+        {
+            if (animationArea != null)
+            {
+                animationArea.SetTrigger("Thunder");
+            }
+        }
+
 
 
     }
