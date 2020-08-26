@@ -38990,6 +38990,7 @@ GameObject:
   - component: {fileID: 313990419}
   - component: {fileID: 313990418}
   - component: {fileID: 313990417}
+  - component: {fileID: 313990421}
   m_Layer: 4
   m_Name: WaterBasicDaytime
   m_TagString: WaterDeath
@@ -39022,8 +39023,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.7453141, y: 0, z: 0.97759444}
-  m_Center: {x: 0.0016642252, y: 0, z: -0.3507601}
+  m_Size: {x: 1.7453141, y: 0.25, z: 0.97759444}
+  m_Center: {x: 0.0016642252, y: -0.13, z: -0.3507601}
 --- !u!114 &313990418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39083,6 +39084,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 313990415}
   m_Mesh: {fileID: 4300008, guid: ce8d79c79d11b8f9d00076e98d76c639, type: 3}
+--- !u!114 &313990421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 313990415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: 3b8122ef292e70644b8ae0033a86c0e3, type: 2}
+  isGlobal: 0
+  blendDistance: 1.86
+  weight: 1
+  priority: 0.1
 --- !u!4 &320620473 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3495670089141394642, guid: d584096a8782a1040adb0a7909ea97a3,
@@ -53740,6 +53758,7 @@ GameObject:
   - component: {fileID: 468737732}
   - component: {fileID: 468737731}
   - component: {fileID: 468737730}
+  - component: {fileID: 468737734}
   m_Layer: 4
   m_Name: WaterProDaytime
   m_TagString: WaterDeath
@@ -53756,7 +53775,7 @@ Transform:
   m_GameObject: {fileID: 468737728}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 360, z: 1357}
-  m_LocalScale: {x: 2400, y: 1, z: 2400}
+  m_LocalScale: {x: 2400, y: 2400, z: 2400}
   m_Children: []
   m_Father: {fileID: 91030189}
   m_RootOrder: 13
@@ -53772,8 +53791,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.9999992, y: 0, z: 1.9999987}
-  m_Center: {x: -0.00000032782552, y: 0, z: 0.00000032782552}
+  m_Size: {x: 1.9999992, y: 1, z: 1.9999987}
+  m_Center: {x: -0.00000032782552, y: -0.51, z: 0.00000032782552}
 --- !u!114 &468737731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53843,6 +53862,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 468737728}
   m_Mesh: {fileID: 4300006, guid: ba6a41dc489914734857bb5924eb70ad, type: 3}
+--- !u!114 &468737734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 468737728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: 3b8122ef292e70644b8ae0033a86c0e3, type: 2}
+  isGlobal: 0
+  blendDistance: 5
+  weight: 1
+  priority: 0
 --- !u!1 &474066764
 GameObject:
   m_ObjectHideFlags: 0
@@ -125164,21 +125200,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1516625154, guid: 131e38ef5c76d294cb31d07208f19dcc, type: 3}
+      propertyPath: volumeLayer.m_Bits
+      value: 528
+      objectReference: {fileID: 0}
     - target: {fileID: 1971277829926040, guid: 131e38ef5c76d294cb31d07208f19dcc, type: 3}
       propertyPath: m_Name
       value: Dilet
       objectReference: {fileID: 0}
     - target: {fileID: 4255561405966268, guid: 131e38ef5c76d294cb31d07208f19dcc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -386
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4255561405966268, guid: 131e38ef5c76d294cb31d07208f19dcc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 652
+      value: 703
       objectReference: {fileID: 0}
     - target: {fileID: 4255561405966268, guid: 131e38ef5c76d294cb31d07208f19dcc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 314
+      value: 884
       objectReference: {fileID: 0}
     - target: {fileID: 4255561405966268, guid: 131e38ef5c76d294cb31d07208f19dcc, type: 3}
       propertyPath: m_LocalRotation.x
