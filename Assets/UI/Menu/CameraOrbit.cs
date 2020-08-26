@@ -5,7 +5,6 @@ using UnityEngine;
 public class CameraOrbit : MonoBehaviour {
     public Transform cameraOrbit;
     public float speed = 1f;
-    public float deg;
 	// Use this for initialization
 	void Start () {
 		
@@ -13,7 +12,6 @@ public class CameraOrbit : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        cameraOrbit.transform.Rotate(0, deg, 0);
-        deg += speed / 100;
+        cameraOrbit.transform.Rotate(0, speed, 0);
     }
 }

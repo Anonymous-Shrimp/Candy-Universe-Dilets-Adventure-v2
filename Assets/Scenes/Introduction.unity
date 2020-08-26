@@ -15376,6 +15376,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114584988048618354, guid: 131e38ef5c76d294cb31d07208f19dcc,
+        type: 3}
+      propertyPath: m_MouseLook.lockCursor
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 114975428100900742, guid: 131e38ef5c76d294cb31d07208f19dcc,
         type: 3}
       propertyPath: Bar

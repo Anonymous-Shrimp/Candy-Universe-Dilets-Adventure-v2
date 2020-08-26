@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: f808cf03f70767a499666314fb12739f, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 888ce785e5f83d64187f5effe875c827, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -392,8 +392,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 237571126}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 360, z: 1357}
-  m_LocalScale: {x: 2400, y: 1, z: 2400}
+  m_LocalPosition: {x: 0.00030334, y: 360, z: 1357}
+  m_LocalScale: {x: 3394.0798, y: 1.4142, z: 3394.0798}
   m_Children: []
   m_Father: {fileID: 402463760}
   m_RootOrder: 8
@@ -10643,6 +10643,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1815933652972462, guid: 5719bf3dedb4db5448d71ab193d60a62, type: 3}
+      propertyPath: m_Name
+      value: Time Cycle
+      objectReference: {fileID: 0}
     - target: {fileID: 4565650697053556, guid: 5719bf3dedb4db5448d71ab193d60a62, type: 3}
       propertyPath: m_LocalPosition.x
       value: -590.8042
@@ -10675,10 +10679,22 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 4565650697053556, guid: 5719bf3dedb4db5448d71ab193d60a62, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4565650697053556, guid: 5719bf3dedb4db5448d71ab193d60a62, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4565650697053556, guid: 5719bf3dedb4db5448d71ab193d60a62, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 114821393877107242, guid: 5719bf3dedb4db5448d71ab193d60a62,
         type: 3}
       propertyPath: currentTimeOfDay
-      value: 0.577
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5719bf3dedb4db5448d71ab193d60a62, type: 3}
@@ -25093,7 +25109,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraOrbit: {fileID: 1620920363}
   speed: 0.1
-  deg: 0
 --- !u!4 &1620920363
 Transform:
   m_ObjectHideFlags: 0

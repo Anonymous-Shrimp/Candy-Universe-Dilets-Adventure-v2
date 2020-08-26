@@ -7,13 +7,16 @@ public class PauseMenu : MonoBehaviour {
 
     public static bool isPaused = false;
     public GameObject pauseMenu;
-    [HideInInspector]
+    //[HideInInspector]
     public bool canPause = true;
+    public bool hideOnCantPause = false;
+    public GameObject savedPopUp;
     private void Start()
     {
         isPaused = false;
     }
     void Update () {
+        print(isPaused);
         if (Input.GetKeyDown(KeyCode.Escape) && canPause)
         {
             if (isPaused)
@@ -29,6 +32,8 @@ public class PauseMenu : MonoBehaviour {
         {
             Cursor.visible = true;
             Screen.lockCursor = false;
+            Time.timeScale = 0f;
+
         }
         else
         {
@@ -36,31 +41,38 @@ public class PauseMenu : MonoBehaviour {
             {
                 Cursor.visible = false;
                 Screen.lockCursor = true;
+                Time.timeScale = 1f;
             }
             else
             {
-                Cursor.visible = true;
-                Screen.lockCursor = false;
+                Cursor.visible = !hideOnCantPause;
+                Screen.lockCursor = hideOnCantPause;
+                Time.timeScale = 1f;
             }
         }
 	}
     public void Resume()
     {
+        if (savedPopUp != null)
+        {
+            savedPopUp.SetActive(false);
+        }
         pauseMenu.SetActive(false);
 
         Time.timeScale = 1f;
-        isPaused = false;
         Cursor.visible = false;
         Screen.lockCursor = true;
+       
+        isPaused = false;
     }
     void Pause()
     {
-
-        Cursor.visible = true;
-        Screen.lockCursor = false;
+        
         pauseMenu.SetActive(true);
 
         Time.timeScale = 0f;
+        Cursor.visible = true;
+        Screen.lockCursor = false;
         isPaused = true;
 
     }
@@ -68,8 +80,7 @@ public class PauseMenu : MonoBehaviour {
     {
         SceneManager.LoadScene("Menu");
         Time.timeScale = 1f;
-        Cursor.visible = true;
-        Screen.lockCursor = false;
+        
     }
     public void quitGame()
     {

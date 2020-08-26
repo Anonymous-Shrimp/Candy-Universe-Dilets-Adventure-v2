@@ -17,6 +17,10 @@ public class loading : MonoBehaviour
     {
         StartCoroutine(LoadAsynchronously(sceneIndex));
     }
+    public void LoadLevelString(string sceneName)
+    {
+        StartCoroutine(LoadAsynchronouslyString(sceneName));
+    }
     public void LoadSameLevel()
     {
         StartCoroutine(LoadAsynchronously(SceneManager.GetActiveScene().buildIndex));
@@ -52,7 +56,34 @@ public class loading : MonoBehaviour
             yield return null;
         }
     }
+    IEnumerator LoadAsynchronouslyString(string sceneName)
+    {
 
+        if (pause != null)
+        {
+            pause.Resume();
+        }
+
+
+        loadingScreen.SetActive(true);
+        if (pause != null)
+        {
+            pause.canPause = false;
+        }
+        Debug.Log("Switch scene to " + sceneName);
+        anim.SetTrigger("FadeOut");
+        yield return new WaitForSeconds(3);
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
+
+
+
+        while (!operation.isDone)
+        {
+            float progress = Mathf.Clamp01(operation.progress / 0.9f);
+            slider.value = progress;
+            yield return null;
+        }
+    }
     IEnumerator wait(float seconds)
     {
         yield return new WaitForSeconds(seconds);

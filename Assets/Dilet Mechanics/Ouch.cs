@@ -36,6 +36,7 @@ public class Ouch : MonoBehaviour
     public GameObject iceGate;
     public GameObject rockGate;
     [Space]
+    public timePlace timeInPlace;
     
     Rigidbody Rigid;
     
@@ -79,6 +80,9 @@ public class Ouch : MonoBehaviour
                 position.y = 479.477f;
                 position.z = 828.8861f;
                 transform.position = position;
+                if(FindObjectOfType<TimeCycle>() != null)
+                FindObjectOfType<TimeCycle>().dayNum = 1;
+                FindObjectOfType<TimeCycle>().currentTimeOfDay= 0.3f;
                 start = false;
                 SavePlayer();
             }
@@ -86,7 +90,7 @@ public class Ouch : MonoBehaviour
             {
                 if (sceneName == "Fire" || sceneName == "Water" || sceneName == "Thunder" || sceneName == "Rock" || sceneName == "Ice" || sceneName == "Nan")
                 {
-
+                    Debug.Log("Loading Dungeon");
                     water = data.water;
                     thunder = data.thunder;
                     fire = data.fire;
@@ -104,8 +108,9 @@ public class Ouch : MonoBehaviour
                     
                     
                 }
-                else if(sceneName == "Overworld 3")
+                else if(sceneName == "Overworld 3" || currentScene.buildIndex == 3)
                 {
+                    Debug.Log("Loading Overworld");
                     LoadPlayer();
                     if (fire)
                     {
@@ -127,23 +132,7 @@ public class Ouch : MonoBehaviour
                     {
                         Destroy(rockGate);
                     }
-                }
-                else
-                {
-                    water = data.water;
-                    thunder = data.thunder;
-                    fire = data.fire;
-                    ice = data.ice;
-                    rock = data.rock;
-                    nan = data.nan;
-                    health = data.health;
-                    start = data.start;
-                    inDungeon = data.inDungeon;
-                    Vector3 loc;
-                    loc.x = 0f;
-                    loc.y = 0f;
-                    loc.z = 0f;
-                    transform.position = loc;
+                    
                 }
                 
             }
@@ -158,7 +147,7 @@ public class Ouch : MonoBehaviour
             LoadPlayer();
             health = 100;
             SavePlayer();
-            Application.LoadLevel("Death");
+            FindObjectOfType<loading>().LoadLevelString("Death");
         }
         barSize = health;
         barSize = barSize / 100;
@@ -167,14 +156,26 @@ public class Ouch : MonoBehaviour
         Scene currentScene = SceneManager.GetActiveScene();
         
         string sceneName = currentScene.name;
-        
+
+        if(FindObjectOfType<TimeCycle>().dayNum >= 10 && FindObjectOfType<TimeCycle>() != null)
+        {
+            start = true;
+            SavePlayer();
+            FindObjectOfType<loading>().LoadLevelString("Death");
+        }
+        if (FindObjectOfType<TimeCycle>() != null)
+        {
+            timeInPlace.dayNum = FindObjectOfType<TimeCycle>().dayNum;
+            timeInPlace.TimeOfDay = FindObjectOfType<TimeCycle>().currentTimeOfDay;
+        }
+
     }
     private void OnTriggerEnter(Collider collision)
     {
 
         if (collision.gameObject.CompareTag("WaterDeath"))
         {
-            Application.LoadLevel("Death");
+            FindObjectOfType<loading>().LoadLevelString("Death");
         }
         if (collision.gameObject.CompareTag("GoblinBox"))
         {
@@ -188,7 +189,7 @@ public class Ouch : MonoBehaviour
             inDungeon = true;
             transform.position = new Vector3(transform.position.x + 20, transform.position.y, transform.position.z);
             SavePlayer();
-            Application.LoadLevel("Fire");
+            FindObjectOfType<loading>().LoadLevelString("Fire");
         }
         if (collision.gameObject.CompareTag("Ice"))
         {
@@ -196,7 +197,7 @@ public class Ouch : MonoBehaviour
             inDungeon = true;
             transform.position = new Vector3(transform.position.x + 2, transform.position.y, transform.position.z);
             SavePlayer();
-            Application.LoadLevel("Ice");
+            FindObjectOfType<loading>().LoadLevelString("Ice");
         }
         if (collision.gameObject.CompareTag("Thunder"))
         {
@@ -204,72 +205,72 @@ public class Ouch : MonoBehaviour
             inDungeon = true;
             transform.position = new Vector3(transform.position.x + 20, transform.position.y, transform.position.z);
             SavePlayer();
-            Application.LoadLevel("Thunder");
+            FindObjectOfType<loading>().LoadLevelString("Thunder");
         }
         if (collision.gameObject.CompareTag("Water"))
         {
             inDungeon = true;
             transform.position = new Vector3(transform.position.x + 5, transform.position.y, transform.position.z);
             SavePlayer();
-            Application.LoadLevel("Water");
+            FindObjectOfType<loading>().LoadLevelString("Water");
         }
         if (collision.gameObject.CompareTag("Rock"))
         {
             inDungeon = true;
             transform.position = new Vector3(transform.position.x + 20, transform.position.y, transform.position.z);
             SavePlayer();
-            Application.LoadLevel("Rock");
+            FindObjectOfType<loading>().LoadLevelString("Rock");
         }
         if (collision.gameObject.CompareTag("Nan"))
         {
             inDungeon = true;
             transform.position = new Vector3(transform.position.x + 20, transform.position.y, transform.position.z);
             SavePlayer();
-            Application.LoadLevel("Nan");
+            FindObjectOfType<loading>().LoadLevelString("Nan");
         }
         if (collision.gameObject.CompareTag("Finish"))
         {
             inDungeon = false;
-            Application.LoadLevel("Overworld 3");
+            FindObjectOfType<loading>().LoadLevelString("Overworld 3");
         }
         if (collision.gameObject.CompareTag("FireBoss"))
         {
             LoadPlayer();
             fire = true;
             SavePlayer();
-            Application.LoadLevel("Overworld 3");
+            FindObjectOfType<loading>().LoadLevelString("Overworld 3");
         }
         if (collision.gameObject.CompareTag("WaterBoss"))
         {
             LoadPlayer();
             water = true;
             SavePlayer();
-            Application.LoadLevel("Overworld 3");
+            FindObjectOfType<loading>().LoadLevelString("Overworld 3");
         }
         if (collision.gameObject.CompareTag("ThunderBoss"))
         {
             LoadPlayer();
             thunder = true;
             SavePlayer();
-            Application.LoadLevel("Overworld 3");
+            FindObjectOfType<loading>().LoadLevelString("Overworld 3");
         }
         if (collision.gameObject.CompareTag("IceBoss"))
         {
             LoadPlayer();
             ice = true;
             SavePlayer();
-            Application.LoadLevel("Overworld 3");
+            FindObjectOfType<loading>().LoadLevelString("Overworld 3");
         }
         if (collision.gameObject.CompareTag("RockBoss"))
         {
             LoadPlayer();
             rock = true;
             SavePlayer();
-            Application.LoadLevel("Overworld 3");
+            FindObjectOfType<loading>().LoadLevelString("Overworld 3");
         }
         if (collision.gameObject.CompareTag("NanBoss"))
         {
-            Application.LoadLevel("ToBeContinued");
+            FindObjectOfType<loading>().LoadLevelString("ToBeContinued");
         }
         if (collision.gameObject.CompareTag("Electricity"))
         {
@@ -310,8 +311,9 @@ public class Ouch : MonoBehaviour
     }
     public void SavePlayer()
     {
-        SaveSystem.SavePlayer(this);
+        SaveSystem.SavePlayer(this, timeInPlace);
     }
+
     public void LoadPlayer()
     {
         PlayerData data = SaveSystem.LoadPlayer();
@@ -325,6 +327,16 @@ public class Ouch : MonoBehaviour
         health = data.health;
         start = data.start;
         inDungeon = data.inDungeon;
+        if (FindObjectOfType<TimeCycle>() != null)
+        {
+            FindObjectOfType<TimeCycle>().dayNum = data.dayNum;
+            FindObjectOfType<TimeCycle>().currentTimeOfDay = data.timeOfDay;
+        }
+        else
+        {
+            timeInPlace.dayNum = data.dayNum;
+            timeInPlace.TimeOfDay = data.timeOfDay;
+        }
         if (nan)
         {
             Vector3 position;
@@ -343,5 +355,9 @@ public class Ouch : MonoBehaviour
             position.z = data.position[2];
             transform.position = position;
         }
+    }
+    public void LoadPlayerAndReload()
+    {
+        FindObjectOfType<loading>().LoadSameLevel();
     }
 }

@@ -14,8 +14,10 @@ public class PlayerData {
     public bool start;
     public bool inDungeon;
     public float[] position;
+    public float timeOfDay;
+    public int dayNum;
     
-    public PlayerData (Ouch player)
+    public PlayerData (Ouch player, timePlace time)
     {
         water = player.water;
         thunder = player.thunder;
@@ -26,6 +28,9 @@ public class PlayerData {
         start = player.start;
         inDungeon = player.inDungeon;
         health = player.health;
+        dayNum = time.dayNum;
+        timeOfDay = time.TimeOfDay;
+
         position = new float[3];
         position[0] = player.transform.position.x;
         position[1] = player.transform.position.y;
