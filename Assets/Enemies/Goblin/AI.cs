@@ -9,29 +9,39 @@ public class AI : MonoBehaviour {
     private float barSize;
     public ParticleSystem explode;
     public Transform targetLookAt;
+    private Quaternion defaultRot;
+    Rigidbody rb;
 
-    static Animator Anim;
+    private Animator Anim;
     public float distanceUntilNotice = 30f;
     
     void Start()
     {
         Anim = GetComponent<Animator>();
-        
+        target = FindObjectOfType<Ouch>().transform;
+        rb = GetComponent<Rigidbody>();
+        defaultRot = transform.rotation;
+
     }
     void Update()
     {
-
+        if(rb.velocity.magnitude == 0)
+        {
+            rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        }
+        Debug.DrawRay(transform.position, Vector3.down);
         if ((target.transform.position - this.transform.position).sqrMagnitude < distanceUntilNotice)
         {
-            transform.LookAt(target.transform, Vector3.up);
+            Quaternion lookRot= Quaternion.LookRotation(target.position - transform.position);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRot, Time.deltaTime * 100);
             Anim.SetTrigger("Attack");
         }
-
-        if (Anim.GetCurrentAnimatorStateInfo(0).IsName("Zombie Death"))
+        else
         {
-            explode.Play();
-            Destroy(gameObject);
+            Anim.SetTrigger("Idle");
         }
+        transform.rotation = new Quaternion(defaultRot.x, transform.rotation.y, defaultRot.z, defaultRot.w);
+        
         barSize = Health;
         barSize = barSize / 100;
         Bar.EnemySize(barSize);
@@ -42,12 +52,20 @@ public class AI : MonoBehaviour {
         Health -= TheDamage;
         if (Health <= 0)
         {
-            Anim.SetTrigger("Death");
-            
+
+            StartCoroutine(death());
             
 
         }
 
+    }
+    IEnumerator death()
+    {
+        Anim.SetTrigger("Death");
+        yield return new WaitForSeconds(2);
+        explode.Play();
+        Destroy(explode.gameObject, 5);
+        Destroy(gameObject);
     }
 }
 

@@ -7,6 +7,7 @@ public class EnemyBar : MonoBehaviour
     public Transform targetTransform;
     public Transform bar;
     private float target;
+    public int hideDistance = 50;
 
     private void Start()
     {
@@ -16,6 +17,14 @@ public class EnemyBar : MonoBehaviour
     {
         Vector3 targetScale = bar.localScale;
         transform.LookAt(targetTransform.transform);
+        if(Vector3.Distance(transform.position, targetTransform.position) > hideDistance)
+        {
+            gameObject.layer = 11;
+        }
+        else
+        {
+            gameObject.layer = 12;
+        }
         if (targetScale.x < target)
         {
             targetScale.x += Time.deltaTime * Mathf.Abs(targetScale.x - target) * 2;

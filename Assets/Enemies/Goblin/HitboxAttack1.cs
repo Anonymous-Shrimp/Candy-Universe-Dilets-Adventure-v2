@@ -5,6 +5,7 @@ using UnityEngine;
 public class HitboxAttack1 : MonoBehaviour {
     public GameObject hitbox;
     public Animator Anim;
+    bool attacked = false;
 
     void Start () {
         hitbox.transform.gameObject.SetActive(false);
@@ -15,13 +16,25 @@ public class HitboxAttack1 : MonoBehaviour {
 	void Update () {
         if (Anim.GetCurrentAnimatorStateInfo(0).IsName("Zombie Kicking"))
         {
-            hitbox.transform.gameObject.SetActive(true);
+            if (!attacked)
+            {
+                attacked = true;
+                StartCoroutine(hit());
+                
+            }
         }
         else
         {
-            hitbox.transform.gameObject.SetActive(false);
+            attacked = false;
         }
     
-
+        
+    }
+    IEnumerator hit()
+    {
+        hitbox.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        hitbox.SetActive(false);
+        yield return null;
     }
 }

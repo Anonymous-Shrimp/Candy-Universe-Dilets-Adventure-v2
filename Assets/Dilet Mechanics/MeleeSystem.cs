@@ -43,7 +43,7 @@ public class MeleeSystem : MonoBehaviour
         {
             energyBar.value += Time.deltaTime * multiplier;
         }
-        print(new Vector2(energyBar.value, chargedEnergyReduction + energyReduction));
+        
         if (Input.GetMouseButtonUp(0) && !FindObjectOfType<PauseMenu>().isPaused)
         {
             if (energyBar.value >= energyReduction)
