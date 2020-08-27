@@ -7,7 +7,8 @@ public class CandyCounter : MonoBehaviour
 {
     [Range(0, 999)]
     public int candyAmount;
-    
+    private float candyAmountApprox;
+
     bool showValue;
 
     Text candyText;
@@ -19,28 +20,28 @@ public class CandyCounter : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         candyText = GetComponentInChildren<Text>();
-        candyAmount = targetAmount;
+        candyAmountApprox = targetAmount;
     }
     
     private void Update()
     {
         anim.SetBool("FadedIn", showValue || Input.GetKey(KeyCode.E));
         candyText.text = candyAmount.ToString();
-        //if(Mathf.Abs(targetAmount - candyAmount) == 1)
-        if(false)
+        candyAmount = Mathf.RoundToInt(candyAmountApprox);
+        if(Mathf.Abs(targetAmount - candyAmountApprox) < 2 && targetAmount != candyAmountApprox)
         {
-           // candyAmount += 1;
+           candyAmountApprox = targetAmount;
             showValue = true;
         }
 
-        else if (targetAmount > candyAmount)
+        else if (targetAmount > candyAmountApprox)
         {
-            candyAmount += 1;
+            candyAmountApprox += Time.deltaTime * Mathf.Abs(targetAmount - candyAmount);
             showValue = true;
         }
-        else if(targetAmount < candyAmount)
+        else if(targetAmount < candyAmountApprox)
         {
-            candyAmount -= 1;
+            candyAmountApprox -= Time.deltaTime * Mathf.Abs(targetAmount - candyAmount);
             showValue = true;
         }
         else
