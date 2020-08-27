@@ -24,7 +24,7 @@ public class MeleeSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && energyBar.value >= energyReduction)
+        if (Input.GetMouseButtonDown(0) && energyBar.value >= energyReduction && !FindObjectOfType<PauseMenu>().isPaused)
         {
             RaycastHit hit;
             if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
