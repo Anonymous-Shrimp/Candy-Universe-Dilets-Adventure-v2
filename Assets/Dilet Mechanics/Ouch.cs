@@ -84,12 +84,14 @@ public class Ouch : MonoBehaviour
                 position.x = -365.293f;
                 position.y = 479.477f;
                 position.z = 828.8861f;
+                if (FindObjectOfType<TimeCycle>() != null)
+                {
+                    FindObjectOfType<TimeCycle>().dayNum = 1;
+                    FindObjectOfType<TimeCycle>().currentTimeOfDay = 0.3f;
+                }
                 candy.targetAmount = 0;
                 candy.candyAmount = 0;
                 transform.position = position;
-                if(FindObjectOfType<TimeCycle>() != null)
-                FindObjectOfType<TimeCycle>().dayNum = 1;
-                FindObjectOfType<TimeCycle>().currentTimeOfDay= 0.3f;
                 start = false;
                 SavePlayer();
             }
@@ -353,6 +355,10 @@ public class Ouch : MonoBehaviour
                 animationArea.SetTrigger("Thunder");
             }
         }
+        if (collision.gameObject.CompareTag("Poyo"))
+        {
+            StartCoroutine(Poyo());
+        }
 
 
 
@@ -363,10 +369,17 @@ public class Ouch : MonoBehaviour
 
         for (float i = 1; i >= 0; i -= Time.deltaTime / Sec)
         {
-            // set color with i as alpha
             Screen.weight = i;
             yield return null;
         }
+    }
+    IEnumerator Poyo()
+    {
+        GameObject.Find("PoyoImage").GetComponent<Animator>().SetTrigger("Poyo");
+        yield return new WaitForSeconds(1);
+        transform.position = new Vector3(-365.293f, 479.477f, 828.8861f);
+        
+        yield return null;
     }
     public void SavePlayer()
     {
