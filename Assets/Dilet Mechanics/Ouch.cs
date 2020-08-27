@@ -152,7 +152,7 @@ public class Ouch : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F) && candy.targetAmount >= 10)
         {
             health += 10;
             candy.targetAmount -= 10;

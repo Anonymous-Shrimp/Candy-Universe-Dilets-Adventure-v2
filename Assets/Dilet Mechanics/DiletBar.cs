@@ -5,14 +5,28 @@ using UnityEngine.UI;
 
 public class DiletBar : MonoBehaviour {
     private Image bar;
+    [Range(0, 1)]
+    public float target;
 	// Use this for initialization
 	void Start () {
         bar = transform.Find("Bar").GetComponent<Image>();
 	}
-	
-	// Update is called once per frame
-	public void SetSize(float sizeNormalized) {
-        bar.fillAmount = sizeNormalized;
+    private void Update()
+    {
+        if (bar.fillAmount < target)
+        {
+            bar.fillAmount += Time.deltaTime * Mathf.Abs(bar.fillAmount - target) * 2;
+        }
+        else if (bar.fillAmount > target)
+        {
+            bar.fillAmount -= Time.deltaTime * Mathf.Abs(bar.fillAmount - target) * 2;
+        }
+             bar.color = new Color(1, Mathf.Abs(bar.fillAmount - target) * 5, Mathf.Abs(bar.fillAmount - target) * 5, 0.7f);
+        gameObject.transform.localScale = new Vector3(0.5f + (bar.fillAmount - target) * 0.6f, 0.5f + (bar.fillAmount - target) * 0.6f, 1);
+    }
+    // Update is called once per frame
+    public void SetSize(float sizeNormalized) {
+        target = sizeNormalized;
 	}
     public void SetColor(Color color)
     {
