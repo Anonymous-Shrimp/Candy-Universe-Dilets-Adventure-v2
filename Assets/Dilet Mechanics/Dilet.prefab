@@ -572,7 +572,7 @@ MonoBehaviour:
   volumeTrigger: {fileID: 4264898395268424}
   volumeLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 528
   stopNaNPropagation: 1
   finalBlitToCameraTarget: 0
   antialiasingMode: 1
@@ -687,7 +687,7 @@ MonoBehaviour:
   health: 100
   dilet: {fileID: 1971277829926040}
   Bar: {fileID: 0}
-  introduction: 1
+  introduction: 0
   CameraShake: {fileID: 114047518812809794}
   Screen: {fileID: 0}
   duration: 0.2
@@ -706,6 +706,11 @@ MonoBehaviour:
   thunderGate: {fileID: 0}
   iceGate: {fileID: 0}
   rockGate: {fileID: 0}
+  timeInPlace:
+    TimeOfDay: 0
+    dayNum: 0
+  animationArea: {fileID: 0}
+  candy: {fileID: 0}
 --- !u!114 &114584988048618354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -991,6 +996,9 @@ MonoBehaviour:
   Miss: {fileID: 82027537559618512}
   damage: 2
   maxDistance: 2
+  energyBar: {fileID: 0}
+  multiplier: 0.8
+  energyReduction: 0.3
 --- !u!1 &6361656101675538846
 GameObject:
   m_ObjectHideFlags: 0
