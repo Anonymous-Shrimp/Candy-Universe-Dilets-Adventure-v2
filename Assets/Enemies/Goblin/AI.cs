@@ -11,7 +11,14 @@ public class AI : MonoBehaviour {
     public Transform targetLookAt;
     private Quaternion defaultRot;
     Rigidbody rb;
+    LookArea area;
+    bool hitted = false;
+    public float hittedCooldown = 3;
+    float hittedTimer;
+    public bool mad = false;
+    public float turnSpeed = 200f;
 
+    private bool canDieAgain = false;
     private Animator Anim;
     public float distanceUntilNotice = 30f;
     
@@ -21,38 +28,52 @@ public class AI : MonoBehaviour {
         target = FindObjectOfType<Ouch>().transform;
         rb = GetComponent<Rigidbody>();
         defaultRot = transform.rotation;
-
+        area = GetComponentInChildren<LookArea>();
     }
-    void Update()
+    void FixedUpdate()
     {
         if(rb.velocity.magnitude == 0)
         {
             rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         }
         Debug.DrawRay(transform.position, Vector3.down);
-        if ((target.transform.position - this.transform.position).sqrMagnitude < distanceUntilNotice)
+        if (((target.transform.position - this.transform.position).sqrMagnitude < distanceUntilNotice) && (hitted || area.inLineOfSight))
         {
             Quaternion lookRot= Quaternion.LookRotation(target.position - transform.position);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRot, Time.deltaTime * 100);
-            Anim.SetTrigger("Attack");
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRot, Time.deltaTime * turnSpeed * Mathf.Abs(lookRot.y - transform.rotation.y));
+            transform.rotation = new Quaternion(defaultRot.x, transform.rotation.y, defaultRot.z, transform.rotation.w);
+
+            mad = true;
         }
         else
         {
-            Anim.SetTrigger("Idle");
+            
+            mad = false;
         }
-        transform.rotation = new Quaternion(defaultRot.x, transform.rotation.y, defaultRot.z, defaultRot.w);
+        Anim.SetBool("Mad", mad);
+        
         
         barSize = Health;
         barSize = barSize / 100;
         Bar.EnemySize(barSize);
-
+        if(hittedTimer <= 0)
+        {
+            hitted = false;
+        }
+        else
+        {
+            hittedTimer -= Time.deltaTime;
+        }
     }
     void ApplyDamage(int TheDamage)
     {
         Health -= TheDamage;
-        if (Health <= 0)
+        hitted = true;
+        hittedTimer = hittedCooldown;
+        if (Health <= 0 && !canDieAgain)
         {
-
+            canDieAgain = true;
+            FindObjectOfType<CandyCounter>().targetAmount += Random.Range(3, 13);
             StartCoroutine(death());
             
 
@@ -67,5 +88,6 @@ public class AI : MonoBehaviour {
         Destroy(explode.gameObject, 5);
         Destroy(gameObject);
     }
+    
 }
 
