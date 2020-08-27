@@ -35,8 +35,9 @@ public class Ouch : MonoBehaviour
     public GameObject thunderGate;
     public GameObject iceGate;
     public GameObject rockGate;
-    
+
     [Space]
+    public GameObject candyParticle;
     public timePlace timeInPlace;
     public Animator animationArea;
     public CandyCounter candy;
@@ -151,6 +152,11 @@ public class Ouch : MonoBehaviour
     }
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            health += 10;
+            candy.targetAmount -= 10;
+        }
         if (health <= 0)
         {
             LoadPlayer();
@@ -303,7 +309,10 @@ public class Ouch : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Candy"))
         {
-            health += 40;
+            candy.targetAmount += 20;
+            GameObject i = Instantiate(candyParticle, collision.transform.position, collision.transform.rotation);
+            i.GetComponent<ParticleSystem>().Play();
+            Destroy(i, 5f);
             Destroy(collision.gameObject);
         }
         if (collision.gameObject.CompareTag("FireArea"))
@@ -376,7 +385,7 @@ public class Ouch : MonoBehaviour
     IEnumerator Poyo()
     {
         GameObject.Find("PoyoImage").GetComponent<Animator>().SetTrigger("Poyo");
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.1f);
         transform.position = new Vector3(-365.293f, 479.477f, 828.8861f);
         
         yield return null;

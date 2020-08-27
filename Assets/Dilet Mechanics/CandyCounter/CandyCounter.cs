@@ -26,19 +26,21 @@ public class CandyCounter : MonoBehaviour
     {
         anim.SetBool("FadedIn", showValue || Input.GetKey(KeyCode.E));
         candyText.text = candyAmount.ToString();
-        if(Mathf.Abs(targetAmount - candyAmount) == 1)
+        //if(Mathf.Abs(targetAmount - candyAmount) == 1)
+        if(false)
+        {
+           // candyAmount += 1;
+            showValue = true;
+        }
+
+        else if (targetAmount > candyAmount)
         {
             candyAmount += 1;
             showValue = true;
         }
-        else if (targetAmount > candyAmount)
-        {
-            candyAmount += 2;
-            showValue = true;
-        }
         else if(targetAmount < candyAmount)
         {
-            candyAmount -= 2;
+            candyAmount -= 1;
             showValue = true;
         }
         else
