@@ -706,6 +706,8 @@ MonoBehaviour:
   thunderGate: {fileID: 0}
   iceGate: {fileID: 0}
   rockGate: {fileID: 0}
+  candyParticle: {fileID: 5840926047116410785, guid: f8d25a27491b0194aa6219e25e3503ca,
+    type: 3}
   timeInPlace:
     TimeOfDay: 0
     dayNum: 0
@@ -997,7 +999,8 @@ MonoBehaviour:
   damage: 2
   maxDistance: 2
   energyBar: {fileID: 0}
-  multiplier: 0.8
+  chargedEnergyBar: {fileID: 0}
+  multiplier: 1.2
   energyReduction: 0.3
 --- !u!1 &6361656101675538846
 GameObject:

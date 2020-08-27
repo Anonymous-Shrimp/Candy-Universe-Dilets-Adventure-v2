@@ -12,40 +12,68 @@ public class MeleeSystem : MonoBehaviour
     public float maxDistance = 2;
     [Space]
     public Slider energyBar;
+    public Slider chargedEnergyBar;
     public float multiplier = 0.3f;
     public float energyReduction = 0.3f;
-
+    private float chargedEnergyReduction = 0.3f;
+    private float chargedDamage;
     // Start is called before the first frame update
     void Start()
     {
+        chargedDamage = damage;
         energyBar = GameObject.Find("EnergyBar").GetComponent<Slider>();
+        chargedEnergyBar = GameObject.Find("ChargedEnergyBar").GetComponent<Slider>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && energyBar.value >= energyReduction && !FindObjectOfType<PauseMenu>().isPaused)
+        chargedEnergyBar.value = energyBar.value;
+        if(Input.GetMouseButton(0) && !FindObjectOfType<PauseMenu>().isPaused)
         {
-            RaycastHit hit;
-            if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
+            if (energyBar.value >= chargedEnergyReduction + energyReduction)
             {
-                Distance = hit.distance;
-                if(Distance < maxDistance)
+                chargedEnergyReduction += Time.deltaTime / 1.5f;
+                chargedDamage += Time.deltaTime * 2.5f;
+            }
+            chargedEnergyBar.value = energyBar.value - chargedEnergyReduction;
+            energyBar.value += Time.deltaTime * multiplier / 3;
+        }
+        else
+        {
+            energyBar.value += Time.deltaTime * multiplier;
+        }
+        print(new Vector2(energyBar.value, chargedEnergyReduction + energyReduction));
+        if (Input.GetMouseButtonUp(0) && !FindObjectOfType<PauseMenu>().isPaused)
+        {
+            if (energyBar.value >= energyReduction)
+            {
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
                 {
-                    hit.transform.SendMessage("ApplyDamage", damage, SendMessageOptions.DontRequireReceiver);
-                    Hit.Play();
+                    Distance = hit.distance;
+                    if (Distance < maxDistance)
+                    {
+                        hit.transform.SendMessage("ApplyDamage", Mathf.Round(chargedDamage + damage), SendMessageOptions.DontRequireReceiver);
+                        print(chargedDamage + damage);
+                        Hit.Play();
+                    }
+                    else
+                    {
+                        Miss.Play();
+
+                    }
                 }
                 else
                 {
                     Miss.Play();
                 }
+                energyBar.value -= chargedEnergyReduction + energyReduction;
             }
-            else
-            {
-                Miss.Play();
-            }
-            energyBar.value -= energyReduction;
+            
+            chargedDamage = 0;
+            chargedEnergyReduction = 0;
         }
-        energyBar.value += Time.deltaTime * multiplier;
+       
     }
 }

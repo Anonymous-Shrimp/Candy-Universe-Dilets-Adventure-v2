@@ -27,6 +27,14 @@ public class DiletBar : MonoBehaviour {
     // Update is called once per frame
     public void SetSize(float sizeNormalized) {
         target = sizeNormalized;
+        if (target > 1)
+        {
+            target = 1;
+        }
+        else if(target < 0)
+        {
+            target = 0;
+        }
 	}
     public void SetColor(Color color)
     {

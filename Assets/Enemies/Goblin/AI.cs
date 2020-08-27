@@ -8,6 +8,7 @@ public class AI : MonoBehaviour {
     public EnemyBar Bar;
     private float barSize;
     public ParticleSystem explode;
+    public Transform targetLookAt;
 
     static Animator Anim;
     public float distanceUntilNotice = 30f;
@@ -22,7 +23,7 @@ public class AI : MonoBehaviour {
 
         if ((target.transform.position - this.transform.position).sqrMagnitude < distanceUntilNotice)
         {
-            transform.LookAt(target.transform);
+            transform.LookAt(target.transform, Vector3.up);
             Anim.SetTrigger("Attack");
         }
 
