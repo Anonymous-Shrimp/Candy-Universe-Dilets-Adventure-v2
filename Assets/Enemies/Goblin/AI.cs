@@ -78,15 +78,7 @@ public class AI : MonoBehaviour {
                 Quaternion lookRot = Quaternion.LookRotation(target.position - transform.position);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRot, Time.deltaTime * turnSpeed * Mathf.Abs(lookRot.y - transform.rotation.y));
                 transform.rotation = new Quaternion(defaultRot.x, transform.rotation.y, defaultRot.z, transform.rotation.w);
-                foreach (AI i in FindObjectsOfType<AI>())
-                {
-
-                    if (Vector3.Distance(i.transform.position, transform.position) < 40 && i != this && !madAlerted)
-                    {
-                        StartCoroutine(alertBiddies(i, 0.2f, 1f));
-
-                    }
-                }
+                
                 madAlerted = false;
 
                 mad = true;
