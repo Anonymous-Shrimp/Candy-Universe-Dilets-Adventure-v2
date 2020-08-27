@@ -131,8 +131,10 @@ public class AI : MonoBehaviour {
     {
         Anim.SetTrigger("Death");
         yield return new WaitForSeconds(2);
-        explode.Play();
-        Destroy(explode.gameObject, 5);
+
+        ParticleSystem e = Instantiate(explode, transform.position, transform.rotation).GetComponent<ParticleSystem>();
+        e.Play();
+        Destroy(e.gameObject, 5);
         Destroy(gameObject);
     }
     IEnumerator alertBiddies(AI buddy, float delayMin, float delayMax)

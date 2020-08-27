@@ -17,6 +17,7 @@ public class MeleeSystem : MonoBehaviour
     public float energyReduction = 0.3f;
     private float chargedEnergyReduction = 0.3f;
     private float chargedDamage;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -35,15 +36,22 @@ public class MeleeSystem : MonoBehaviour
             {
                 chargedEnergyReduction += Time.deltaTime / 1.5f;
                 chargedDamage += Time.deltaTime * 2.5f;
+                print(chargedEnergyReduction + energyReduction);
             }
-            chargedEnergyBar.value = energyBar.value - (chargedEnergyReduction + energyReduction);
+            chargedEnergyBar.value = chargedEnergyReduction + energyReduction;
+            chargedEnergyBar.GetComponentInChildren<Image>().color = new Color(1, 1, 1, (chargedEnergyReduction + 0.5f) / 3);
             energyBar.value += Time.deltaTime * multiplier / 3;
         }
         else
         {
             energyBar.value += Time.deltaTime * multiplier;
+            chargedEnergyBar.value = 0;
+            chargedEnergyBar.GetComponentInChildren<Image>().color = new Color(1, 1, 1, 0);
         }
-        
+        if(chargedEnergyBar.value > energyBar.value)
+        {
+            chargedEnergyBar.value = energyBar.value;
+        }
         if (Input.GetMouseButtonUp(0) && !FindObjectOfType<PauseMenu>().isPaused)
         {
             if (energyBar.value >= energyReduction)
