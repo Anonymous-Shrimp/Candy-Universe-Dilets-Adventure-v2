@@ -35,13 +35,14 @@ public class Ouch : MonoBehaviour
     public GameObject thunderGate;
     public GameObject iceGate;
     public GameObject rockGate;
+    
     [Space]
     public timePlace timeInPlace;
     public Animator animationArea;
     public CandyCounter candy;
     Rigidbody Rigid;
     
-    void Start()
+    void Awake()
     {
         candy = FindObjectOfType<CandyCounter>();
         Rigid = GetComponent<Rigidbody>();
@@ -362,7 +363,7 @@ public class Ouch : MonoBehaviour
     }
     public void SavePlayer()
     {
-        SaveSystem.SavePlayer(this, timeInPlace, candy.candyAmount);
+        SaveSystem.SavePlayer(this, timeInPlace, candy.targetAmount);
     }
 
     public void LoadPlayer()
@@ -378,7 +379,7 @@ public class Ouch : MonoBehaviour
         health = data.health;
         start = data.start;
         inDungeon = data.inDungeon;
-        candy.candyAmount = data.candyAmount;
+        candy.targetAmount = data.candyAmount;
         if (FindObjectOfType<TimeCycle>() != null)
         {
             FindObjectOfType<TimeCycle>().dayNum = data.dayNum;
