@@ -11,7 +11,7 @@ public class spriteCharacter : MonoBehaviour
 
     private void Start()
     {
-        sprite[0] = GameObject.Find("SpriteCharacter").transform;
+        sprite[1] = GameObject.Find("SpriteCharacter").transform;
     }
     // Update is called once per frame
     void Update()

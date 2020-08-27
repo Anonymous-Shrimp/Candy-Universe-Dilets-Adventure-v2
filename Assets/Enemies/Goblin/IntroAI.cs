@@ -2,46 +2,103 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IntroAI : MonoBehaviour {
-    public GameObject target;
+public class IntroAI : MonoBehaviour
+{
+    public Transform target;
     public int Health = 100;
-    public bool playCutscene = false;
     public EnemyBar Bar;
     private float barSize;
     public ParticleSystem explode;
-    static Animator Anim;
-    public float distanceUntilNotice;
-    
+    public Transform targetLookAt;
+    private Quaternion defaultRot;
+    Rigidbody rb;
+    LookArea area;
+    public bool playCutscene = false;
+    bool hitted = false;
+    public float hittedCooldown = 3;
+    public float cooldown;
+    float hittedTimer;
+    public bool mad = false;
+    public bool madAlerted = false;
+    public float turnSpeed = 200f;
+
+    private bool canDieAgain = false;
+    private Animator Anim;
+    public AnimationClip walkingClip;
+    public float distanceUntilNotice = 30f;
+
     void Start()
     {
         Anim = GetComponent<Animator>();
+        target = FindObjectOfType<Ouch>().transform;
+        rb = GetComponent<Rigidbody>();
+        defaultRot = transform.rotation;
+        area = GetComponentInChildren<LookArea>();
     }
-    void Update()
+    void FixedUpdate()
     {
-
-        if ((target.transform.position - this.transform.position).sqrMagnitude < distanceUntilNotice)
+        if (rb.velocity.magnitude == 0)
         {
-            transform.LookAt(target.transform);
-            Anim.SetTrigger("Attack");
+            rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        }
+        Debug.DrawRay(transform.position, Vector3.down);
+        if ((Vector3.Distance(target.transform.position, transform.position) < distanceUntilNotice) && (hitted || area.inLineOfSight) || madAlerted)
+        {
+            AnimatorClipInfo[] a = Anim.GetCurrentAnimatorClipInfo(0);
+            if (a[0].clip == walkingClip)
+            {
+                transform.Translate(new Vector3(0, 0, Time.deltaTime * 5));
+            }
+            Quaternion lookRot = Quaternion.LookRotation(target.position - transform.position);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRot, Time.deltaTime * turnSpeed * Mathf.Abs(lookRot.y - transform.rotation.y));
+            transform.rotation = new Quaternion(defaultRot.x, transform.rotation.y, defaultRot.z, transform.rotation.w);
+            foreach (AI i in FindObjectsOfType<AI>())
+            {
+
+                if (Vector3.Distance(i.transform.position, transform.position) < 40 && i != this && !madAlerted)
+                {
+                    StartCoroutine(alertBiddies(i, 0.2f, 1f));
+
+                }
+            }
+            cooldown = hittedCooldown;
+            madAlerted = false;
+
+            mad = true;
+
         }
 
-        if (Anim.GetCurrentAnimatorStateInfo(0).IsName("Zombie Death"))
+        else
         {
-            explode.Play();
-            Destroy(gameObject);
-            if (playCutscene)
+            if (cooldown > 0)
             {
-                Application.LoadLevel("Cutscene2");
+                AnimatorClipInfo[] a = Anim.GetCurrentAnimatorClipInfo(0);
+                if (a[0].clip == walkingClip)
+                {
+                    transform.Translate(new Vector3(0, 0, Time.deltaTime * 5));
+                }
+                Quaternion lookRot = Quaternion.LookRotation(target.position - transform.position);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRot, Time.deltaTime * turnSpeed * Mathf.Abs(lookRot.y - transform.rotation.y));
+                transform.rotation = new Quaternion(defaultRot.x, transform.rotation.y, defaultRot.z, transform.rotation.w);
+                foreach (AI i in FindObjectsOfType<AI>())
+                {
+
+                    if (Vector3.Distance(i.transform.position, transform.position) < 40 && i != this && !madAlerted)
+                    {
+                        StartCoroutine(alertBiddies(i, 0.2f, 1f));
+
+                    }
+                }
+                madAlerted = false;
+
+                mad = true;
+
             }
-            else
-            {
-                FindObjectOfType<loading>().LoadLevel(3);
-            }
-            
+            hittedTimer -= Time.deltaTime;
+            mad = false;
+
         }
-        barSize = Health;
-        barSize = barSize / 100;
-        Bar.EnemySize(barSize);
+        
         if (Input.GetButtonDown("Cancel"))
         {
             if (playCutscene)
@@ -53,19 +110,64 @@ public class IntroAI : MonoBehaviour {
                 FindObjectOfType<loading>().LoadLevel(3);
             }
         }
+        Anim.SetBool("Mad", mad);
+        Anim.SetFloat("Distance", Vector3.Distance(target.transform.position, transform.position));
 
+
+        barSize = Health;
+        barSize = barSize / 100;
+        Bar.EnemySize(barSize);
+        if (hittedTimer <= 0)
+        {
+            hitted = false;
+        }
+        else
+        {
+            hittedTimer -= Time.deltaTime;
+        }
     }
     void ApplyDamage(int TheDamage)
     {
         Health -= TheDamage;
-        if (Health <= 0)
+        hitted = true;
+        hittedTimer = hittedCooldown;
+        if (Health <= 0 && !canDieAgain)
         {
-            Anim.SetTrigger("Death");
-            
-            
+            canDieAgain = true;
+            FindObjectOfType<CandyCounter>().targetAmount += Random.Range(3, 13);
+            StartCoroutine(death());
+
 
         }
 
     }
+    IEnumerator death()
+    {
+        Anim.SetTrigger("Death");
+        yield return new WaitForSeconds(2);
+        explode.Play();
+        Destroy(explode.gameObject, 5);
+        Destroy(gameObject);
+        yield return new WaitForSeconds(4);
+        if (playCutscene)
+        {
+            Application.LoadLevel("Cutscene2");
+        }
+        else
+        {
+            FindObjectOfType<loading>().LoadLevel(3);
+        }
+    }
+    IEnumerator alertBiddies(AI buddy, float delayMin, float delayMax)
+    {
+
+        yield return new WaitForSeconds(Random.Range(delayMin, delayMax));
+        buddy.madAlerted = true;
+
+
+    }
+
 }
+
+
 

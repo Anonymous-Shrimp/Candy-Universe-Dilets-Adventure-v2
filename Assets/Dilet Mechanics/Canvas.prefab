@@ -1711,6 +1711,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite:
   - {fileID: 0}
+  - {fileID: 0}
   disappearOnFull:
   - {fileID: 0}
   - {fileID: 0}

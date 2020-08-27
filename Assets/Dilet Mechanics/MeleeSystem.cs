@@ -36,7 +36,7 @@ public class MeleeSystem : MonoBehaviour
                 chargedEnergyReduction += Time.deltaTime / 1.5f;
                 chargedDamage += Time.deltaTime * 2.5f;
             }
-            chargedEnergyBar.value = energyBar.value - chargedEnergyReduction;
+            chargedEnergyBar.value = energyBar.value - (chargedEnergyReduction + energyReduction);
             energyBar.value += Time.deltaTime * multiplier / 3;
         }
         else

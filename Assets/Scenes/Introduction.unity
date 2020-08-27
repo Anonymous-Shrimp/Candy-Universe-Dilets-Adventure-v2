@@ -20,11 +20,11 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientSkyColor: {r: 0.42352942, g: 0.45490196, b: 0.5176471, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: f808cf03f70767a499666314fb12739f, type: 2}
   m_HaloStrength: 0.5
@@ -205,12 +205,6 @@ Skybox:
   m_GameObject: {fileID: 414432989}
   m_Enabled: 1
   m_CustomSkybox: {fileID: 0}
---- !u!1 &428879580 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8866689999974746886, guid: 7be9daf9147e66148b55ac0fe8cea43b,
-    type: 3}
-  m_PrefabInstance: {fileID: 8866408227355657564}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &428879581 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8864439933031579682, guid: 7be9daf9147e66148b55ac0fe8cea43b,
@@ -9896,13 +9890,13 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.2
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -10075,11 +10069,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa10fe407c17433449bc52c74d441b86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 428879580}
+  target: {fileID: 428879581}
   Health: 100
-  playCutscene: 0
   Bar: {fileID: 1564984575}
   explode: {fileID: 940122420}
+  targetLookAt: {fileID: 0}
+  playCutscene: 0
+  hittedCooldown: 3
+  cooldown: 0
+  mad: 0
+  madAlerted: 0
+  turnSpeed: 200
+  walkingClip: {fileID: -203655887218126122, guid: a5004e7e374b5434b8e5eebf20fa12f0,
+    type: 3}
   distanceUntilNotice: 30
 --- !u!1 &906190384
 GameObject:
@@ -25331,6 +25333,36 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!1 &1978075183
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1978075184}
+  m_Layer: 0
+  m_Name: Don't Delete Me
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1978075184
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978075183}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1172.4391, y: 518.4508, z: 2266.891}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1982517506
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25474,10 +25506,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 708539337, guid: 9f36854827c504f4faaf609aa9e467b5, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 708539337, guid: 9f36854827c504f4faaf609aa9e467b5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1602331537, guid: 9f36854827c504f4faaf609aa9e467b5, type: 3}
-      propertyPath: sprite
+      propertyPath: sprite.Array.data[0]
       value: 
       objectReference: {fileID: 1575756483}
+    - target: {fileID: 1602331537, guid: 9f36854827c504f4faaf609aa9e467b5, type: 3}
+      propertyPath: sprite.Array.data[1]
+      value: 
+      objectReference: {fileID: 1575756483}
+    - target: {fileID: 1602331537, guid: 9f36854827c504f4faaf609aa9e467b5, type: 3}
+      propertyPath: disappearOnFull.Array.data[0]
+      value: 
+      objectReference: {fileID: 1978075183}
     - target: {fileID: 1602331537, guid: 9f36854827c504f4faaf609aa9e467b5, type: 3}
       propertyPath: cam
       value: 
@@ -25789,6 +25837,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Dilet
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884563735094848900, guid: 7be9daf9147e66148b55ac0fe8cea43b,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 4151
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7be9daf9147e66148b55ac0fe8cea43b, type: 3}
