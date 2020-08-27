@@ -43,7 +43,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.8
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -134,8 +134,8 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.83214664, g: 0.9433962, b: 0.93795305, a: 1}
-  m_Intensity: 0.5
+  m_Color: {r: 0.63252044, g: 0.75470054, b: 0.9716981, a: 1}
+  m_Intensity: 0.2
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -178,8 +178,8 @@ Light:
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
+  m_ColorTemperature: 8273
+  m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
@@ -230,8 +230,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sun: {fileID: 108924272455834172}
   sunObject: {fileID: 6485240718075057523}
-  secondsInFullDay: 60
-  currentTimeOfDay: 0.577
+  secondsInFullDay: 300
+  dayBar: {fileID: 0}
+  dayDisplay: {fileID: 0}
+  currentTimeOfDay: 0
   dayNum: 1
 --- !u!1 &6485240718075057523
 GameObject:

@@ -3,14 +3,14 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
 public static class SaveSystem {
-    public static void SavePlayer(Ouch player, timePlace time)
+    public static void SavePlayer(Ouch player, timePlace time, int ammt)
     {
         BinaryFormatter formatter = new BinaryFormatter();
 
         string path = Application.persistentDataPath + "/CandyUniverse.dilet";
         FileStream stream = new FileStream (path, FileMode.Create);
 
-        PlayerData data = new PlayerData(player, time);
+        PlayerData data = new PlayerData(player, time, ammt);
 
         formatter.Serialize(stream, data);
         stream.Close();

@@ -16,8 +16,9 @@ public class PlayerData {
     public float[] position;
     public float timeOfDay;
     public int dayNum;
-    
-    public PlayerData (Ouch player, timePlace time)
+    public int candyAmount;
+
+    public PlayerData(Ouch player, timePlace time, int ammount)
     {
         water = player.water;
         thunder = player.thunder;
@@ -30,6 +31,7 @@ public class PlayerData {
         health = player.health;
         dayNum = time.dayNum;
         timeOfDay = time.TimeOfDay;
+        candyAmount = ammount;
 
         position = new float[3];
         position[0] = player.transform.position.x;

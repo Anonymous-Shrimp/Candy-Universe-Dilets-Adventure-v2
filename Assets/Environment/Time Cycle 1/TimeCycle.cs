@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TimeCycle : MonoBehaviour {
     [SerializeField] private Light sun;
     [SerializeField] private GameObject sunObject;
     [SerializeField] private float secondsInFullDay = 60f;
+
+    public Slider dayBar;
+    public Animator dayDisplay;
 
     [Range(0, 1)] public float currentTimeOfDay = 0;
     [Range(0, 1)] private float actualTime = 0;
@@ -20,6 +24,15 @@ public class TimeCycle : MonoBehaviour {
     void Update()
     {
         UpdateSun();
+        if (dayBar != null)
+        {
+            dayBar.value = currentTimeOfDay;
+        }
+        if (dayDisplay != null)
+        {
+            dayDisplay.gameObject.GetComponent<Text>().text = "Night of Day " + (dayNum - 1).ToString();
+        }
+
 
         currentTimeOfDay += (Time.deltaTime / secondsInFullDay) * timeMultiplier;
 
@@ -27,6 +40,10 @@ public class TimeCycle : MonoBehaviour {
         {
             currentTimeOfDay = 0;
             dayNum = dayNum + 1;
+            if (dayDisplay != null)
+            {
+                dayDisplay.SetTrigger("DayIncrease");
+            }
         }
         if(currentTimeOfDay < 0.5)
         {

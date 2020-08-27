@@ -38,10 +38,12 @@ public class Ouch : MonoBehaviour
     [Space]
     public timePlace timeInPlace;
     public Animator animationArea;
+    public CandyCounter candy;
     Rigidbody Rigid;
     
     void Start()
     {
+        candy = FindObjectOfType<CandyCounter>();
         Rigid = GetComponent<Rigidbody>();
         Scene currentScene = SceneManager.GetActiveScene();
         string sceneName = currentScene.name;
@@ -360,7 +362,7 @@ public class Ouch : MonoBehaviour
     }
     public void SavePlayer()
     {
-        SaveSystem.SavePlayer(this, timeInPlace);
+        SaveSystem.SavePlayer(this, timeInPlace, candy.candyAmount);
     }
 
     public void LoadPlayer()
@@ -376,11 +378,13 @@ public class Ouch : MonoBehaviour
         health = data.health;
         start = data.start;
         inDungeon = data.inDungeon;
+        candy.candyAmount = data.candyAmount;
         if (FindObjectOfType<TimeCycle>() != null)
         {
             FindObjectOfType<TimeCycle>().dayNum = data.dayNum;
             FindObjectOfType<TimeCycle>().currentTimeOfDay = data.timeOfDay;
         }
+        
         else
         {
             timeInPlace.dayNum = data.dayNum;
