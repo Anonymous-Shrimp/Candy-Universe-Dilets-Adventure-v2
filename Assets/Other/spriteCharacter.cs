@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class spriteCharacter : MonoBehaviour
 {
-    public Transform sprite;
+    public Transform[] sprite;
+    public GameObject[] disappearOnFull;
     public float multiplier;
     public Camera cam;
 
@@ -14,12 +15,22 @@ public class spriteCharacter : MonoBehaviour
     {
         if (FindObjectOfType<miniMap>().followingCharacter)
         {
-            sprite.localScale = new Vector3(cam.orthographicSize * multiplier, cam.orthographicSize * multiplier, cam.orthographicSize * multiplier);
+            foreach (Transform s in sprite)
+            {
+                s.localScale = new Vector3(cam.orthographicSize * multiplier, cam.orthographicSize * multiplier, cam.orthographicSize * multiplier);
+            }
+            
         }
         else
         {
-            sprite.localScale = new Vector3(cam.orthographicSize * multiplier / 2, cam.orthographicSize * multiplier / 2, cam.orthographicSize * multiplier / 2);
+            foreach (Transform s in sprite)
+            {
+                s.localScale = new Vector3(cam.orthographicSize * multiplier / 2, cam.orthographicSize * multiplier / 2, cam.orthographicSize * multiplier / 2);
+            }
         }
-        
+        foreach (GameObject s in disappearOnFull)
+        {
+            s.SetActive(!FindObjectOfType<miniMap>().followingCharacter);
+        }
     }
 }
