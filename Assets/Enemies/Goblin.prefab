@@ -1500,7 +1500,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetTransform: {fileID: 0}
   bar: {fileID: 4386064653271802}
-  hideDistance: 50
+  hideDistance: 20
 --- !u!1 &1681160483888988
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,6 +8,7 @@ public class EnemyBar : MonoBehaviour
     public Transform bar;
     private float target;
     public int hideDistance = 50;
+    public GameObject Background;
 
     private void Start()
     {
@@ -19,11 +20,13 @@ public class EnemyBar : MonoBehaviour
         transform.LookAt(targetTransform.transform);
         if(Vector3.Distance(transform.position, targetTransform.position) > hideDistance)
         {
-            gameObject.layer = 11;
+            bar.GetComponentInChildren<SpriteRenderer>().gameObject.layer = 11;
+            Background.layer = 11;
         }
         else
         {
-            gameObject.layer = 12;
+            bar.GetComponentInChildren<SpriteRenderer>().gameObject.layer = 12;
+            Background.layer = 12;
         }
         if (targetScale.x < target)
         {
