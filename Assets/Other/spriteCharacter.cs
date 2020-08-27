@@ -9,7 +9,10 @@ public class spriteCharacter : MonoBehaviour
     public float multiplier;
     public Camera cam;
 
-    
+    private void Start()
+    {
+        sprite[0] = GameObject.Find("SpriteCharacter").transform;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -28,9 +31,12 @@ public class spriteCharacter : MonoBehaviour
                 s.localScale = new Vector3(cam.orthographicSize * multiplier / 2, cam.orthographicSize * multiplier / 2, cam.orthographicSize * multiplier / 2);
             }
         }
-        foreach (GameObject s in disappearOnFull)
+        if (disappearOnFull.Length > 0)
         {
-            s.SetActive(!FindObjectOfType<miniMap>().followingCharacter);
+            foreach (GameObject s in disappearOnFull)
+            {
+                s.SetActive(!FindObjectOfType<miniMap>().followingCharacter);
+            }
         }
     }
 }

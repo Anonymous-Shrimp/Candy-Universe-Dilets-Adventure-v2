@@ -61,6 +61,8 @@ public class Ouch : MonoBehaviour
             rock = false;
             nan = false;
             health = 100;
+            candy.targetAmount = 0;
+            candy.candyAmount = 0;
             start = true;
             SavePlayer();
         }
@@ -82,6 +84,8 @@ public class Ouch : MonoBehaviour
                 position.x = -365.293f;
                 position.y = 479.477f;
                 position.z = 828.8861f;
+                candy.targetAmount = 0;
+                candy.candyAmount = 0;
                 transform.position = position;
                 if(FindObjectOfType<TimeCycle>() != null)
                 FindObjectOfType<TimeCycle>().dayNum = 1;
@@ -160,11 +164,14 @@ public class Ouch : MonoBehaviour
         
         string sceneName = currentScene.name;
 
-        if(FindObjectOfType<TimeCycle>().dayNum >= 10 && FindObjectOfType<TimeCycle>() != null)
+        if( FindObjectOfType<TimeCycle>() != null)
         {
-            start = true;
-            SavePlayer();
-            FindObjectOfType<loading>().LoadLevelString("Death");
+            if (FindObjectOfType<TimeCycle>().dayNum >= 10)
+            {
+                start = true;
+                SavePlayer();
+                FindObjectOfType<loading>().LoadLevelString("Death");
+            }
         }
         if (FindObjectOfType<TimeCycle>() != null)
         {
@@ -380,6 +387,7 @@ public class Ouch : MonoBehaviour
         start = data.start;
         inDungeon = data.inDungeon;
         candy.targetAmount = data.candyAmount;
+        candy.candyAmount = data.candyAmount;
         if (FindObjectOfType<TimeCycle>() != null)
         {
             FindObjectOfType<TimeCycle>().dayNum = data.dayNum;
