@@ -16,6 +16,7 @@ public class AI : MonoBehaviour {
     public float hittedCooldown = 3;
     float hittedTimer;
     public bool mad = false;
+    public bool madAlerted = false;
     public float turnSpeed = 200f;
 
     private bool canDieAgain = false;
@@ -37,18 +38,31 @@ public class AI : MonoBehaviour {
             rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         }
         Debug.DrawRay(transform.position, Vector3.down);
-        if (((target.transform.position - this.transform.position).sqrMagnitude < distanceUntilNotice) && (hitted || area.inLineOfSight))
+        if (((target.transform.position - transform.position).sqrMagnitude < distanceUntilNotice) && (hitted || area.inLineOfSight) || madAlerted)
         {
             Quaternion lookRot= Quaternion.LookRotation(target.position - transform.position);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRot, Time.deltaTime * turnSpeed * Mathf.Abs(lookRot.y - transform.rotation.y));
             transform.rotation = new Quaternion(defaultRot.x, transform.rotation.y, defaultRot.z, transform.rotation.w);
-
-            mad = true;
+            foreach(AI i in FindObjectsOfType<AI>())
+            {
+                
+                if(Vector3.Distance(i.transform.position, transform.position) < 40 && i != this && !madAlerted)
+                {
+                    StartCoroutine(alertBiddies(i, 0.2f, 1f));
+                    
+                }
+            }
+            madAlerted = false;
+            
+                mad = true;
+            
         }
+
         else
         {
             
-            mad = false;
+                mad = false;
+            
         }
         Anim.SetBool("Mad", mad);
         
@@ -88,6 +102,14 @@ public class AI : MonoBehaviour {
         Destroy(explode.gameObject, 5);
         Destroy(gameObject);
     }
-    
+    IEnumerator alertBiddies(AI buddy, float delayMin, float delayMax)
+    {
+        
+        yield return new WaitForSeconds(Random.Range(delayMin, delayMax));
+        buddy.madAlerted = true;
+
+
+    }
+
 }
 
