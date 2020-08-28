@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class QuestPlayer : MonoBehaviour
 {
     QuestManager manager;
+    public QuestData[] questData;
 
     void Start()
     {
@@ -14,13 +16,17 @@ public class QuestPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (manager.quests[1].active)
+        
+        if(!GetComponent<Ouch>().introduction && !GetComponent<Ouch>().inDungeon)
+            if (manager.quests[1].active)
         {
             if (FindObjectOfType<NanTeleport>().nanGate)
             {
                 manager.EndQuest(1);
             }
         }
+        
+        
     }
     private void OnTriggerEnter(Collider other)
     {

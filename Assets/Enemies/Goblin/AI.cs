@@ -7,7 +7,7 @@ public class AI : MonoBehaviour {
     public int Health = 100;
     public EnemyBar Bar;
     private float barSize;
-    public ParticleSystem explode;
+    public GameObject explode;
     public Transform targetLookAt;
     private Quaternion defaultRot;
     Rigidbody rb;
@@ -32,6 +32,7 @@ public class AI : MonoBehaviour {
         rb = GetComponent<Rigidbody>();
         defaultRot = transform.rotation;
         area = GetComponentInChildren<LookArea>();
+        explode = GameObject.Find("DeathEnemy");
     }
     void FixedUpdate()
     {

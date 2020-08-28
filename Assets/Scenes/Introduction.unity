@@ -25792,6 +25792,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8832604250507108376, guid: 7be9daf9147e66148b55ac0fe8cea43b,
         type: 3}
+      propertyPath: questData.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8832604250507108376, guid: 7be9daf9147e66148b55ac0fe8cea43b,
+        type: 3}
       propertyPath: Bar
       value: 
       objectReference: {fileID: 2039582352}

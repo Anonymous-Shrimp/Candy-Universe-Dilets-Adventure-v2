@@ -13,10 +13,7 @@ public class QuestManager : MonoBehaviour
         foreach(Quest q in quests)
         {
             q.defaultAction.Invoke();
-            if (q.active && !q.started)
-            {
-                q.startingAction.Invoke();
-            }else if (q.active && q.started)
+            if (q.active && q.started)
             {
                 q.activeDuringQuest.Invoke();
             }
@@ -26,11 +23,13 @@ public class QuestManager : MonoBehaviour
     {
         try
         {
-            if (!quests[questIndex].completed && !quests[questIndex].active)
+            if (!quests[questIndex].completed)
             {
                 quests[questIndex].active = true;
+                quests[questIndex].started = true;
             }
             quests[questIndex].startingAction.Invoke();
+            quests[questIndex].activeDuringQuest.Invoke();
         }
         catch
         {
@@ -46,6 +45,7 @@ public class QuestManager : MonoBehaviour
             {
                 quests[questIndex].completed = true;
                 quests[questIndex].active = false;
+                quests[questIndex].started = false;
                 quests[questIndex].endingAction.Invoke();
             }
         }

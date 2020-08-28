@@ -1,8 +1,10 @@
 ﻿using System.Collections;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering.PostProcessing;
+using System.Collections.Generic;
 
 public class Ouch : MonoBehaviour
 {
@@ -38,21 +40,37 @@ public class Ouch : MonoBehaviour
 
     [Space]
     public GameObject candyParticle;
-    public QuestData[] questData;
     public timePlace timeInPlace;
+    public List<QuestData> questData = new List<QuestData>();
     public Animator animationArea;
     public CandyCounter candy;
+    public QuestManager questManager;
     Rigidbody Rigid;
     
     void Awake()
     {
+
         candy = FindObjectOfType<CandyCounter>();
         Rigid = GetComponent<Rigidbody>();
+        questManager = GetComponent<QuestManager>();
+
         Scene currentScene = SceneManager.GetActiveScene();
         string sceneName = currentScene.name;
         Screen.weight = 0;
 
         //load
+        
+            questData.Clear();
+            foreach (Quest q in questManager.quests)
+            {
+                q.active = false;
+                q.completed = false;
+                q.completed = false;
+                QuestData qd = new QuestData(q.active, q.started, q.completed);
+
+                questData.Add(qd);
+            }
+
         
         if (introduction)
         {
@@ -66,6 +84,8 @@ public class Ouch : MonoBehaviour
             candy.targetAmount = 0;
             candy.candyAmount = 0;
             start = true;
+            questData.Clear();
+            
             SavePlayer();
         }
         else
@@ -86,12 +106,14 @@ public class Ouch : MonoBehaviour
                 position.x = -365.293f;
                 position.y = 479.477f;
                 position.z = 828.8861f;
-                FindObjectOfType<QuestManager>().StartQuest(0);
+                
                 if (FindObjectOfType<TimeCycle>() != null)
                 {
                     FindObjectOfType<TimeCycle>().dayNum = 1;
                     FindObjectOfType<TimeCycle>().currentTimeOfDay = 0.3f;
                 }
+
+                
                 candy.targetAmount = 0;
                 candy.candyAmount = 0;
                 transform.position = position;
@@ -152,6 +174,13 @@ public class Ouch : MonoBehaviour
         
 
     }
+    private void Start()
+    {
+        if(!questManager.quests[0].active && !questManager.quests[0].completed)
+        {
+            questManager.StartQuest(0);
+        }
+    }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.F) && candy.targetAmount >= 10)
@@ -187,6 +216,18 @@ public class Ouch : MonoBehaviour
         {
             timeInPlace.dayNum = FindObjectOfType<TimeCycle>().dayNum;
             timeInPlace.TimeOfDay = FindObjectOfType<TimeCycle>().currentTimeOfDay;
+        }
+        
+        if(questManager != null)
+        {
+            questData.Clear();
+            foreach (Quest q in questManager.quests)
+            {
+                QuestData qd = new QuestData(q.active, q.started, q.completed);
+                questData.Add(qd);
+            }
+            
+
         }
 
     }
@@ -394,21 +435,8 @@ public class Ouch : MonoBehaviour
     }
     public void SavePlayer()
     {
-        if (FindObjectOfType<QuestManager>() != null)
-        {
-            QuestData[] d = new QuestData[FindObjectOfType<QuestManager>().quests.Length];
-            for (int i = 0; i < FindObjectOfType<QuestManager>().quests.Length; i++)
-            {
-                d[i].active = FindObjectOfType<QuestManager>().quests[i].active;
-                d[i].started = FindObjectOfType<QuestManager>().quests[i].started;
-                d[i].completed = FindObjectOfType<QuestManager>().quests[i].completed;
-            }
-            SaveSystem.SavePlayer(this, timeInPlace, candy.targetAmount, d);
-        }
-        else
-        {
-            SaveSystem.SavePlayer(this, timeInPlace, candy.targetAmount, questData);
-        }
+        SaveSystem.SavePlayer(this, timeInPlace, candy.targetAmount, questData.ToArray());
+
     }
 
     public void LoadPlayer()
@@ -426,7 +454,13 @@ public class Ouch : MonoBehaviour
         inDungeon = data.inDungeon;
         candy.targetAmount = data.candyAmount;
         candy.candyAmount = data.candyAmount;
-        questData = data.questData;
+        for (int i = 0; i < data.questData.Length; i++)
+        {
+            questManager.quests[i].active = data.questData[i].active;
+            questManager.quests[i].started = data.questData[i].started;
+            questManager.quests[i].completed = data.questData[i].completed;
+        }
+        
         if (FindObjectOfType<TimeCycle>() != null)
         {
             FindObjectOfType<TimeCycle>().dayNum = data.dayNum;
@@ -437,6 +471,17 @@ public class Ouch : MonoBehaviour
         {
             timeInPlace.dayNum = data.dayNum;
             timeInPlace.TimeOfDay = data.timeOfDay;
+        }
+        if(questManager != null)
+        {
+            int index = 0;
+            foreach(QuestData q in data.questData)
+            {
+                questManager.quests[index].active = q.active;
+                questManager.quests[index].started = q.started;
+                questManager.quests[index].completed = q.completed;
+                index++;
+            }
         }
         if (nan)
         {

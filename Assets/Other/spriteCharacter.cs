@@ -35,7 +35,10 @@ public class spriteCharacter : MonoBehaviour
         {
             foreach (GameObject s in disappearOnFull)
             {
-                s.SetActive(!FindObjectOfType<miniMap>().followingCharacter);
+                if (s != null)
+                {
+                    s.SetActive(!FindObjectOfType<miniMap>().followingCharacter);
+                }
             }
         }
     }

@@ -19,8 +19,9 @@ public class PlayerData {
     public int candyAmount;
     public QuestData[] questData;
 
-    public PlayerData(Ouch player, timePlace time, int ammount, QuestData[] _questData)
+     public PlayerData(Ouch player, timePlace time, int ammount, QuestData[] _questData)
     {
+   
         water = player.water;
         thunder = player.thunder;
         fire = player.fire;
@@ -49,4 +50,10 @@ public class QuestData
     public bool active;
     public bool started;
     public bool completed;
+    public QuestData(bool _active, bool _started, bool _completed)
+    {
+        active = _active;
+        started = _started;
+        completed = _completed;
+    }
 }
