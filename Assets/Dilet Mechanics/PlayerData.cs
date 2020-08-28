@@ -17,8 +17,9 @@ public class PlayerData {
     public float timeOfDay;
     public int dayNum;
     public int candyAmount;
+    public QuestData[] questData;
 
-    public PlayerData(Ouch player, timePlace time, int ammount)
+    public PlayerData(Ouch player, timePlace time, int ammount, QuestData[] _questData)
     {
         water = player.water;
         thunder = player.thunder;
@@ -32,6 +33,7 @@ public class PlayerData {
         dayNum = time.dayNum;
         timeOfDay = time.TimeOfDay;
         candyAmount = ammount;
+        questData = _questData;
 
         position = new float[3];
         position[0] = player.transform.position.x;
@@ -39,4 +41,12 @@ public class PlayerData {
         position[2] = player.transform.position.z;
     }
 
+
+}
+[System.Serializable]
+public class QuestData
+{
+    public bool active;
+    public bool started;
+    public bool completed;
 }

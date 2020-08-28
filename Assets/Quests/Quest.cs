@@ -12,7 +12,9 @@ public class Quest
     public QuestType questType;
     public UnityEvent defaultAction;
     public UnityEvent startingAction;
+    public UnityEvent activeDuringQuest;
     public UnityEvent endingAction;
     public bool active = false;
+    public bool started = false;
     public bool completed = false;
 }

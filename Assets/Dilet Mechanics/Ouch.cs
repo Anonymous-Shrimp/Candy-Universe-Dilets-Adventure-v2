@@ -38,6 +38,7 @@ public class Ouch : MonoBehaviour
 
     [Space]
     public GameObject candyParticle;
+    public QuestData[] questData;
     public timePlace timeInPlace;
     public Animator animationArea;
     public CandyCounter candy;
@@ -393,7 +394,21 @@ public class Ouch : MonoBehaviour
     }
     public void SavePlayer()
     {
-        SaveSystem.SavePlayer(this, timeInPlace, candy.targetAmount);
+        if (FindObjectOfType<QuestManager>() != null)
+        {
+            QuestData[] d = new QuestData[FindObjectOfType<QuestManager>().quests.Length];
+            for (int i = 0; i < FindObjectOfType<QuestManager>().quests.Length; i++)
+            {
+                d[i].active = FindObjectOfType<QuestManager>().quests[i].active;
+                d[i].started = FindObjectOfType<QuestManager>().quests[i].started;
+                d[i].completed = FindObjectOfType<QuestManager>().quests[i].completed;
+            }
+            SaveSystem.SavePlayer(this, timeInPlace, candy.targetAmount, d);
+        }
+        else
+        {
+            SaveSystem.SavePlayer(this, timeInPlace, candy.targetAmount, questData);
+        }
     }
 
     public void LoadPlayer()
@@ -411,6 +426,7 @@ public class Ouch : MonoBehaviour
         inDungeon = data.inDungeon;
         candy.targetAmount = data.candyAmount;
         candy.candyAmount = data.candyAmount;
+        questData = data.questData;
         if (FindObjectOfType<TimeCycle>() != null)
         {
             FindObjectOfType<TimeCycle>().dayNum = data.dayNum;

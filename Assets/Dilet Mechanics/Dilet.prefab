@@ -405,7 +405,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 4151
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -631,6 +631,7 @@ GameObject:
   - component: {fileID: 114584988048618354}
   - component: {fileID: 54263003291527970}
   - component: {fileID: 82756915934677588}
+  - component: {fileID: 2094979208}
   m_Layer: 0
   m_Name: Dilet
   m_TagString: Dilet
@@ -949,6 +950,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &2094979208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1971277829926040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aba9b8a2f9d695469a4fed5acb8c803, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1974520207110844
 GameObject:
   m_ObjectHideFlags: 0
@@ -996,7 +1009,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Hit: {fileID: 82012118190260122}
   Miss: {fileID: 82027537559618512}
-  damage: 2
+  damage: 4
   maxDistance: 2
   energyBar: {fileID: 0}
   chargedEnergyBar: {fileID: 0}

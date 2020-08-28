@@ -14,9 +14,12 @@ public class QuestPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (FindObjectOfType<NanTeleport>().nanGate)
+        if (manager.quests[1].active)
         {
-            manager.EndQuest(1);
+            if (FindObjectOfType<NanTeleport>().nanGate)
+            {
+                manager.EndQuest(1);
+            }
         }
     }
     private void OnTriggerEnter(Collider other)

@@ -25855,6 +25855,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8866408226292299213, guid: 7be9daf9147e66148b55ac0fe8cea43b,
+        type: 3}
+      propertyPath: quests.Array.data[1].name
+      value: Claim All Elementals
+      objectReference: {fileID: 0}
     - target: {fileID: 8866689999974746886, guid: 7be9daf9147e66148b55ac0fe8cea43b,
         type: 3}
       propertyPath: m_Name
