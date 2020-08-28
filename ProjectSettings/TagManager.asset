@@ -35,6 +35,7 @@ TagManager:
   - PoyoArea
   - NanArea
   - Poyo
+  - Quest
   layers:
   - Default
   - TransparentFX

@@ -85,6 +85,7 @@ public class Ouch : MonoBehaviour
                 position.x = -365.293f;
                 position.y = 479.477f;
                 position.z = 828.8861f;
+                FindObjectOfType<QuestManager>().StartQuest(0);
                 if (FindObjectOfType<TimeCycle>() != null)
                 {
                     FindObjectOfType<TimeCycle>().dayNum = 1;

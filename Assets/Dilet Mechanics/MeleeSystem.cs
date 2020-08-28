@@ -36,7 +36,7 @@ public class MeleeSystem : MonoBehaviour
             {
                 chargedEnergyReduction += Time.deltaTime / 1.5f;
                 chargedDamage += Time.deltaTime * 2.5f;
-                print(chargedEnergyReduction + energyReduction);
+
             }
             chargedEnergyBar.value = chargedEnergyReduction + energyReduction;
             chargedEnergyBar.GetComponentInChildren<Image>().color = new Color(1, 1, 1, (chargedEnergyReduction + 0.5f) / 3);
@@ -63,7 +63,6 @@ public class MeleeSystem : MonoBehaviour
                     if (Distance < maxDistance)
                     {
                         hit.transform.SendMessage("ApplyDamage", Mathf.Round(chargedDamage + damage), SendMessageOptions.DontRequireReceiver);
-                        print(chargedDamage + damage);
                         Hit.Play();
                     }
                     else

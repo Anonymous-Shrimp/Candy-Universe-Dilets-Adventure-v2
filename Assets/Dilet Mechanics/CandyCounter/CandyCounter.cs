@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class CandyCounter : MonoBehaviour
 {
-    [Range(0, 999)]
+    [Range(0, 9999)]
     public int candyAmount;
     private float candyAmountApprox;
 
@@ -28,7 +28,7 @@ public class CandyCounter : MonoBehaviour
         anim.SetBool("FadedIn", showValue || Input.GetKey(KeyCode.E));
         candyText.text = candyAmount.ToString();
         candyAmount = Mathf.RoundToInt(candyAmountApprox);
-        if(Mathf.Abs(targetAmount - candyAmountApprox) < 2 && targetAmount != candyAmountApprox)
+        if(Mathf.Abs(targetAmount - candyAmountApprox) < 1 && targetAmount != candyAmountApprox)
         {
            candyAmountApprox = targetAmount;
             showValue = true;
