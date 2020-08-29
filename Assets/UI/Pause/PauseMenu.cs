@@ -66,7 +66,10 @@ public class PauseMenu : MonoBehaviour {
     }
     void Pause()
     {
-        
+        if (savedPopUp != null)
+        {
+            savedPopUp.SetActive(false);
+        }
         pauseMenu.SetActive(true);
 
         Time.timeScale = 0f;

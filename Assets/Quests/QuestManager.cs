@@ -49,7 +49,8 @@ public class QuestManager : MonoBehaviour
             {
                 progressText = quests[questIndex].progress.ToString() + " / " + quests[questIndex].progressMax.ToString();
             }
-            display.addShowing(quests[questIndex].name, quests[questIndex].description, progressText);
+            bool questType = quests[questIndex].questType == Quest.QuestType.Main;
+            display.addShowing(quests[questIndex].name, quests[questIndex].description, progressText, questType);
 
         }
         else
@@ -67,10 +68,15 @@ public class QuestManager : MonoBehaviour
             {
                 progressText = quests[questIndex].progress.ToString() + " / " + quests[questIndex].progressMax.ToString();
             }
-            FindObjectOfType<questDisplay>().addShowing(quests[questIndex].name, quests[questIndex].description, progressText);
+            bool questType = quests[questIndex].questType == Quest.QuestType.Main;
+            FindObjectOfType<questDisplay>().addShowing(quests[questIndex].name, quests[questIndex].description, progressText, questType);
         }
         
         
+    }
+    public int getProgress(int questIndex)
+    {
+        return quests[questIndex].progress;
     }
     public void changeProgress(int questIndex, int progress)
     {
@@ -88,7 +94,12 @@ public class QuestManager : MonoBehaviour
         {
             progressText = quests[questIndex].progress.ToString() + " / " + quests[questIndex].progressMax.ToString();
         }
-        display.addShowing(quests[questIndex].name, quests[questIndex].description, progressText);
+        bool questType = quests[questIndex].questType == Quest.QuestType.Main;
+        display.addShowing(quests[questIndex].name, quests[questIndex].description, progressText, questType);
+        if (quests[questIndex].progress >= quests[questIndex].progressMax)
+        {
+            EndQuest(questIndex);
+        }
     }
     public void changeProgressByOne(int questIndex)
     {
@@ -99,13 +110,19 @@ public class QuestManager : MonoBehaviour
             progressText = "New Quest!";
         }else if(quests[questIndex].progress >= quests[questIndex].progressMax)
         {
+            
             progressText = "Completed!";
         }
         else
         {
             progressText = quests[questIndex].progress.ToString() + " / " + quests[questIndex].progressMax.ToString();
         }
-        display.addShowing(quests[questIndex].name, quests[questIndex].description, progressText);
+        bool questType = quests[questIndex].questType == Quest.QuestType.Main;
+        display.addShowing(quests[questIndex].name, quests[questIndex].description, progressText, questType);
+        if(quests[questIndex].progress >= quests[questIndex].progressMax)
+        {
+            EndQuest(questIndex);
+        }
     }
     public void EndQuest(int questIndex)
     {
@@ -122,7 +139,16 @@ public class QuestManager : MonoBehaviour
         catch
         {
             throw;
+
         }
+        StartCoroutine(saveAfterTime());
+        
+    }
+    IEnumerator saveAfterTime()
+    {
+        yield return new WaitForSeconds(3);
+        player.SavePlayer();
+        yield return null;
     }
     
 }

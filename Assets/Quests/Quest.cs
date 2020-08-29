@@ -8,7 +8,8 @@ public class Quest
 {
     public string name;
     public string description;
-    
+    public string detailedDescription;
+
     public enum QuestType { Main, Side };
     public QuestType questType;
     public UnityEvent defaultAction;

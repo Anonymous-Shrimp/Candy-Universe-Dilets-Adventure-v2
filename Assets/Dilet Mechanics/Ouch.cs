@@ -229,7 +229,16 @@ public class Ouch : MonoBehaviour
             
 
         }
-
+        int gatesCompleted = 0;
+        if (water) { gatesCompleted++; }
+        if (fire) { gatesCompleted++; }
+        if (ice) { gatesCompleted++; }
+        if (thunder) { gatesCompleted++; }
+        if (rock) { gatesCompleted++; }
+        if(gatesCompleted != questManager.getProgress(1))
+        {
+            questManager.changeProgress(1, gatesCompleted);
+        }
     }
     private void OnTriggerEnter(Collider collision)
     {
