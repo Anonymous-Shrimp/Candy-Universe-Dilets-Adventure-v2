@@ -66,7 +66,8 @@ public class Ouch : MonoBehaviour
                 q.active = false;
                 q.completed = false;
                 q.completed = false;
-                QuestData qd = new QuestData(q.active, q.started, q.completed);
+                q.progress = 0;
+                QuestData qd = new QuestData(q.active, q.started, q.completed, q.progress);
 
                 questData.Add(qd);
             }
@@ -84,7 +85,6 @@ public class Ouch : MonoBehaviour
             candy.targetAmount = 0;
             candy.candyAmount = 0;
             start = true;
-            questData.Clear();
             
             SavePlayer();
         }
@@ -106,7 +106,10 @@ public class Ouch : MonoBehaviour
                 position.x = -365.293f;
                 position.y = 479.477f;
                 position.z = 828.8861f;
-                
+                if (!questManager.quests[0].completed && !introduction)
+                {
+                    questManager.StartQuest(0);
+                }
                 if (FindObjectOfType<TimeCycle>() != null)
                 {
                     FindObjectOfType<TimeCycle>().dayNum = 1;
@@ -176,10 +179,7 @@ public class Ouch : MonoBehaviour
     }
     private void Start()
     {
-        if(!questManager.quests[0].active && !questManager.quests[0].completed)
-        {
-            questManager.StartQuest(0);
-        }
+        
     }
     void Update()
     {
@@ -223,7 +223,7 @@ public class Ouch : MonoBehaviour
             questData.Clear();
             foreach (Quest q in questManager.quests)
             {
-                QuestData qd = new QuestData(q.active, q.started, q.completed);
+                QuestData qd = new QuestData(q.active, q.started, q.completed, q.progress);
                 questData.Add(qd);
             }
             
@@ -459,6 +459,7 @@ public class Ouch : MonoBehaviour
             questManager.quests[i].active = data.questData[i].active;
             questManager.quests[i].started = data.questData[i].started;
             questManager.quests[i].completed = data.questData[i].completed;
+            questManager.quests[i].progress = data.questData[i].progress;
         }
         
         if (FindObjectOfType<TimeCycle>() != null)
@@ -480,6 +481,7 @@ public class Ouch : MonoBehaviour
                 questManager.quests[index].active = q.active;
                 questManager.quests[index].started = q.started;
                 questManager.quests[index].completed = q.completed;
+                questManager.quests[index].progress = q.progress;
                 index++;
             }
         }

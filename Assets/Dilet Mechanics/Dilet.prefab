@@ -405,7 +405,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4151
+    m_Bits: 28727
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1064,6 +1064,8 @@ MonoBehaviour:
           m_CallState: 2
     active: 0
     started: 0
+    progress: 0
+    progressMax: 1
     completed: 0
   - name: Claim All Elementals
     description: 
@@ -1115,7 +1117,10 @@ MonoBehaviour:
           m_CallState: 2
     active: 0
     started: 0
+    progress: 0
+    progressMax: 1
     completed: 0
+  display: {fileID: 0}
 --- !u!1 &1974520207110844
 GameObject:
   m_ObjectHideFlags: 0

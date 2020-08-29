@@ -50,10 +50,12 @@ public class QuestData
     public bool active;
     public bool started;
     public bool completed;
-    public QuestData(bool _active, bool _started, bool _completed)
+    public int progress;
+    public QuestData(bool _active, bool _started, bool _completed, int _progress)
     {
         active = _active;
         started = _started;
         completed = _completed;
+        progress = _progress;
     }
 }

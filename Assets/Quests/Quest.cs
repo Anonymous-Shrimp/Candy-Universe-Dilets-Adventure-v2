@@ -8,6 +8,7 @@ public class Quest
 {
     public string name;
     public string description;
+    
     public enum QuestType { Main, Side };
     public QuestType questType;
     public UnityEvent defaultAction;
@@ -16,5 +17,7 @@ public class Quest
     public UnityEvent endingAction;
     public bool active = false;
     public bool started = false;
+    public int progress = 0;
+    public int progressMax = 1;
     public bool completed = false;
 }

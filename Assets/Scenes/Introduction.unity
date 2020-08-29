@@ -25792,11 +25792,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8832604250507108376, guid: 7be9daf9147e66148b55ac0fe8cea43b,
         type: 3}
-      propertyPath: questData.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8832604250507108376, guid: 7be9daf9147e66148b55ac0fe8cea43b,
-        type: 3}
       propertyPath: Bar
       value: 
       objectReference: {fileID: 2039582352}
@@ -25860,20 +25855,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8866408226292299213, guid: 7be9daf9147e66148b55ac0fe8cea43b,
-        type: 3}
-      propertyPath: quests.Array.data[1].name
-      value: Claim All Elementals
-      objectReference: {fileID: 0}
     - target: {fileID: 8866689999974746886, guid: 7be9daf9147e66148b55ac0fe8cea43b,
         type: 3}
       propertyPath: m_Name
       value: Dilet
-      objectReference: {fileID: 0}
-    - target: {fileID: 8884563735094848900, guid: 7be9daf9147e66148b55ac0fe8cea43b,
-        type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 4151
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7be9daf9147e66148b55ac0fe8cea43b, type: 3}

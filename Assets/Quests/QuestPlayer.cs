@@ -22,6 +22,7 @@ public class QuestPlayer : MonoBehaviour
         {
             if (FindObjectOfType<NanTeleport>().nanGate)
             {
+
                 manager.EndQuest(1);
             }
         }
