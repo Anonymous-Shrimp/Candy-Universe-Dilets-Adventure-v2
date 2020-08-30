@@ -20,6 +20,7 @@ public class questDisplay : MonoBehaviour
 
     public Color mainQuest;
     public Color sideQuest;
+    public Color tiledQuest;
 
     public bool canChange;
     public int showings;
@@ -84,20 +85,25 @@ public class questDisplay : MonoBehaviour
         }
 
     }
-    public void addShowing(string title, string descrip, string progress, bool questType)
+    public void addShowing(string title, string descrip, string progress, Quest.QuestType questType)
     {
         titleText.Add(title);
         descripText.Add(descrip);
         progressText.Add(progress);
-        if (questType)
+        if (questType == Quest.QuestType.Main)
         {
             questIcon.Add(mainQuest);
             questTypeText.Add("Main Quest");
         }
-        else
+        else if(questType == Quest.QuestType.Side)
         {
             questIcon.Add(sideQuest);
             questTypeText.Add("Side Quest");
+        }
+        else
+        {
+            questIcon.Add(tiledQuest);
+            questTypeText.Add("Tiled Quest");
         }
         showings++;
     }

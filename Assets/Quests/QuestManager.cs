@@ -7,9 +7,19 @@ public class QuestManager : MonoBehaviour
 {
     public Quest[] quests;
     public questDisplay display;
+    public List<QuestItem> questItems;
     Ouch player;
+    public GameObject HUDQuestDisplayItem;
+    public GameObject HUDParent;
     private void Update()
     {
+        if (questItems != null)
+        {
+            for (int i = 0; i < questItems.ToArray().Length; i++)
+            {
+                questItems[i].updateValues(quests[i]);
+            }
+        }
     }
     private void Start()
     {
@@ -23,6 +33,7 @@ public class QuestManager : MonoBehaviour
                 q.activeDuringQuest.Invoke();
             }
         }
+        refreshPage();
     }
     public void StartQuest(int questIndex)
     {
@@ -49,8 +60,8 @@ public class QuestManager : MonoBehaviour
             {
                 progressText = quests[questIndex].progress.ToString() + " / " + quests[questIndex].progressMax.ToString();
             }
-            bool questType = quests[questIndex].questType == Quest.QuestType.Main;
-            display.addShowing(quests[questIndex].name, quests[questIndex].description, progressText, questType);
+            
+            display.addShowing(quests[questIndex].name, quests[questIndex].description, progressText, quests[questIndex].questType);
 
         }
         else
@@ -68,11 +79,12 @@ public class QuestManager : MonoBehaviour
             {
                 progressText = quests[questIndex].progress.ToString() + " / " + quests[questIndex].progressMax.ToString();
             }
-            bool questType = quests[questIndex].questType == Quest.QuestType.Main;
-            FindObjectOfType<questDisplay>().addShowing(quests[questIndex].name, quests[questIndex].description, progressText, questType);
+            
+            FindObjectOfType<questDisplay>().addShowing(quests[questIndex].name, quests[questIndex].description, progressText, quests[questIndex].questType);
         }
-        
-        
+        refreshPage();
+
+
     }
     public int getProgress(int questIndex)
     {
@@ -94,12 +106,13 @@ public class QuestManager : MonoBehaviour
         {
             progressText = quests[questIndex].progress.ToString() + " / " + quests[questIndex].progressMax.ToString();
         }
-        bool questType = quests[questIndex].questType == Quest.QuestType.Main;
-        display.addShowing(quests[questIndex].name, quests[questIndex].description, progressText, questType);
+        
+        display.addShowing(quests[questIndex].name, quests[questIndex].description, progressText, quests[questIndex].questType);
         if (quests[questIndex].progress >= quests[questIndex].progressMax)
         {
             EndQuest(questIndex);
         }
+        refreshPage();
     }
     public void changeProgressByOne(int questIndex)
     {
@@ -117,12 +130,13 @@ public class QuestManager : MonoBehaviour
         {
             progressText = quests[questIndex].progress.ToString() + " / " + quests[questIndex].progressMax.ToString();
         }
-        bool questType = quests[questIndex].questType == Quest.QuestType.Main;
-        display.addShowing(quests[questIndex].name, quests[questIndex].description, progressText, questType);
+        
+        display.addShowing(quests[questIndex].name, quests[questIndex].description, progressText, quests[questIndex].questType);
         if(quests[questIndex].progress >= quests[questIndex].progressMax)
         {
             EndQuest(questIndex);
         }
+        refreshPage();
     }
     public void EndQuest(int questIndex)
     {
@@ -142,7 +156,22 @@ public class QuestManager : MonoBehaviour
 
         }
         StartCoroutine(saveAfterTime());
+        refreshPage();
+    }
+    public void refreshPage()
+    {
+        foreach (QuestItem q in questItems) {
+            Destroy(q.gameObject);
+
+        }
+        questItems.RemoveRange(0, questItems.ToArray().Length);
         
+        foreach (Quest q in quests) {
+            if (q.active || q.completed)
+            {
+                questItems.Add(Instantiate(HUDQuestDisplayItem, HUDParent.transform).GetComponent<QuestItem>());
+            }
+                }
     }
     IEnumerator saveAfterTime()
     {

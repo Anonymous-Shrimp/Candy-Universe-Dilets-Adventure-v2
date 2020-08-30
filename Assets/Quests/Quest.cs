@@ -10,7 +10,7 @@ public class Quest
     public string description;
     public string detailedDescription;
 
-    public enum QuestType { Main, Side };
+    public enum QuestType { Main, Side, Tiled };
     public QuestType questType;
     public UnityEvent defaultAction;
     public UnityEvent startingAction;
@@ -19,6 +19,6 @@ public class Quest
     public bool active = false;
     public bool started = false;
     public int progress = 0;
-    public int progressMax = 1;
+    public int progressMax;
     public bool completed = false;
 }

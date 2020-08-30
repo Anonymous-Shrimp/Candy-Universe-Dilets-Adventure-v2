@@ -10,10 +10,12 @@ public class PauseMenu : MonoBehaviour {
     //[HideInInspector]
     public bool canPause = true;
     public bool hideOnCantPause = false;
+    public bool hudMenu = false;
     public GameObject savedPopUp;
     private void Start()
     {
         isPaused = false;
+        hudMenu = false;
     }
     void Update () {
         if (Input.GetKeyDown(KeyCode.Escape) && canPause)
@@ -27,7 +29,7 @@ public class PauseMenu : MonoBehaviour {
                 Pause();
             }
         }
-        if (isPaused)
+        if (isPaused || hudMenu)
         {
             Cursor.visible = true;
             Screen.lockCursor = false;
