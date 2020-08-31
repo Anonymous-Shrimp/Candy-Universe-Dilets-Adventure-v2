@@ -27,7 +27,7 @@ public class Tiled : MonoBehaviour
     void Update()
     {
         talkZone = GetComponentInChildren<TalkArea>().talkArea;
-        if((talkZone && Input.GetKeyDown(KeyCode.V)) || talking)
+        if(((talkZone && Input.GetKeyDown(KeyCode.V)) || talking) && !FindObjectOfType<PauseMenu>().hudMenu)
         {
             talking = true;
             dialouge.active = true;
@@ -77,7 +77,11 @@ public class Tiled : MonoBehaviour
                             dialouge.active = false;
                             FindObjectOfType<PauseMenu>().talking = false;
                             FindObjectOfType<QuestManager>().changeProgress(4, 2);
-
+                            if (!FindObjectOfType<PauseMenu>().hudMenu)
+                            {
+                                FindObjectOfType<FullQuestDisplay>().tab = 1;
+                                FindObjectOfType<FullQuestDisplay>().HUDMenu(true);
+                            }
                             index = 0;
                         }
                     }
@@ -118,7 +122,11 @@ public class Tiled : MonoBehaviour
                         talking = false;
                         dialouge.active = false;
                         FindObjectOfType<PauseMenu>().talking = false;
-                        
+                        if (!FindObjectOfType<PauseMenu>().hudMenu)
+                        {
+                            FindObjectOfType<FullQuestDisplay>().tab = 1;
+                            FindObjectOfType<FullQuestDisplay>().HUDMenu(true);
+                        }
 
                         index = 0;
                     }

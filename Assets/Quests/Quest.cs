@@ -10,7 +10,7 @@ public class Quest
     public string description;
     public string detailedDescription;
 
-    public enum QuestType { Main, Side, Tiled };
+    public enum QuestType { Main, Side, Telid };
     public QuestType questType;
     public UnityEvent defaultAction;
     public UnityEvent startingAction;

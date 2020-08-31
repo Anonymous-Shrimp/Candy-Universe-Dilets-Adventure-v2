@@ -85,7 +85,11 @@ public class questDisplay : MonoBehaviour
                 questTypeLabel.text = questTypeText[0];
                 TABTip.SetActive(showings > 1);
             }
-            
+
+        }
+        else if(!FindObjectOfType<PauseMenu>().hudMenu)
+        {
+            FindObjectOfType<FullQuestDisplay>().tab = 0;
         }
 
     }
