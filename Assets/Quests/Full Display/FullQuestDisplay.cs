@@ -17,7 +17,7 @@ public class FullQuestDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.C) && pause.canPause)
         {
             pause.hudMenu = !pause.hudMenu;
             hudMenu.SetActive(pause.hudMenu);
