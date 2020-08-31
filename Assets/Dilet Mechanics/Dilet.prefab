@@ -572,7 +572,7 @@ MonoBehaviour:
   volumeTrigger: {fileID: 4264898395268424}
   volumeLayer:
     serializedVersion: 2
-    m_Bits: 528
+    m_Bits: 16912
   stopNaNPropagation: 1
   finalBlitToCameraTarget: 0
   antialiasingMode: 1
@@ -980,9 +980,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quests:
   - name: Escape the Poyo Forest
-    description: You are trapped in the Poyo forest. The forest known for being so
-      repetive that you don't know where you've been. Try to escape the Poyo forest
-      to continue the journey.
+    description: Escape the dreaded Poyo forest. Beware of losing track of where
+      you are.
+    detailedDescription: You are trapped in the Poyo forest. The forest known for
+      being so repetive that you don't know where you've been. Try to escape the
+      Poyo forest to continue the journey.
     questType: 0
     defaultAction:
       m_PersistentCalls:
@@ -1052,6 +1054,17 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
         - m_Target: {fileID: 3554051444237017429}
+          m_MethodName: changeProgressByOne
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 3554051444237017429}
           m_MethodName: StartQuest
           m_Mode: 3
           m_Arguments:
@@ -1068,7 +1081,76 @@ MonoBehaviour:
     progressMax: 1
     completed: 0
   - name: Claim All Elementals
-    description: 
+    description: Go to all of the scattered regions of Anesea and reclaim all of
+      the elemental lands.
+    detailedDescription: Nan has taken over the 5 elementals. She is too strong,
+      but is unable to defend them all. By taking each one, you are weakening her.
+    questType: 0
+    defaultAction:
+      m_PersistentCalls:
+        m_Calls: []
+    startingAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    activeDuringQuest:
+      m_PersistentCalls:
+        m_Calls: []
+    endingAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_MethodName: changeAmount
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 200
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 0}
+          m_MethodName: changeAmount
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 500
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 3554051444237017429}
+          m_MethodName: StartQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 2
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    active: 0
+    started: 0
+    progress: 0
+    progressMax: 5
+    completed: 0
+  - name: Defeat Nan
+    description: Go to her castle and find her.
+    detailedDescription: This is it. The final battle. Defeat her, and the common
+      sense will go back to the rest of the world.
     questType: 0
     defaultAction:
       m_PersistentCalls:
@@ -1121,6 +1203,10 @@ MonoBehaviour:
     progressMax: 1
     completed: 0
   display: {fileID: 0}
+  questItems: []
+  HUDQuestDisplayItem: {fileID: 2125617721925014087, guid: 9f98a7abe0b115348800f011183683aa,
+    type: 3}
+  HUDParent: {fileID: 0}
 --- !u!1 &1974520207110844
 GameObject:
   m_ObjectHideFlags: 0
@@ -1146,7 +1232,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1974520207110844}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.805}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4439715908876190}
