@@ -11,6 +11,7 @@ public class PauseMenu : MonoBehaviour {
     public bool canPause = true;
     public bool hideOnCantPause = false;
     public bool hudMenu = false;
+    public bool talking = false;
     public GameObject savedPopUp;
     private void Start()
     {
@@ -29,7 +30,7 @@ public class PauseMenu : MonoBehaviour {
                 Pause();
             }
         }
-        if (isPaused || hudMenu)
+        if (isPaused || hudMenu || talking)
         {
             Cursor.visible = true;
             Screen.lockCursor = false;

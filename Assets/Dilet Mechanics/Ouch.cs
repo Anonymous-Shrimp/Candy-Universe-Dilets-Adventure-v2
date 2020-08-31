@@ -420,11 +420,20 @@ public class Ouch : MonoBehaviour
         {
             StartCoroutine(Poyo());
         }
-
+        if (collision.gameObject.CompareTag("TalkArea"))
+        {
+            collision.gameObject.GetComponent<TalkArea>().talkArea = true;
+        }
 
 
     }
-
+    private void OnTriggerExit(Collider collision)
+    {
+        if (collision.gameObject.CompareTag("TalkArea"))
+        {
+            collision.gameObject.GetComponent<TalkArea>().talkArea = false;
+        }
+    }
     IEnumerator Screenoof(float Sec)
     {
 

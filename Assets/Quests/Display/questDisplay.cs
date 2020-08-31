@@ -12,6 +12,8 @@ public class questDisplay : MonoBehaviour
     public Image questType;
     public Text questTypeLabel;
 
+    public GameObject TABTip;
+
     public List<string> titleText;
     public List<string> descripText;
     public List<string> progressText;
@@ -38,6 +40,7 @@ public class questDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (timer > 0)
         {
             timer -= Time.deltaTime;
@@ -80,6 +83,7 @@ public class questDisplay : MonoBehaviour
                 progress.text = progressText[0];
                 questType.color = questIcon[0];
                 questTypeLabel.text = questTypeText[0];
+                TABTip.SetActive(showings > 1);
             }
             
         }

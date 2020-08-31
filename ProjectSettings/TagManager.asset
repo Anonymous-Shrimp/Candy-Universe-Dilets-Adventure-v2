@@ -36,6 +36,7 @@ TagManager:
   - NanArea
   - Poyo
   - Quest
+  - TalkArea
   layers:
   - Default
   - TransparentFX

@@ -10,6 +10,7 @@ public class QuestItem : MonoBehaviour
     public Text detailedDescripText;
     public Text progressText;
     public Image typeImage;
+    public Text completed;
     [Space]
     questDisplay display;
 
@@ -18,6 +19,7 @@ public class QuestItem : MonoBehaviour
     public string detailedDescrip;
     public string progress;
     public Quest.QuestType questType;
+    public bool isCompleted;
 
     private void Start()
     {
@@ -44,6 +46,24 @@ public class QuestItem : MonoBehaviour
         {
             typeImage.color = display.tiledQuest;
         }
+        if (isCompleted)
+        {
+            titleText.color = new Color(1, 1, 1, 0.2f);
+            descripText.color = new Color(1, 1, 1, 0.2f);
+            detailedDescripText.color = new Color(1, 1, 1, 0.2f);
+            progressText.color = new Color(1, 1, 1, 0.2f);
+            typeImage.color = new Color(typeImage.color.r, typeImage.color.g, typeImage.color.b, 0.2f);
+            completed.text = "Completed!";
+        }
+        else
+        {
+            titleText.color = new Color(1, 1, 1, 0.8f);
+            descripText.color = new Color(1, 1, 1, 0.8f);
+            detailedDescripText.color = new Color(1, 1, 1, 0.8f);
+            progressText.color = new Color(1, 1, 1, 0.8f);
+            typeImage.color = new Color(typeImage.color.r, typeImage.color.g, typeImage.color.b, 0.8f);
+            completed.text = "";
+        }
     }
     public void updateValues(Quest q)
     {
@@ -52,5 +72,6 @@ public class QuestItem : MonoBehaviour
         detailedDescrip = q.detailedDescription;
         progress = q.progress.ToString() + " / " + q.progressMax.ToString();
         questType = q.questType;
+        isCompleted = q.completed;
     }
 }

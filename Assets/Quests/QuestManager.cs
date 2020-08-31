@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,12 +14,9 @@ public class QuestManager : MonoBehaviour
     public GameObject HUDParent;
     private void Update()
     {
-        if (questItems != null)
+        if(Input.GetKeyDown(KeyCode.E) && FindObjectOfType<PauseMenu>().hudMenu)
         {
-            for (int i = 0; i < questItems.ToArray().Length; i++)
-            {
-                questItems[i].updateValues(quests[i]);
-            }
+            refreshPage();
         }
     }
     private void Start()
@@ -142,6 +140,7 @@ public class QuestManager : MonoBehaviour
     {
         try
         {
+                
             if (quests[questIndex].active && !quests[questIndex].completed)
             {
                 quests[questIndex].completed = true;
@@ -169,9 +168,34 @@ public class QuestManager : MonoBehaviour
         foreach (Quest q in quests) {
             if (q.active || q.completed)
             {
-                questItems.Add(Instantiate(HUDQuestDisplayItem, HUDParent.transform).GetComponent<QuestItem>());
+                QuestItem qi = Instantiate(HUDQuestDisplayItem, HUDParent.transform).GetComponent<QuestItem>();
+                questItems.Add(qi);
+                qi.updateValues(q);
+
             }
                 }
+        List<QuestItem> qs;
+        qs = new List<QuestItem>();
+        foreach(QuestItem q in questItems)
+        {
+            qs.Add(q);
+        }
+        foreach(QuestItem q in qs)
+        {
+            if (q.completed)
+            {
+                questItems.Remove(q);
+                questItems.Add(q);
+            }
+        }
+        
+        foreach(QuestItem q in questItems)
+        {
+            q.gameObject.name = q.title;
+            q.transform.SetAsLastSibling();
+        }
+        
+
     }
     IEnumerator saveAfterTime()
     {
