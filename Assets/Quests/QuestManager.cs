@@ -45,53 +45,54 @@ public class QuestManager : MonoBehaviour
     }
     public void StartQuest(int questIndex)
     {
-        
+        if (!quests[questIndex].active)
+        {
             if (!quests[questIndex].completed)
             {
                 quests[questIndex].active = true;
                 quests[questIndex].started = true;
             }
             quests[questIndex].startingAction.Invoke();
-        quests[questIndex].activeDuringQuest.Invoke();
-        if (display != null)
-        {
-            string progressText;
-            if (quests[questIndex].progress == 0)
+            quests[questIndex].activeDuringQuest.Invoke();
+            if (display != null)
             {
-                progressText = "New Quest!";
-            }
-            else if (quests[questIndex].progress >= quests[questIndex].progressMax)
-            {
-                progressText = "Completed!";
+                string progressText;
+                if (quests[questIndex].progress == 0)
+                {
+                    progressText = "New Quest!";
+                }
+                else if (quests[questIndex].progress >= quests[questIndex].progressMax)
+                {
+                    progressText = "Completed!";
+                }
+                else
+                {
+                    progressText = quests[questIndex].progress.ToString() + " / " + quests[questIndex].progressMax.ToString();
+                }
+
+                display.addShowing(quests[questIndex].name, quests[questIndex].description, progressText, quests[questIndex].questType);
+
             }
             else
             {
-                progressText = quests[questIndex].progress.ToString() + " / " + quests[questIndex].progressMax.ToString();
-            }
-            
-            display.addShowing(quests[questIndex].name, quests[questIndex].description, progressText, quests[questIndex].questType);
+                string progressText;
+                if (quests[questIndex].progress == 0)
+                {
+                    progressText = "New Quest!";
+                }
+                else if (quests[questIndex].progress >= quests[questIndex].progressMax)
+                {
+                    progressText = "Completed!";
+                }
+                else
+                {
+                    progressText = quests[questIndex].progress.ToString() + " / " + quests[questIndex].progressMax.ToString();
+                }
 
+                FindObjectOfType<questDisplay>().addShowing(quests[questIndex].name, quests[questIndex].description, progressText, quests[questIndex].questType);
+            }
+            refreshPage();
         }
-        else
-        {
-            string progressText;
-            if (quests[questIndex].progress == 0)
-            {
-                progressText = "New Quest!";
-            }
-            else if (quests[questIndex].progress >= quests[questIndex].progressMax)
-            {
-                progressText = "Completed!";
-            }
-            else
-            {
-                progressText = quests[questIndex].progress.ToString() + " / " + quests[questIndex].progressMax.ToString();
-            }
-            
-            FindObjectOfType<questDisplay>().addShowing(quests[questIndex].name, quests[questIndex].description, progressText, quests[questIndex].questType);
-        }
-        refreshPage();
-
 
     }
     public int getProgress(int questIndex)
