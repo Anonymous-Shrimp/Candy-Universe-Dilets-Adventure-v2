@@ -855,10 +855,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4015760385080712}
   - component: {fileID: 95846353076872130}
-  - component: {fileID: 65701207130845480}
   - component: {fileID: 114508126503161010}
   - component: {fileID: 507249988762086587}
   - component: {fileID: 7985938585780557906}
+  - component: {fileID: 2063745406}
   m_Layer: 14
   m_Name: Goblin
   m_TagString: Untagged
@@ -906,19 +906,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!65 &65701207130845480
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1411242869466896}
-  m_Material: {fileID: 13400000, guid: 3aeb7dadc0c69d54d9e5777e9d5631f1, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.028006854, y: 0.0436506, z: 0.027967181}
-  m_Center: {x: 0.001941136, y: 0.021042742, z: 0.007443237}
 --- !u!114 &114508126503161010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -966,14 +953,30 @@ MonoBehaviour:
   Bar: {fileID: 114240083279932800}
   explode: {fileID: 0}
   targetLookAt: {fileID: 0}
+  specialProperty: 0
   hittedCooldown: 3
   cooldown: 0
   mad: 0
   madAlerted: 0
   turnSpeed: 200
+  walkingSpeed: 5
   walkingClip: {fileID: -203655887218126122, guid: a5004e7e374b5434b8e5eebf20fa12f0,
     type: 3}
   distanceUntilNotice: 30
+--- !u!136 &2063745406
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411242869466896}
+  m_Material: {fileID: 13400000, guid: e52fb17f9b1e7fd48b8955f1391d3688, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.02
+  m_Height: 0.04
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.02, z: 0.005}
 --- !u!1 &1421403645041730
 GameObject:
   m_ObjectHideFlags: 0

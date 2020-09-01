@@ -111,7 +111,7 @@ public class questDisplay : MonoBehaviour
         else
         {
             questIcon.Add(tiledQuest);
-            questTypeText.Add("Tiled Quest");
+            questTypeText.Add("Telid Quest");
         }
         showings++;
     }

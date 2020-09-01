@@ -13,6 +13,7 @@ public class EnemyBar : MonoBehaviour
     private void Start()
     {
         targetTransform = FindObjectOfType<Ouch>().transform;
+
     }
     void Update()
     {

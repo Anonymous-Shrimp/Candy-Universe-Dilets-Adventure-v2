@@ -18,8 +18,9 @@ public class PlayerData {
     public int dayNum;
     public int candyAmount;
     public QuestData[] questData;
+    public ResearchData telidData;
 
-     public PlayerData(Ouch player, timePlace time, int ammount, QuestData[] _questData)
+     public PlayerData(Ouch player, timePlace time, int ammount, QuestData[] _questData, ResearchData _telidData)
     {
    
         water = player.water;
@@ -35,6 +36,8 @@ public class PlayerData {
         timeOfDay = time.TimeOfDay;
         candyAmount = ammount;
         questData = _questData;
+        telidData = _telidData;
+
 
         position = new float[3];
         position[0] = player.transform.position.x;

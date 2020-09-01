@@ -28,7 +28,14 @@ public class FullQuestDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        telidTab.SetActive(FindObjectOfType<QuestManager>().quests[4].completed);
+        try
+        {
+            telidTab.SetActive(FindObjectOfType<QuestManager>().quests[4].completed);
+        }
+        catch
+        {
+
+        }
         if (!FindObjectOfType<QuestManager>().quests[4].completed)
         {
             tab = 0;

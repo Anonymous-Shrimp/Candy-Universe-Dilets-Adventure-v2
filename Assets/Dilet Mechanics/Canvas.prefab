@@ -4463,7 +4463,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 6d1604f5d735cb54286d7723b315de60, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
@@ -4966,7 +4966,7 @@ MonoBehaviour:
     questIndex: 8
     activeText: {fileID: 6591244661159945399}
   - name: Regeneration
-    descrip: Dilet can regenrate health
+    descrip: Dilet can regenerate health
     candyCost: 400
     completed: 0
     active: 0

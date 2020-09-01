@@ -13,6 +13,11 @@ public class TelidResearch : MonoBehaviour
     {
         manager = FindObjectOfType<QuestManager>();
         FindObjectOfType<TelidResearch>().cantBuy.SetActive(false);
+        foreach(TelidResearchItem t in items)
+        {
+            t.completed = manager.quests[t.questIndex].completed;
+            t.questActive = manager.quests[t.questIndex].active;
+        }
     }
 
     // Update is called once per frame
@@ -26,6 +31,13 @@ public class TelidResearch : MonoBehaviour
                 t.descripText.text = t.descrip;
                 t.candyTextAmount.gameObject.SetActive(false);
             }
+            else if(t.questActive)
+            {
+                t.title.text = "???";
+                t.descripText.text = "Click to see quest page";
+                t.candyTextAmount.gameObject.SetActive(false);
+                t.candyTextAmount.text = t.candyCost.ToString();
+            }
             else
             {
                 t.title.text = "???";
@@ -34,6 +46,11 @@ public class TelidResearch : MonoBehaviour
                 t.candyTextAmount.text = t.candyCost.ToString();
             }
             t.activeText.SetActive(t.active);
+        }
+        foreach (TelidResearchItem t in items)
+        {
+            t.completed = manager.quests[t.questIndex].completed;
+            t.questActive = manager.quests[t.questIndex].active;
         }
     }
     public void click(int index)
@@ -65,6 +82,8 @@ public class TelidResearch : MonoBehaviour
                 try
                 {
                     manager.StartQuest(items[index].questIndex);
+                    FindObjectOfType<CandyCounter>().changeAmount(-items[index].candyCost);
+                    FindObjectOfType<FullQuestDisplay>().HUDMenu(false);
                 }
                 catch
                 {
@@ -75,6 +94,10 @@ public class TelidResearch : MonoBehaviour
             {
                 cantBuy.SetActive(true);
             }
+        }else if (items[index].questActive)
+        {
+            
+            FindObjectOfType<FullQuestDisplay>().tab = 0;
         }
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering.PostProcessing;
 using System.Collections.Generic;
+using System.Linq;
 
 public class Ouch : MonoBehaviour
 {
@@ -42,10 +43,15 @@ public class Ouch : MonoBehaviour
     public GameObject candyParticle;
     public timePlace timeInPlace;
     public List<QuestData> questData = new List<QuestData>();
+    public ResearchData telidData;
     public Animator animationArea;
     public CandyCounter candy;
     public QuestManager questManager;
+    public TelidResearch telid;
     Rigidbody Rigid;
+    [Space]
+    public bool cold = false;
+    float coldTimer;
     
     void Awake()
     {
@@ -53,6 +59,7 @@ public class Ouch : MonoBehaviour
         candy = FindObjectOfType<CandyCounter>();
         Rigid = GetComponent<Rigidbody>();
         questManager = GetComponent<QuestManager>();
+        telid = FindObjectOfType<TelidResearch>();
 
         Scene currentScene = SceneManager.GetActiveScene();
         string sceneName = currentScene.name;
@@ -115,8 +122,17 @@ public class Ouch : MonoBehaviour
                     FindObjectOfType<TimeCycle>().dayNum = 1;
                     FindObjectOfType<TimeCycle>().currentTimeOfDay = 0.3f;
                 }
+                if (telid != null)
+                {
+                    foreach(TelidResearchItem t in telid.items)
+                    {
+                        t.active = false;
+                        t.questActive = false;
+                        t.completed = false;
+                    }
+                }
 
-                
+
                 candy.targetAmount = 0;
                 candy.candyAmount = 0;
                 transform.position = position;
@@ -183,6 +199,7 @@ public class Ouch : MonoBehaviour
     }
     void Update()
     {
+        
         if (Input.GetKeyDown(KeyCode.F) && candy.targetAmount >= 10)
         {
             health += 10;
@@ -217,8 +234,40 @@ public class Ouch : MonoBehaviour
             timeInPlace.dayNum = FindObjectOfType<TimeCycle>().dayNum;
             timeInPlace.TimeOfDay = FindObjectOfType<TimeCycle>().currentTimeOfDay;
         }
-        
-        if(questManager != null)
+        if (telid != null)
+        {
+            foreach (TelidResearchItem t in telid.items)
+            {
+                if (t.researchType == TelidResearchItem.ResearchType.Attack && t.active) {
+                    telidData.attack = t.name;
+
+                }
+                if (t.researchType == TelidResearchItem.ResearchType.Movement && t.active)
+                {
+                    telidData.movement = t.name;
+
+                }
+                if (t.researchType == TelidResearchItem.ResearchType.Defense && t.active)
+                {
+                    telidData.defence = t.name;
+
+                }
+
+            }
+            }
+        if (cold)
+        {
+            coldTimer -= Time.deltaTime;
+            if(coldTimer <= 0)
+            {
+                coldTimer = 7f;
+                health -= 5;
+                StartCoroutine(Screenoof(4f));
+            }
+        }
+
+
+        if (questManager != null)
         {
             questData.Clear();
             foreach (Quest q in questManager.quests)
@@ -240,7 +289,7 @@ public class Ouch : MonoBehaviour
             questManager.changeProgress(1, gatesCompleted);
         }
     }
-    private void OnTriggerEnter(Collider collision)
+    void OnTriggerEnter(Collider collision)
     {
 
         if (collision.gameObject.CompareTag("WaterDeath"))
@@ -249,7 +298,9 @@ public class Ouch : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("GoblinBox"))
         {
-            health -= GoblinDamage;
+            
+                health -= collision.gameObject.GetComponentInParent<AI>().damage;
+            
             StartCoroutine(CameraShake.Shake(duration, magnitude));
             StartCoroutine(Screenoof(2));
         }
@@ -351,8 +402,7 @@ public class Ouch : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Freeze"))
         {
-            health -= 1;
-            StartCoroutine(Screenoof(0.5f));
+            cold = true;
         }
         if (collision.gameObject.CompareTag("Boulder"))
         {
@@ -433,6 +483,10 @@ public class Ouch : MonoBehaviour
         {
             collision.gameObject.GetComponent<TalkArea>().talkArea = false;
         }
+        if (collision.gameObject.CompareTag("Freeze"))
+        {
+            cold = false;
+        }
     }
     IEnumerator Screenoof(float Sec)
     {
@@ -453,7 +507,7 @@ public class Ouch : MonoBehaviour
     }
     public void SavePlayer()
     {
-        SaveSystem.SavePlayer(this, timeInPlace, candy.targetAmount, questData.ToArray());
+        SaveSystem.SavePlayer(this, timeInPlace, candy.targetAmount, questData.ToArray(), telidData);
 
     }
 
@@ -490,6 +544,17 @@ public class Ouch : MonoBehaviour
         {
             timeInPlace.dayNum = data.dayNum;
             timeInPlace.TimeOfDay = data.timeOfDay;
+        }
+        if(telid != null)
+        {
+            foreach(TelidResearchItem t in telid.items)
+            {
+                t.active = false;
+                if(t.name == data.telidData.attack || t.name == data.telidData.movement || t.name == data.telidData.defence)
+                {
+                    t.active = true;
+                }
+            }
         }
         if(questManager != null)
         {

@@ -46,13 +46,20 @@ public class QuestPlayer : MonoBehaviour
             {
                 manager.EndQuest(0);
             }
-        }
-        if (other.gameObject.CompareTag("Quest"))
-        {
             if (other.gameObject.name == "TiledCandy")
             {
                 manager.changeProgress(4,1);
                 HasTiledCandy = true;
+                Destroy(other.gameObject);
+            }
+            if(other.gameObject.name == "KinemaKey")
+            {
+                manager.changeProgress(8, 1);
+                Destroy(other.gameObject);
+            }
+            if (other.gameObject.name == "CaperKey")
+            {
+                manager.changeProgress(7, 1);
                 Destroy(other.gameObject);
             }
         }
