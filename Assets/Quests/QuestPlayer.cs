@@ -12,6 +12,8 @@ public class QuestPlayer : MonoBehaviour
     public bool HasTiledCandy;
     public GameObject TiledCandy;
 
+    bool inSunset = false;
+
     void Start()
     {
         manager = FindObjectOfType<QuestManager>();
@@ -35,8 +37,16 @@ public class QuestPlayer : MonoBehaviour
                 manager.changeProgress(0,1);
             }
         }
-        
-        
+        if(inSunset && FindObjectOfType<TimeCycle>().currentTimeOfDay > 0.73f && FindObjectOfType<TimeCycle>().currentTimeOfDay < 0.75f)
+        {
+            manager.changeProgress(11, 1);
+        }
+        if (FindObjectOfType<TimeCycle>().currentTimeOfDay > 0.2f && FindObjectOfType<TimeCycle>().currentTimeOfDay < 0.77f && manager.getProgress(12) != 0)
+        {
+            manager.changeProgress(12, 0);
+        }
+
+
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -62,7 +72,21 @@ public class QuestPlayer : MonoBehaviour
                 manager.changeProgress(7, 1);
                 Destroy(other.gameObject);
             }
+            if(other.gameObject.name == "Sunset")
+            {
+                inSunset = true;
+            }
         }
     }
-    
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Quest"))
+        {
+            if (other.gameObject.name == "Sunset")
+            {
+                inSunset = false;
+            }
+        }
+    }
+
 }

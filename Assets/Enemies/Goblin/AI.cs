@@ -171,6 +171,11 @@ public class AI : MonoBehaviour {
         {
             FindObjectOfType<QuestManager>().changeProgressByOne(5);
         }
+        if (FindObjectOfType<QuestManager>().quests[12].active && (FindObjectOfType<TimeCycle>().currentTimeOfDay < 0.2f || FindObjectOfType<TimeCycle>().currentTimeOfDay > 0.77f))
+        {
+            FindObjectOfType<QuestManager>().changeProgressByOne(12);
+            
+        }
         if (FindObjectOfType<QuestManager>().quests[6].active && specialProperty == enemySpecialProperty.giant)
         {
             FindObjectOfType<QuestManager>().changeProgressByOne(6);
