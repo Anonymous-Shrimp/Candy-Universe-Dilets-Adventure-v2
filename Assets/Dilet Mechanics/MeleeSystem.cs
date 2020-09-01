@@ -28,7 +28,7 @@ public class MeleeSystem : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         chargedEnergyBar.value = energyBar.value;
         if(Input.GetMouseButton(0) && !(FindObjectOfType<PauseMenu>().isPaused || FindObjectOfType<PauseMenu>().hudMenu || FindObjectOfType<PauseMenu>().talking) )
