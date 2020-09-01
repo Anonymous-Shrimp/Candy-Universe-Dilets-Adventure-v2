@@ -59,10 +59,12 @@ public class Ouch : MonoBehaviour
     float jumpPower;
     bool refreshResearchData = false;
     float jumpEnergyReduction;
+    float runSpeed;
     public Animator jumpBarAnim;
 
     void Awake()
     {
+        runSpeed = GetComponent<FirstPersonController>().m_RunSpeed;
         jumpPower = GetComponent<FirstPersonController>().jumpAdd;
         candy = FindObjectOfType<CandyCounter>();
         Rigid = GetComponent<Rigidbody>();
@@ -275,20 +277,29 @@ public class Ouch : MonoBehaviour
         }
         if(telidData.movement == "Super Run")
         {
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (Input.GetKey(KeyCode.LeftShift) && FindObjectOfType<MeleeSystem>().energyBar.value >= 0f)
             {
                 FindObjectOfType<MeleeSystem>().energyBar.value -= Time.deltaTime * 1.5f;
-                if (FindObjectOfType<MeleeSystem>().energyBar.value <= 0)
-                {
-                    GetComponent<FirstPersonController>().m_IsWalking = false;
-                }
+                GetComponent<FirstPersonController>().m_RunSpeed = GetComponent<FirstPersonController>().m_RunSpeed;
+                GetComponent<FirstPersonController>().m_IsWalking = false;
+                GetComponent<FirstPersonController>().m_RunSpeed = 30;
             }
+            else
+            {
+                GetComponent<FirstPersonController>().m_RunSpeed = GetComponent<FirstPersonController>().m_WalkSpeed;
+                GetComponent<FirstPersonController>().m_IsWalking = true;
+                GetComponent<FirstPersonController>().m_RunSpeed = 10;
+            }
+            if (Input.GetKeyDown(KeyCode.LeftShift) && FindObjectOfType<MeleeSystem>().energyBar.value >= 0.2f)
+            {
+                FindObjectOfType<MeleeSystem>().energyBar.value -= 0.2f;
+            }
+
             
-            GetComponent<FirstPersonController>().m_RunSpeed = 30;
         }
         else
         {
-            GetComponent<FirstPersonController>().m_RunSpeed = 10;
+            
         }
         if(telidData.movement == "Super Jump")
         {

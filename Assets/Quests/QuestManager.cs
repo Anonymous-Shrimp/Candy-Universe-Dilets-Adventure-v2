@@ -100,22 +100,30 @@ public class QuestManager : MonoBehaviour
     }
     public void changeProgress(int questIndex, int progress)
     {
-        quests[questIndex].progress = progress;
-        string progressText;
-        if (quests[questIndex].progress == 0)
+        if (quests[questIndex].progress < progress)
         {
-            progressText = "New Quest!";
-        }
-        else if (quests[questIndex].progress >= quests[questIndex].progressMax)
-        {
-            progressText = "Completed!";
+            quests[questIndex].progress = progress;
+            string progressText;
+            if (quests[questIndex].progress == 0)
+            {
+                progressText = "New Quest!";
+            }
+            else if (quests[questIndex].progress >= quests[questIndex].progressMax)
+            {
+                progressText = "Completed!";
+            }
+            else
+            {
+                progressText = quests[questIndex].progress.ToString() + " / " + quests[questIndex].progressMax.ToString();
+            }
+
+            display.addShowing(quests[questIndex].name, quests[questIndex].description, progressText, quests[questIndex].questType);
         }
         else
         {
-            progressText = quests[questIndex].progress.ToString() + " / " + quests[questIndex].progressMax.ToString();
+            quests[questIndex].progress = progress;
+
         }
-        
-        display.addShowing(quests[questIndex].name, quests[questIndex].description, progressText, quests[questIndex].questType);
         if (quests[questIndex].progress >= quests[questIndex].progressMax)
         {
             EndQuest(questIndex);

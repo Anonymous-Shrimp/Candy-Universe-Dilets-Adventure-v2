@@ -11,7 +11,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
     public class FirstPersonController : MonoBehaviour
     {
         public bool m_IsWalking;
-        [SerializeField] private float m_WalkSpeed;
+        public float m_WalkSpeed;
         public float m_RunSpeed;
         [SerializeField] [Range(0f, 1f)] private float m_RunstepLenghten;
         public float m_JumpSpeed;
@@ -126,7 +126,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 if (m_Jump)
                 {
                     m_MoveDir.y = m_JumpSpeed + jumpAdd;
-                    print(m_MoveDir.y);
+
                     PlayJumpSound();
                     m_Jump = false;
                     m_Jumping = true;
