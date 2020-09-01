@@ -4,7 +4,7 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerData {
 
-    public int health;
+    public float health;
     public bool water;
     public bool thunder;
     public bool fire;

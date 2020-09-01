@@ -11,7 +11,7 @@ public class DiletBar : MonoBehaviour {
 	void Start () {
         bar = transform.Find("Bar").GetComponent<Image>();
 	}
-    private void Update()
+    private void FixedUpdate()
     {
         if (bar.fillAmount < target)
         {
@@ -23,6 +23,8 @@ public class DiletBar : MonoBehaviour {
         }
              bar.color = new Color(1, Mathf.Abs(bar.fillAmount - target) * 5, Mathf.Abs(bar.fillAmount - target) * 5, 0.7f);
         gameObject.transform.localScale = new Vector3(0.5f + (bar.fillAmount - target) * 0.6f, 0.5f + (bar.fillAmount - target) * 0.6f, 1);
+
+        
     }
     // Update is called once per frame
     public void SetSize(float sizeNormalized) {

@@ -5,11 +5,14 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering.PostProcessing;
 using System.Collections.Generic;
+using UnityStandardAssets.Characters.FirstPerson;
 using System.Linq;
 
 public class Ouch : MonoBehaviour
 {
-    public int health = 100;
+    
+    public float health = 100;
+    int maxHealth = 100;
     public GameObject dilet;
     public DiletBar Bar;
     public bool introduction;
@@ -52,14 +55,20 @@ public class Ouch : MonoBehaviour
     [Space]
     public bool cold = false;
     float coldTimer;
-    
+    float regenTimer;
+    float jumpPower;
+    bool refreshResearchData = false;
+    float jumpEnergyReduction;
+    public Animator jumpBarAnim;
+
     void Awake()
     {
-
+        jumpPower = GetComponent<FirstPersonController>().jumpAdd;
         candy = FindObjectOfType<CandyCounter>();
         Rigid = GetComponent<Rigidbody>();
         questManager = GetComponent<QuestManager>();
         telid = FindObjectOfType<TelidResearch>();
+        jumpBarAnim = GameObject.Find("JumpBar").GetComponent<Animator>();
 
         Scene currentScene = SceneManager.GetActiveScene();
         string sceneName = currentScene.name;
@@ -199,11 +208,63 @@ public class Ouch : MonoBehaviour
     }
     void Update()
     {
-        
+        if(FindObjectOfType<TelidResearch>() != null)
+        {
+            telid = FindObjectOfType<TelidResearch>();
+        }
+        if (telid != null && !refreshResearchData)
+        {
+            bool attack = false;
+            bool movement = false;
+            bool defence = false;
+            foreach (TelidResearchItem t in telid.items)
+            {
+                
+                if (t.researchType == TelidResearchItem.ResearchType.Attack && t.active)
+                {
+                    telidData.attack = t.name;
+                    attack = true;
+
+                }
+                if (t.researchType == TelidResearchItem.ResearchType.Movement && t.active)
+                {
+                    telidData.movement = t.name;
+                    movement = true;
+
+                }
+                if (t.researchType == TelidResearchItem.ResearchType.Defense && t.active)
+                {
+                    telidData.defence = t.name;
+                    defence = true;
+
+                }
+
+            }
+            if (!attack) { telidData.attack = ""; }
+            if (!movement) { telidData.movement = ""; }
+            if (!defence) { telidData.defence = ""; }
+
+        }
+        else if(telid != null)
+        {
+            foreach (TelidResearchItem t in telid.items)
+            {
+                t.active = false;
+                if (t.name == telidData.attack || t.name == telidData.movement || t.name == telidData.defence)
+                {
+                    t.active = true;
+                }
+            }
+            refreshResearchData = false;
+        }
         if (Input.GetKeyDown(KeyCode.F) && candy.targetAmount >= 10)
         {
             health += 10;
             candy.targetAmount -= 10;
+            if (FindObjectOfType<QuestManager>().quests[5].active)
+            {
+                FindObjectOfType<QuestManager>().changeProgress(5, 0);
+            }
         }
         if (health <= 0)
         {
@@ -212,8 +273,70 @@ public class Ouch : MonoBehaviour
             SavePlayer();
             FindObjectOfType<loading>().LoadLevelString("Death");
         }
+        if(telidData.movement == "Super Run")
+        {
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                FindObjectOfType<MeleeSystem>().energyBar.value -= Time.deltaTime * 1.5f;
+                if (FindObjectOfType<MeleeSystem>().energyBar.value <= 0)
+                {
+                    GetComponent<FirstPersonController>().m_IsWalking = false;
+                }
+            }
+            
+            GetComponent<FirstPersonController>().m_RunSpeed = 30;
+        }
+        else
+        {
+            GetComponent<FirstPersonController>().m_RunSpeed = 10;
+        }
+        if(telidData.movement == "Super Jump")
+        {
+            GetComponent<FirstPersonController>().jumpInput = false;
+        }
+        else
+        {
+            GetComponent<FirstPersonController>().jumpInput = true;
+        }
+        if(telidData.movement == "Super Jump" && Input.GetKey(KeyCode.Space))
+        {
+            GetComponent<FirstPersonController>().jumpAdd += Time.deltaTime * 10;
+            if(GetComponent<FirstPersonController>().jumpAdd > jumpBarAnim.gameObject.GetComponent<Slider>().maxValue)
+            {
+                GetComponent<FirstPersonController>().jumpAdd = jumpBarAnim.gameObject.GetComponent<Slider>().maxValue;
+            }
+            jumpBarAnim.gameObject.GetComponent<Slider>().value = GetComponent<FirstPersonController>().jumpAdd;
+        }
+        else if(telidData.movement == "Super Jump" && !Input.GetKey(KeyCode.Space) && GetComponent<FirstPersonController>().m_Jumping)
+        {
+
+            jumpBarAnim.gameObject.GetComponent<Slider>().value = GetComponent<FirstPersonController>().jumpAdd;
+        }
+        else 
+        {
+
+        }
+        jumpBarAnim.SetBool("Entered", telidData.movement == "Super Jump" && Input.GetKey(KeyCode.Space));
+        if (telidData.defence == "Regeneration")
+        {
+            
+            
+            regenTimer += Time.deltaTime;
+            if(regenTimer > 4 && health < 100)
+            {
+                health += 15 * Time.deltaTime;
+            }
+        }
+        if (telidData.defence == "Max Health+")
+        {
+            maxHealth = 300;
+        }
+        else
+        {
+            maxHealth = 100;
+        }
         barSize = health;
-        barSize = barSize / 100;
+        barSize = barSize / maxHealth;
         Bar.SetSize(barSize);
         
         Scene currentScene = SceneManager.GetActiveScene();
@@ -234,27 +357,7 @@ public class Ouch : MonoBehaviour
             timeInPlace.dayNum = FindObjectOfType<TimeCycle>().dayNum;
             timeInPlace.TimeOfDay = FindObjectOfType<TimeCycle>().currentTimeOfDay;
         }
-        if (telid != null)
-        {
-            foreach (TelidResearchItem t in telid.items)
-            {
-                if (t.researchType == TelidResearchItem.ResearchType.Attack && t.active) {
-                    telidData.attack = t.name;
-
-                }
-                if (t.researchType == TelidResearchItem.ResearchType.Movement && t.active)
-                {
-                    telidData.movement = t.name;
-
-                }
-                if (t.researchType == TelidResearchItem.ResearchType.Defense && t.active)
-                {
-                    telidData.defence = t.name;
-
-                }
-
-            }
-            }
+        
         if (cold)
         {
             coldTimer -= Time.deltaTime;
@@ -490,7 +593,10 @@ public class Ouch : MonoBehaviour
     }
     IEnumerator Screenoof(float Sec)
     {
-
+        if (telidData.defence == "Regeneration")
+        {
+            regenTimer = 0;
+        }
         for (float i = 1; i >= 0; i -= Time.deltaTime / Sec)
         {
             Screen.weight = i;
@@ -555,6 +661,12 @@ public class Ouch : MonoBehaviour
                     t.active = true;
                 }
             }
+            refreshResearchData = false;
+        }
+        else
+        {
+            telidData = data.telidData;
+            refreshResearchData = true;
         }
         if(questManager != null)
         {

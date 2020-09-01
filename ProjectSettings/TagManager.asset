@@ -37,6 +37,7 @@ TagManager:
   - Poyo
   - Quest
   - TalkArea
+  - DiletHitbox
   layers:
   - Default
   - TransparentFX

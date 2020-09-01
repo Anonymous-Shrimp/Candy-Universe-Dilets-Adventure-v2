@@ -12,12 +12,22 @@ public class QuestManager : MonoBehaviour
     Ouch player;
     public GameObject HUDQuestDisplayItem;
     public GameObject HUDParent;
+    public Text questProgresses;
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.E) && FindObjectOfType<PauseMenu>().hudMenu)
         {
             refreshPage();
         }
+        int numComplete = 0;
+        foreach(Quest q in quests)
+        {
+            if (q.completed)
+            {
+                numComplete++;
+            }
+        }
+        questProgresses.text = numComplete.ToString() + " / " + quests.Length.ToString();
     }
     private void Start()
     {

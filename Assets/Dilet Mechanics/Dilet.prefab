@@ -723,6 +723,7 @@ MonoBehaviour:
   questManager: {fileID: 3554051444237017429}
   telid: {fileID: 0}
   cold: 0
+  jumpBarAnim: {fileID: 0}
 --- !u!114 &114584988048618354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -847,6 +848,7 @@ MonoBehaviour:
   - {fileID: 0}
   m_JumpSound: {fileID: 8300000, guid: 5897aeed9b676024fbb8c694b421a861, type: 3}
   m_LandSound: {fileID: 0}
+  jumpInput: 1
 --- !u!54 &54263003291527970
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1709,6 +1711,7 @@ MonoBehaviour:
   HUDQuestDisplayItem: {fileID: 2125617721925014087, guid: 9f98a7abe0b115348800f011183683aa,
     type: 3}
   HUDParent: {fileID: 0}
+  questProgresses: {fileID: 0}
 --- !u!1 &1974520207110844
 GameObject:
   m_ObjectHideFlags: 0
@@ -1762,6 +1765,8 @@ MonoBehaviour:
   chargedEnergyBar: {fileID: 0}
   multiplier: 1.2
   energyReduction: 0.3
+  largeHitbox: {fileID: 8933660895364597473, guid: df689a4b841ee3e49af10781f655d63d,
+    type: 3}
 --- !u!1 &6361656101675538846
 GameObject:
   m_ObjectHideFlags: 0

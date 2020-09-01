@@ -29,6 +29,9 @@ public class AI : MonoBehaviour {
     private Animator Anim;
     public AnimationClip walkingClip;
     public float distanceUntilNotice = 30f;
+
+    float poisonedShortTimer;
+    float poisonTimer;
     
     void Start()
     {
@@ -110,6 +113,20 @@ public class AI : MonoBehaviour {
         {
             hittedTimer -= Time.deltaTime;
         }
+        if (poisonTimer > 0)
+        {
+            poisonTimer -= Time.deltaTime;
+            if (poisonedShortTimer > 0)
+            {
+                poisonedShortTimer -= Time.deltaTime;
+            }else
+            {
+                poisonedShortTimer = 1;
+                ApplyNormalDamage(4);
+            }
+        }
+        
+        
     }
     void ApplyDamage(int TheDamage)
     {
@@ -122,6 +139,25 @@ public class AI : MonoBehaviour {
             FindObjectOfType<CandyCounter>().targetAmount += Random.Range(3, 13);
             StartCoroutine(death());
             
+
+        }
+        if(FindObjectOfType<Ouch>().telidData.attack == "Poison Slap")
+        {
+            poisonTimer = 5;
+        }
+
+    }
+    void ApplyNormalDamage(int TheDamage)
+    {
+        Health -= TheDamage;
+        hitted = true;
+        hittedTimer = hittedCooldown;
+        if (Health <= 0 && !canDieAgain)
+        {
+            canDieAgain = true;
+            FindObjectOfType<CandyCounter>().targetAmount += Random.Range(3, 13);
+            StartCoroutine(death());
+
 
         }
 
@@ -160,6 +196,23 @@ public class AI : MonoBehaviour {
         buddy.madAlerted = true;
 
 
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("DiletHitbox"))
+        {
+            Health -= 3;
+            hitted = true;
+            hittedTimer = hittedCooldown;
+            if (Health <= 0 && !canDieAgain)
+            {
+                canDieAgain = true;
+                FindObjectOfType<CandyCounter>().targetAmount += Random.Range(3, 13);
+                StartCoroutine(death());
+
+
+            }
+        }
     }
 
 }

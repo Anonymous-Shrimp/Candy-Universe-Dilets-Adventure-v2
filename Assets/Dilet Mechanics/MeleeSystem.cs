@@ -17,6 +17,7 @@ public class MeleeSystem : MonoBehaviour
     public float energyReduction = 0.3f;
     private float chargedEnergyReduction = 0.3f;
     private float chargedDamage;
+    public GameObject largeHitbox;
     
     // Start is called before the first frame update
     void Start()
@@ -62,6 +63,11 @@ public class MeleeSystem : MonoBehaviour
                     Distance = hit.distance;
                     if (Distance < maxDistance)
                     {
+                        if (FindObjectOfType<Ouch>().telidData.attack == "Shock Slap")
+                        {
+                            GameObject g = Instantiate(largeHitbox, hit.point, Quaternion.identity);
+                            Destroy(g, 1);
+                        }
                         hit.transform.SendMessage("ApplyDamage", Mathf.Round(chargedDamage + damage), SendMessageOptions.DontRequireReceiver);
                         Hit.Play();
                     }
