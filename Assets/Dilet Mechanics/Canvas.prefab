@@ -4953,6 +4953,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cantBuy: {fileID: 7643918389785193809}
+  questionSprite: {fileID: 21300000, guid: 6ef719ec4850cb74899864a8d09eb3c2, type: 3}
   items:
   - name: Poison Slap
     descrip: Slaps inflict damage to enemies over time.
@@ -4963,6 +4964,7 @@ MonoBehaviour:
     candyTextAmount: {fileID: 4308768579910704385}
     title: {fileID: 3183574969692572282}
     descripText: {fileID: 1233672644533861823}
+    UISprite: {fileID: 21300000, guid: 1cc218a5e300c6740807343a0e795647, type: 3}
     researchType: 0
     questIndex: 5
     activeText: {fileID: 731238109950960362}
@@ -4975,6 +4977,7 @@ MonoBehaviour:
     candyTextAmount: {fileID: 8294534459812225349}
     title: {fileID: 1244396922175350587}
     descripText: {fileID: 708596140090074565}
+    UISprite: {fileID: 21300000, guid: 02bc3cf5696227c4487b8d05e526a354, type: 3}
     researchType: 0
     questIndex: 6
     activeText: {fileID: 6358894627198550918}
@@ -4987,6 +4990,7 @@ MonoBehaviour:
     candyTextAmount: {fileID: 6270994708166984991}
     title: {fileID: 8451530682696462459}
     descripText: {fileID: 3934732106292792519}
+    UISprite: {fileID: 21300000, guid: f4cb81297f4c8834eada1e07afaf662c, type: 3}
     researchType: 1
     questIndex: 7
     activeText: {fileID: 4756135145959710270}
@@ -4999,6 +5003,7 @@ MonoBehaviour:
     candyTextAmount: {fileID: 2328781487464157834}
     title: {fileID: 2514072528251594155}
     descripText: {fileID: 8902723219160760547}
+    UISprite: {fileID: 21300000, guid: d07a97e25dc227c45a26c90bea77d4dc, type: 3}
     researchType: 1
     questIndex: 8
     activeText: {fileID: 6591244661159945399}
@@ -5011,6 +5016,7 @@ MonoBehaviour:
     candyTextAmount: {fileID: 3054290994355094521}
     title: {fileID: 3052988856218741801}
     descripText: {fileID: 2935953414071400023}
+    UISprite: {fileID: 21300000, guid: aedcc828a68a3b84a8ac91c3f01ce227, type: 3}
     researchType: 2
     questIndex: 9
     activeText: {fileID: 3665501044305297742}
@@ -5023,6 +5029,7 @@ MonoBehaviour:
     candyTextAmount: {fileID: 5995960603998279899}
     title: {fileID: 5987152274100114801}
     descripText: {fileID: 181872787494097376}
+    UISprite: {fileID: 21300000, guid: 0ae3d8d16408ce9459dbd28e36a3bc46, type: 3}
     researchType: 2
     questIndex: 10
     activeText: {fileID: 3844766492711455523}

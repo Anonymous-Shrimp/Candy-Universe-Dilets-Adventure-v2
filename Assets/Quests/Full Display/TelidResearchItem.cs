@@ -16,6 +16,7 @@ public class TelidResearchItem
     public Text candyTextAmount;
     public Text title;
     public Text descripText;
+    public Sprite UISprite;
     public enum ResearchType { Attack,Movement,Defense};
     public ResearchType researchType;
     public int questIndex;

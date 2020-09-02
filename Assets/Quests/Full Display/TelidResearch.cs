@@ -7,6 +7,7 @@ public class TelidResearch : MonoBehaviour
 {
     QuestManager manager;
     public GameObject cantBuy;
+    public Sprite questionSprite;
     public TelidResearchItem[] items;
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,7 @@ public class TelidResearch : MonoBehaviour
                 t.title.text = t.name;
                 t.descripText.text = t.descrip;
                 t.candyTextAmount.gameObject.SetActive(false);
+                t.title.gameObject.GetComponentInParent<Image>().sprite = t.UISprite;
             }
             else if(t.questActive)
             {
@@ -37,13 +39,14 @@ public class TelidResearch : MonoBehaviour
                 t.descripText.text = "Click to see quest page";
                 t.candyTextAmount.gameObject.SetActive(false);
                 t.candyTextAmount.text = t.candyCost.ToString();
+                t.title.gameObject.GetComponentInParent<Image>().sprite = questionSprite;
             }
             else
             {
                 t.title.text = "???";
                 t.descripText.text = "";
                 t.candyTextAmount.gameObject.SetActive(true);
-                t.candyTextAmount.text = t.candyCost.ToString();
+                t.title.gameObject.GetComponentInParent<Image>().sprite = questionSprite;
             }
             t.activeText.SetActive(t.active);
         }
