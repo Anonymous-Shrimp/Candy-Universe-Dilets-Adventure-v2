@@ -68,7 +68,7 @@ public class loading : MonoBehaviour
         loadingScreen.SetActive(true);
         if (pause != null)
         {
-            pause.canPause = false;
+            pause.unFreezeEverything();
         }
         Debug.Log("Switch scene to " + sceneName);
         anim.SetTrigger("FadeOut");

@@ -53,6 +53,14 @@ public class PauseMenu : MonoBehaviour {
             }
         }
 	}
+    public void unFreezeEverything()
+    {
+        if(FindObjectOfType<FullQuestDisplay>() != null)
+        {
+            FindObjectOfType<FullQuestDisplay>().HUDMenu(false);
+            canPause = false;
+        }
+    }
     public void Resume()
     {
         if (savedPopUp != null)

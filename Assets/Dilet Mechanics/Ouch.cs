@@ -124,10 +124,7 @@ public class Ouch : MonoBehaviour
                 position.x = -365.293f;
                 position.y = 479.477f;
                 position.z = 828.8861f;
-                if (!questManager.quests[0].completed && !introduction)
-                {
-                    questManager.StartQuest(0);
-                }
+                
                 if (FindObjectOfType<TimeCycle>() != null)
                 {
                     FindObjectOfType<TimeCycle>().dayNum = 1;
@@ -258,6 +255,10 @@ public class Ouch : MonoBehaviour
                 }
             }
             refreshResearchData = false;
+        }
+        if (!questManager.quests[0].completed && !introduction && !questManager.quests[0].active)
+        {
+            questManager.StartQuest(0);
         }
         if (Input.GetKeyDown(KeyCode.F) && candy.targetAmount >= 10)
         {

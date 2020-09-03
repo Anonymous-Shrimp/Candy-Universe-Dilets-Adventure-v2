@@ -26,7 +26,7 @@ public class Dialouge : MonoBehaviour
     void Update()
     {
         talkZone = GetComponentInChildren<TalkArea>().talkArea;
-        if (((talkZone && Input.GetKeyDown(KeyCode.V)) || talking) && !FindObjectOfType<PauseMenu>().hudMenu)
+        if (((talkZone && Input.GetKeyDown(KeyCode.V)) || talking) && !FindObjectOfType<PauseMenu>().hudMenu && FindObjectOfType<PauseMenu>().canPause)
         {
             talking = true;
             UI.active = true;
