@@ -32,7 +32,14 @@ public class QuestManager : MonoBehaviour
             }
             if(q.desciptionType == Quest.DesciptionType.Static)
             {
-                q.detailedDescription = q.detailedDescriptions[0];
+                try
+                {
+                    q.detailedDescription = q.detailedDescriptions[0];
+                }
+                catch
+                {
+                    Debug.Log(q.name + " doesn't have a zeroth description");
+                }
             }
             else
             {
