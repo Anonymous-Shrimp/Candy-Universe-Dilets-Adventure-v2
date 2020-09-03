@@ -7,10 +7,6 @@ using UnityEngine.UI;
 
 public class QuestManager : MonoBehaviour
 {
-    
-    public bool text;
-    public string noText;
-    public Quest[] quests;
     public questDisplay display;
     public List<QuestItem> questItems;
     Ouch player;
@@ -18,6 +14,7 @@ public class QuestManager : MonoBehaviour
     public GameObject HUDParent;
     public Text questProgresses;
 
+    public Quest[] quests;
    
 
     private void Update()

@@ -203,14 +203,19 @@ public class Ouch : MonoBehaviour
     }
     private void Start()
     {
-        
+        if (FindObjectOfType<TelidResearch>() != null)
+        {
+            telid = FindObjectOfType<TelidResearch>();
+            if (FindObjectOfType<TimeCycle>() != null)
+            {
+                FindObjectOfType<TimeCycle>().dayNum = 1;
+                FindObjectOfType<TimeCycle>().currentTimeOfDay = 0.3f;
+            }
+        }
     }
     void Update()
     {
-        if(FindObjectOfType<TelidResearch>() != null)
-        {
-            telid = FindObjectOfType<TelidResearch>();
-        }
+        
         if (telid != null && !refreshResearchData)
         {
             bool attack = false;
