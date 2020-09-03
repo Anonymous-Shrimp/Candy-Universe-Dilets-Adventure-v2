@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEditor;
 using UnityEngine.UI;
 
 public class QuestManager : MonoBehaviour
 {
+    
+    public bool text;
+    public string noText;
     public Quest[] quests;
     public questDisplay display;
     public List<QuestItem> questItems;
@@ -13,6 +17,9 @@ public class QuestManager : MonoBehaviour
     public GameObject HUDQuestDisplayItem;
     public GameObject HUDParent;
     public Text questProgresses;
+
+   
+
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.E) && FindObjectOfType<PauseMenu>().hudMenu)
@@ -25,6 +32,14 @@ public class QuestManager : MonoBehaviour
             if (q.completed)
             {
                 numComplete++;
+            }
+            if(q.desciptionType == Quest.DesciptionType.Static)
+            {
+                q.detailedDescription = q.detailedDescriptions[0];
+            }
+            else
+            {
+                q.detailedDescription = q.detailedDescriptions[q.progress];
             }
         }
         questProgresses.text = numComplete.ToString() + " / " + quests.Length.ToString();
