@@ -49,6 +49,7 @@ public class TelidResearch : MonoBehaviour
                 t.title.gameObject.GetComponentInParent<Image>().sprite = questionSprite;
             }
             t.activeText.SetActive(t.active);
+            t.candyTextAmount.text = t.candyCost.ToString();
         }
         foreach (TelidResearchItem t in items)
         {
