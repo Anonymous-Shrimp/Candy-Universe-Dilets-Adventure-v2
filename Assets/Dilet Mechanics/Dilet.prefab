@@ -849,6 +849,8 @@ MonoBehaviour:
   m_JumpSound: {fileID: 8300000, guid: 5897aeed9b676024fbb8c694b421a861, type: 3}
   m_LandSound: {fileID: 0}
   jumpInput: 1
+  m_Jumping: 0
+  jumpAdd: 0
 --- !u!54 &54263003291527970
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -988,14 +990,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07767e18290bef142ab7f492beca134b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  text: 0
+  noText: 
   quests:
   - name: Escape the Poyo Forest
     description: Escape the dreaded Poyo forest. Beware of losing track of where
       you are.
+    desciptionType: 0
     detailedDescription: You are trapped in the Poyo forest. The forest known for
       being so repetive that you don't know where you've been. Try to escape the
       Poyo forest to continue the journey.
+    detailedDescriptions:
+    - You are trapped in the Poyo forest. The forest known for being so repetive
+      that you don't know where you've been. Try to escape the Poyo forest to continue
+      the journey.
     questType: 0
+    active: 0
+    started: 0
+    progress: 0
+    progressMax: 1
+    completed: 0
     defaultAction:
       m_PersistentCalls:
         m_Calls:
@@ -1096,17 +1110,31 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-    active: 0
-    started: 0
-    progress: 0
-    progressMax: 1
-    completed: 0
   - name: Claim All Elementals
     description: Go to all of the scattered regions of Anesea and reclaim all of
       the elemental lands.
+    desciptionType: 1
     detailedDescription: Nan has taken over the 5 elementals. She is too strong,
       but is unable to defend them all. By taking each one, you are weakening her.
+    detailedDescriptions:
+    - Nan has taken over the 5 elementals. She is too strong, but is unable to defend
+      them all. By taking each one, you are weakening her. You have completed 0 elementals
+    - Nan has taken over the 5 elementals. She is too strong, but is unable to defend
+      them all. By taking each one, you are weakening her. You have completed 1 elementals
+    - Nan has taken over the 5 elementals. She is too strong, but is unable to defend
+      them all. By taking each one, you are weakening her. You have completed 2 elementals
+    - Nan has taken over the 5 elementals. She is too strong, but is unable to defend
+      them all. By taking each one, you are weakening her. You have completed 3 elementals
+    - Nan has taken over the 5 elementals. She is too strong, but is unable to defend
+      them all. By taking each one, you are weakening her. You have completed 4 elementals
+    - Nan has taken over the 5 elementals. She is too strong, but is unable to defend
+      them all. By taking each one, you are weakening her. You have completed 5 elementals
     questType: 0
+    active: 0
+    started: 0
+    progress: 0
+    progressMax: 5
+    completed: 0
     defaultAction:
       m_PersistentCalls:
         m_Calls: []
@@ -1163,16 +1191,20 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - name: Defeat Nan
+    description: Go to her castle and find her.
+    desciptionType: 0
+    detailedDescription: This is it. The final battle. Defeat her, and the common
+      sense will go back to the rest of the world.
+    detailedDescriptions:
+    - This is it. The final battle. Defeat her, and the common sense will go back
+      to the rest of the world.
+    questType: 0
     active: 0
     started: 0
     progress: 0
-    progressMax: 5
+    progressMax: 1
     completed: 0
-  - name: Defeat Nan
-    description: Go to her castle and find her.
-    detailedDescription: This is it. The final battle. Defeat her, and the common
-      sense will go back to the rest of the world.
-    questType: 0
     defaultAction:
       m_PersistentCalls:
         m_Calls: []
@@ -1218,16 +1250,20 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - name: Find Tiled
+    description: Tiled is your best friend who is really smart.
+    desciptionType: 0
+    detailedDescription: Tiled is a master of combat, and overall smarter than you.
+      He is able to improve your combat skills, and a boost of candy.
+    detailedDescriptions:
+    - Tiled is a master of combat, and overall smarter than you. He is able to improve
+      your combat skills, and a boost of candy.
+    questType: 0
     active: 0
     started: 0
     progress: 0
     progressMax: 1
     completed: 0
-  - name: Find Tiled
-    description: Tiled is your best friend who is really smart.
-    detailedDescription: Tiled is a master of combat, and overall smarter than you.
-      He is able to improve your combat skills, and a boost of candy.
-    questType: 0
     defaultAction:
       m_PersistentCalls:
         m_Calls: []
@@ -1273,17 +1309,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-    active: 0
-    started: 0
-    progress: 0
-    progressMax: 1
-    completed: 0
   - name: Search for Telid's Candy
     description: Find Telid's blue candy somewhere
+    desciptionType: 1
     detailedDescription: Telid is similar to you. He also needs his Candy to live.
       But his Candy is different than yours. Nan has taken it away. Try to find it
       near the Lake Shore
+    detailedDescriptions:
+    - Telid is similar to you. He also needs his Candy to live. But his Candy is
+      different than yours. Nan has taken it away. Try to find it near the Lake Shore
+    - You have found Telid's candy. Bring it back to him so he can help you.
     questType: 2
+    active: 0
+    started: 0
+    progress: 0
+    progressMax: 2
+    completed: 0
     defaultAction:
       m_PersistentCalls:
         m_Calls: []
@@ -1329,59 +1370,70 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-    active: 0
-    started: 0
-    progress: 0
-    progressMax: 2
-    completed: 0
   - name: Attack Quest 1
     description: Kill 7 Enemies without healing
+    desciptionType: 1
     detailedDescription: By completing this quest, you will get an attack buff/perk.
+    detailedDescriptions:
+    - By completing this quest, you will get an attack buff/perk.
+    - You have completed this quest. Go back to Telid or press the Telid Research
+      tab to active the ability.
     questType: 2
-    defaultAction:
-      m_PersistentCalls:
-        m_Calls: []
-    startingAction:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_MethodName: 
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: 
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    activeDuringQuest:
-      m_PersistentCalls:
-        m_Calls: []
-    endingAction:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_MethodName: changeAmount
-          m_Mode: 3
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 50
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
     active: 0
     started: 0
     progress: 0
     progressMax: 7
     completed: 0
+    defaultAction:
+      m_PersistentCalls:
+        m_Calls: []
+    startingAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    activeDuringQuest:
+      m_PersistentCalls:
+        m_Calls: []
+    endingAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_MethodName: changeAmount
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 50
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - name: Attack Quest 2
     description: Kill the big goblin
+    desciptionType: 1
     detailedDescription: By completing this quest, you will get an attack buff/perk.
       You can find the goblin in the southeast peninsula.
+    detailedDescriptions:
+    - By completing this quest, you will get an attack buff/perk. You can find the
+      goblin in the southeast peninsula.
+    - You have completed this quest. Go back to Telid or press the Telid Research
+      tab to active the ability.
     questType: 2
+    active: 0
+    started: 0
+    progress: 0
+    progressMax: 1
+    completed: 0
     defaultAction:
       m_PersistentCalls:
         m_Calls:
@@ -1438,15 +1490,20 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-    active: 0
-    started: 0
-    progress: 0
-    progressMax: 1
-    completed: 0
   - name: Movement Quest 1
     description: Find the key in the desert building
+    desciptionType: 1
     detailedDescription: By completing this quest, you will get an movement buff/perk.
+    detailedDescriptions:
+    - By completing this quest, you will get an movement buff/perk.
+    - You have completed this quest. Go back to Telid or press the Telid Research
+      tab to active the ability.
     questType: 2
+    active: 0
+    started: 0
+    progress: 0
+    progressMax: 1
+    completed: 0
     defaultAction:
       m_PersistentCalls:
         m_Calls:
@@ -1503,16 +1560,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-    active: 0
-    started: 0
-    progress: 0
-    progressMax: 1
-    completed: 0
   - name: Movement Quest 2
     description: Find the kinema key
+    desciptionType: 0
     detailedDescription: By completing this quest, you will get an movement buff/perk.
       The kinema key can be found in the sand, of the northwest of the island.
+    detailedDescriptions: []
     questType: 2
+    active: 0
+    started: 0
+    progress: 0
+    progressMax: 1
+    completed: 0
     defaultAction:
       m_PersistentCalls:
         m_Calls:
@@ -1569,16 +1628,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - name: Defense Quest 1
+    description: Kill the 5 ice goblins
+    desciptionType: 1
+    detailedDescription: By completing this quest, you will get an defense buff/perk.
+      The ice goblins can be found in Mt. Graupel
+    detailedDescriptions:
+    - By completing this quest, you will get an defense buff/perk. The ice goblins
+      can be found in Mt. Graupel
+    - You have completed this quest. Go back to Telid or press the Telid Research
+      tab to active the ability.
+    questType: 2
     active: 0
     started: 0
     progress: 0
-    progressMax: 1
+    progressMax: 5
     completed: 0
-  - name: Defense Quest 1
-    description: Kill the 5 ice goblins
-    detailedDescription: By completing this quest, you will get an defense buff/perk.
-      The ice goblins can be found in Mt. Graupel
-    questType: 2
     defaultAction:
       m_PersistentCalls:
         m_Calls:
@@ -1635,16 +1700,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - name: Defense Quest 2
+    description: Kill the 5 thunder goblins
+    desciptionType: 1
+    detailedDescription: By completing this quest, you will get an defense buff/perk.
+      The thunder goblins can be found near Coulombs Swamp
+    detailedDescriptions:
+    - By completing this quest, you will get an defense buff/perk. The thunder goblins
+      can be found near Coulombs Swamp
+    - You have completed this quest. Go back to Telid or press the Telid Research
+      tab to active the ability.
+    questType: 2
     active: 0
     started: 0
     progress: 0
     progressMax: 5
     completed: 0
-  - name: Defense Quest 2
-    description: Kill the 5 thunder goblins
-    detailedDescription: By completing this quest, you will get an defense buff/perk.
-      The thunder goblins can be found near Coulombs Swamp
-    questType: 2
     defaultAction:
       m_PersistentCalls:
         m_Calls:
@@ -1701,11 +1772,146 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - name: The Special Charm
+    description: Find the owner of the journal's "Special Charm"
+    desciptionType: 0
+    detailedDescription: He said it was in the sourthern coast. That is where he
+      hid it.And also, it was during a sunset.
+    detailedDescriptions:
+    - He said it was in the sourthern coast. That is where he hid it.And also, it
+      was during a sunset.
+    questType: 1
+    active: 0
+    started: 0
+    progress: 0
+    progressMax: 1
+    completed: 0
+    defaultAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    startingAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    activeDuringQuest:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    endingAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_MethodName: changeAmount
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 150
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: Stronger by Night
+    description: Kill 5 enemies in one night
+    desciptionType: 0
+    detailedDescription: Apparently, Goblins are stronger at night. To prove this,
+      kill 5 of them in one night.
+    detailedDescriptions:
+    - Apparently, Goblins are stronger at night. To prove this, kill 5 of them in
+      one night.
+    questType: 1
     active: 0
     started: 0
     progress: 0
     progressMax: 5
     completed: 0
+    defaultAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    startingAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    activeDuringQuest:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    endingAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_MethodName: changeAmount
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 150
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   display: {fileID: 0}
   questItems: []
   HUDQuestDisplayItem: {fileID: 2125617721925014087, guid: 9f98a7abe0b115348800f011183683aa,
