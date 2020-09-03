@@ -1,2 +1,2 @@
 # Candy Universe Dilets Adventure v2
- The first main update of Candy Universe 1
+ This is Candy Universe Remastered. This now comes with a aquesting system, better graphics, and updated dungeons. Also, it comes with Dilet's best friend, Telid. Telid will give you upgrades for combat and more quests.
