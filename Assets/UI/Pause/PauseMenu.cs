@@ -30,7 +30,7 @@ public class PauseMenu : MonoBehaviour {
                 Pause();
             }
         }
-        if (isPaused || hudMenu || talking)
+        if ((isPaused || hudMenu || talking) && canPause)
         {
             Cursor.visible = true;
             Screen.lockCursor = false;
