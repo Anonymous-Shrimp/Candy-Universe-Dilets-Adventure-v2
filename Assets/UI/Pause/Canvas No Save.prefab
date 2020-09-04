@@ -25,7 +25,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1145554894883194, guid: 9f36854827c504f4faaf609aa9e467b5, type: 3}
       propertyPath: m_Name
-      value: Canvas (1)
+      value: Canvas No Save
       objectReference: {fileID: 0}
     - target: {fileID: 1164054788360722, guid: 9f36854827c504f4faaf609aa9e467b5, type: 3}
       propertyPath: m_IsActive
@@ -175,6 +175,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1018109632572307487, guid: 9f36854827c504f4faaf609aa9e467b5,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3896988019822994563, guid: 9f36854827c504f4faaf609aa9e467b5,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3896988019822994563, guid: 9f36854827c504f4faaf609aa9e467b5,
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

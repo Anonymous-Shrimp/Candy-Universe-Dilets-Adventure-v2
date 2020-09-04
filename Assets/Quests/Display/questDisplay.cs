@@ -55,7 +55,7 @@ public class questDisplay : MonoBehaviour
         }
         anim.SetInteger("Showings", showings);
         AnimatorClipInfo[] a = anim.GetCurrentAnimatorClipInfo(0);
-        if ((Input.GetKeyDown(KeyCode.Tab) || timer <= 0) && a[0].clip.name == "Showed")
+        if ((Input.GetKeyDown(FindObjectOfType<Keybind>().keys["Skip"]) || timer <= 0) && a[0].clip.name == "Showed")
         {
             timer = disappearTime;
             anim.SetTrigger("Hide");

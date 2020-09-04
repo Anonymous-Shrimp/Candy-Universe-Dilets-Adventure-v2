@@ -26,14 +26,14 @@ public class Dialouge : MonoBehaviour
     void Update()
     {
         talkZone = GetComponentInChildren<TalkArea>().talkArea;
-        if (((talkZone && Input.GetKeyDown(KeyCode.V)) || talking) && !FindObjectOfType<PauseMenu>().hudMenu && FindObjectOfType<PauseMenu>().canPause)
+        if (((talkZone && Input.GetKeyDown(FindObjectOfType<Keybind>().keys["Interact"])) || talking) && !FindObjectOfType<PauseMenu>().hudMenu && FindObjectOfType<PauseMenu>().canPause)
         {
             talking = true;
             UI.active = true;
             UI.speaker = Speaker;
             FindObjectOfType<PauseMenu>().talking = true;
             UI.speech = dialouge[index];
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(FindObjectOfType<Keybind>().keys["Jump"]))
             {
                 index++;
                 try

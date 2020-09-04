@@ -27,7 +27,7 @@ public class Tiled : MonoBehaviour
     void Update()
     {
         talkZone = GetComponentInChildren<TalkArea>().talkArea;
-        if(((talkZone && Input.GetKeyDown(KeyCode.V)) || talking) && !FindObjectOfType<PauseMenu>().hudMenu && FindObjectOfType<PauseMenu>().canPause)
+        if(((talkZone && Input.GetKeyDown(FindObjectOfType<Keybind>().keys["Interact"])) || talking) && !FindObjectOfType<PauseMenu>().hudMenu && FindObjectOfType<PauseMenu>().canPause)
         {
             talking = true;
             dialouge.active = true;
@@ -37,7 +37,7 @@ public class Tiled : MonoBehaviour
             {
 
                 dialouge.speech = firstTimeSpeech[index];
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (Input.GetKeyDown(FindObjectOfType<Keybind>().keys["Jump"]))
                 {
                     index++;
                     try
@@ -64,7 +64,7 @@ public class Tiled : MonoBehaviour
                 if (FindObjectOfType<QuestPlayer>().HasTiledCandy)
                 {
                     dialouge.speech = questSpeech2[index];
-                    if (Input.GetKeyDown(KeyCode.Space))
+                    if (Input.GetKeyDown(FindObjectOfType<Keybind>().keys["Jump"]))
                     {
                         index++;
                         try
@@ -89,7 +89,7 @@ public class Tiled : MonoBehaviour
                 else
                 {
                     dialouge.speech = questSpeech[index];
-                    if (Input.GetKeyDown(KeyCode.Space))
+                    if (Input.GetKeyDown(FindObjectOfType<Keybind>().keys["Jump"]))
                     {
                         index++;
                         try
@@ -110,7 +110,7 @@ public class Tiled : MonoBehaviour
             else
             {
                 dialouge.speech = regularSpeech[index];
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (Input.GetKeyDown(FindObjectOfType<Keybind>().keys["Jump"]))
                 {
                     index++;
                     try

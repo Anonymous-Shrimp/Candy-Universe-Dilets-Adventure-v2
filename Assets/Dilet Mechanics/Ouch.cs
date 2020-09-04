@@ -65,6 +65,7 @@ public class Ouch : MonoBehaviour
 
     void Awake()
     {
+        
         runSpeed = GetComponent<FirstPersonController>().m_RunSpeed;
         jumpPower = GetComponent<FirstPersonController>().jumpAdd;
         candy = FindObjectOfType<CandyCounter>();
@@ -213,10 +214,12 @@ public class Ouch : MonoBehaviour
                 FindObjectOfType<TimeCycle>().currentTimeOfDay = 0.3f;
             }
         }
+       
     }
     void Update()
     {
-        
+        FindObjectOfType<FirstPersonController>().jump = FindObjectOfType<Keybind>().keys["Jump"];
+        FindObjectOfType<FirstPersonController>().run = FindObjectOfType<Keybind>().keys["Run"];
         if (telid != null && !refreshResearchData)
         {
             bool attack = false;
@@ -266,7 +269,7 @@ public class Ouch : MonoBehaviour
         {
             questManager.StartQuest(0);
         }
-        if (Input.GetKeyDown(KeyCode.F) && candy.targetAmount >= 10 && maxHealth - health > 0) 
+        if (Input.GetKeyDown(FindObjectOfType<Keybind>().keys["Eat Candy"]) && candy.targetAmount >= 10 && maxHealth - health > 0) 
         {
             health += 10;
             candy.targetAmount -= 10;
@@ -283,7 +286,7 @@ public class Ouch : MonoBehaviour
         }
         if(telidData.movement == "Super Run")
         {
-            if (Input.GetKey(KeyCode.LeftShift) && FindObjectOfType<MeleeSystem>().energyBar.value >= 0f)
+            if (Input.GetKey(FindObjectOfType<Keybind>().keys["Run"]) && FindObjectOfType<MeleeSystem>().energyBar.value >= 0f)
             {
                 FindObjectOfType<MeleeSystem>().energyBar.value -= Time.deltaTime * 1.5f;
                 GetComponent<FirstPersonController>().m_RunSpeed = GetComponent<FirstPersonController>().m_RunSpeed;
@@ -296,7 +299,7 @@ public class Ouch : MonoBehaviour
                 GetComponent<FirstPersonController>().m_IsWalking = true;
                 GetComponent<FirstPersonController>().m_RunSpeed = 10;
             }
-            if (Input.GetKeyDown(KeyCode.LeftShift) && FindObjectOfType<MeleeSystem>().energyBar.value >= 0.2f)
+            if (Input.GetKeyDown(FindObjectOfType<Keybind>().keys["Run"]) && FindObjectOfType<MeleeSystem>().energyBar.value >= 0.2f)
             {
                 FindObjectOfType<MeleeSystem>().energyBar.value -= 0.2f;
             }
@@ -315,7 +318,7 @@ public class Ouch : MonoBehaviour
         {
             GetComponent<FirstPersonController>().jumpInput = true;
         }
-        if(telidData.movement == "Super Jump" && Input.GetKey(KeyCode.Space))
+        if(telidData.movement == "Super Jump" && Input.GetKey(FindObjectOfType<Keybind>().keys["Jump"]))
         {
             GetComponent<FirstPersonController>().jumpAdd += Time.deltaTime * 10;
             if(GetComponent<FirstPersonController>().jumpAdd > jumpBarAnim.gameObject.GetComponent<Slider>().maxValue)
@@ -324,7 +327,7 @@ public class Ouch : MonoBehaviour
             }
             jumpBarAnim.gameObject.GetComponent<Slider>().value = GetComponent<FirstPersonController>().jumpAdd;
         }
-        else if(telidData.movement == "Super Jump" && !Input.GetKey(KeyCode.Space) && GetComponent<FirstPersonController>().m_Jumping)
+        else if(telidData.movement == "Super Jump" && !Input.GetKey(FindObjectOfType<Keybind>().keys["Jump"]) && GetComponent<FirstPersonController>().m_Jumping)
         {
 
             jumpBarAnim.gameObject.GetComponent<Slider>().value = GetComponent<FirstPersonController>().jumpAdd;
@@ -333,7 +336,7 @@ public class Ouch : MonoBehaviour
         {
 
         }
-        jumpBarAnim.SetBool("Entered", telidData.movement == "Super Jump" && Input.GetKey(KeyCode.Space));
+        jumpBarAnim.SetBool("Entered", telidData.movement == "Super Jump" && Input.GetKey(FindObjectOfType<Keybind>().keys["Jump"]));
         if (telidData.defence == "Regeneration")
         {
             

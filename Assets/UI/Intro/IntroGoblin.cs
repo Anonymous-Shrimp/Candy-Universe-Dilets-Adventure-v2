@@ -12,7 +12,7 @@ public class IntroGoblin : MonoBehaviour
     }
     private void Update()
     {
-        if(goblin.Health <= 0 || Input.GetKeyDown(KeyCode.Tab))
+        if(goblin.Health <= 0 || Input.GetKeyDown(FindObjectOfType<Keybind>().keys["Skip"]))
         {
             FindObjectOfType<loading>().LoadLevel(3);
         }

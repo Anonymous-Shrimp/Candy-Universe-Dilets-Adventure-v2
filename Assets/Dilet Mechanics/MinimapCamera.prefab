@@ -245,7 +245,7 @@ MonoBehaviour:
   offset: {x: 0, y: 28.70001, z: 0}
   followingCharacter: 1
   zoomOutPos: {x: 0, y: 3351, z: 1193}
-  camSizeNormal: 30
+  camSizeNormal: 65
   camSizeZoom: 1320
   cam: {fileID: 8837322739863887548}
   northArrow: {fileID: 0}

@@ -7,13 +7,14 @@ public class CandyCounter : MonoBehaviour
 {
     [Range(0, 9999)]
     public int candyAmount;
+
     private float candyAmountApprox;
 
     bool showValue;
 
     Text candyText;
     Animator anim;
-
+    [Range(0, 9999)]
     public int targetAmount;
 
     private void Start()

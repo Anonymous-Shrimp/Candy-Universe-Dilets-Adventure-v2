@@ -31,7 +31,7 @@ public class MeleeSystem : MonoBehaviour
     void FixedUpdate()
     {
         chargedEnergyBar.value = energyBar.value;
-        if(Input.GetMouseButton(0) && !(FindObjectOfType<PauseMenu>().isPaused || FindObjectOfType<PauseMenu>().hudMenu || FindObjectOfType<PauseMenu>().talking) && FindObjectOfType<PauseMenu>().canPause)
+        if(Input.GetKey(FindObjectOfType<Keybind>().keys["Slap"]) && !(FindObjectOfType<PauseMenu>().isPaused || FindObjectOfType<PauseMenu>().hudMenu || FindObjectOfType<PauseMenu>().talking) && FindObjectOfType<PauseMenu>().canPause)
         {
             if (energyBar.value >= chargedEnergyReduction + energyReduction)
             {
@@ -53,7 +53,7 @@ public class MeleeSystem : MonoBehaviour
         {
             chargedEnergyBar.value = energyBar.value;
         }
-        if (Input.GetMouseButtonUp(0) && !(FindObjectOfType<PauseMenu>().isPaused || FindObjectOfType<PauseMenu>().hudMenu))
+        if (Input.GetKeyUp(FindObjectOfType<Keybind>().keys["Slap"]) && !(FindObjectOfType<PauseMenu>().isPaused || FindObjectOfType<PauseMenu>().hudMenu))
         {
             if (energyBar.value >= energyReduction)
             {

@@ -24,12 +24,12 @@ public class miniMap : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(FindObjectOfType<Keybind>().keys["Switch Minimap View"]))
         {
             
             followingCharacter = !followingCharacter;
         }
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(FindObjectOfType<Keybind>().keys["Enlarge Minimap"]))
         {
             anim.SetBool("big", !anim.GetBool("big"));
         }

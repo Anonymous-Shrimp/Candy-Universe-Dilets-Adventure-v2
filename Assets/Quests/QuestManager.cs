@@ -19,7 +19,7 @@ public class QuestManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.E) && FindObjectOfType<PauseMenu>().hudMenu)
+        if(Input.GetKeyDown(FindObjectOfType<Keybind>().keys["Show Candy"]) && FindObjectOfType<PauseMenu>().hudMenu)
         {
             refreshPage();
         }

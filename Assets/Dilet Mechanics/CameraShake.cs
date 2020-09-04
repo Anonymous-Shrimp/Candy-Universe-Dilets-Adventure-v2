@@ -10,7 +10,7 @@ public class CameraShake : MonoBehaviour {
     private bool isZoomed = false;
     void Update()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetKeyDown(FindObjectOfType<Keybind>().keys["Zoom"]))
         {
             isZoomed = !isZoomed;
         }

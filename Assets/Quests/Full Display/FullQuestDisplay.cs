@@ -40,7 +40,7 @@ public class FullQuestDisplay : MonoBehaviour
         {
             tab = 0;
         }
-        if (Input.GetKeyDown(KeyCode.C) && pause.canPause)
+        if (Input.GetKeyDown(FindObjectOfType<Keybind>().keys["HUD Menu"]) && pause.canPause)
         {
             pause.hudMenu = !pause.hudMenu;
             try

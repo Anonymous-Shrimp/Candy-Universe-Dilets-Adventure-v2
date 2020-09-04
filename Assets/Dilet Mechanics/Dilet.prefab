@@ -722,6 +722,7 @@ MonoBehaviour:
   candy: {fileID: 0}
   questManager: {fileID: 3554051444237017429}
   telid: {fileID: 0}
+  deadAnim: {fileID: 0}
   cold: 0
   jumpBarAnim: {fileID: 0}
 --- !u!114 &114584988048618354
@@ -990,8 +991,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07767e18290bef142ab7f492beca134b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: 0
-  noText: 
+  display: {fileID: 0}
+  questItems: []
+  HUDQuestDisplayItem: {fileID: 2125617721925014087, guid: 9f98a7abe0b115348800f011183683aa,
+    type: 3}
+  HUDParent: {fileID: 0}
+  questProgresses: {fileID: 0}
   quests:
   - name: Escape the Poyo Forest
     description: Escape the dreaded Poyo forest. Beware of losing track of where
@@ -1912,12 +1917,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  display: {fileID: 0}
-  questItems: []
-  HUDQuestDisplayItem: {fileID: 2125617721925014087, guid: 9f98a7abe0b115348800f011183683aa,
-    type: 3}
-  HUDParent: {fileID: 0}
-  questProgresses: {fileID: 0}
 --- !u!1 &1974520207110844
 GameObject:
   m_ObjectHideFlags: 0
