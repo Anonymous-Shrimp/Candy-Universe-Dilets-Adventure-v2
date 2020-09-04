@@ -43,7 +43,14 @@ public class QuestManager : MonoBehaviour
             }
             else
             {
-                q.detailedDescription = q.detailedDescriptions[q.progress];
+                try
+                {
+                    q.detailedDescription = q.detailedDescriptions[q.progress];
+                }
+                catch
+                {
+                    q.detailedDescription = q.detailedDescriptions[q.detailedDescriptions.Length - 1];
+                }
             }
         }
         questProgresses.text = numComplete.ToString() + " / " + quests.Length.ToString();

@@ -51,6 +51,7 @@ public class Ouch : MonoBehaviour
     public CandyCounter candy;
     public QuestManager questManager;
     public TelidResearch telid;
+    public Animator deadAnim;
     Rigidbody Rigid;
     [Space]
     public bool cold = false;
@@ -265,7 +266,7 @@ public class Ouch : MonoBehaviour
         {
             questManager.StartQuest(0);
         }
-        if (Input.GetKeyDown(KeyCode.F) && candy.targetAmount >= 10)
+        if (Input.GetKeyDown(KeyCode.F) && candy.targetAmount >= 10 && maxHealth - health > 0) 
         {
             health += 10;
             candy.targetAmount -= 10;
@@ -276,10 +277,9 @@ public class Ouch : MonoBehaviour
         }
         if (health <= 0)
         {
-            LoadPlayer();
-            health = 100;
-            SavePlayer();
-            FindObjectOfType<loading>().LoadLevelString("Death");
+            
+            deadAnim.SetTrigger("Dead");
+            FindObjectOfType<PauseMenu>().canPause = false;
         }
         if(telidData.movement == "Super Run")
         {
@@ -366,7 +366,8 @@ public class Ouch : MonoBehaviour
             {
                 start = true;
                 SavePlayer();
-                FindObjectOfType<loading>().LoadLevelString("Death");
+                deadAnim.SetTrigger("Dead");
+                FindObjectOfType<PauseMenu>().canPause = false;
             }
         }
         if (FindObjectOfType<TimeCycle>() != null)
@@ -414,7 +415,8 @@ public class Ouch : MonoBehaviour
 
         if (collision.gameObject.CompareTag("WaterDeath"))
         {
-            FindObjectOfType<loading>().LoadLevelString("Death");
+            deadAnim.SetTrigger("Dead");
+            FindObjectOfType<PauseMenu>().canPause = false;
         }
         if (collision.gameObject.CompareTag("GoblinBox"))
         {
@@ -630,6 +632,7 @@ public class Ouch : MonoBehaviour
     }
     public void SavePlayer()
     {
+        Debug.Log("Saved Player");
         SaveSystem.SavePlayer(this, timeInPlace, candy.targetAmount, questData.ToArray(), telidData);
 
     }

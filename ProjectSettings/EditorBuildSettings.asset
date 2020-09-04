@@ -17,18 +17,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Overworld 3.unity
     guid: c169e10a7c2a8704683c57fa952cddd7
-  - enabled: 1
-    path: Assets/Scenes/Death.unity
-    guid: 7e87bee91c3d9604ab021ce5693e6a33
   - enabled: 0
-    path: Assets/Scenes/Cutscene1.unity
-    guid: 704ad4c556cc2fb479de059881c10b78
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
-    path: Assets/Scenes/Cutscene2.unity
-    guid: 5cd55a767d4fe2e43bf1b7cf76587799
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
-    path: Assets/Scenes/Cutscene3.unity
-    guid: c5cc133d601748e4a84b37fe8be2a5e1
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Dungeons/Fire.unity
     guid: 67740022a25f46146ba14d88632caa5f
