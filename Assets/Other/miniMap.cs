@@ -22,7 +22,7 @@ public class miniMap : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (Input.GetKeyDown(FindObjectOfType<Keybind>().keys["Switch Minimap View"]))
         {

@@ -12,7 +12,8 @@ public class Keybind : MonoBehaviour
     [Header("Menu")]
     [SerializeField] public Dictionary<string, KeyCode> keys = new Dictionary<string, KeyCode>();
     public Text[] buttonTexts;
-    private GameObject currentKey;
+    [HideInInspector]
+    public GameObject currentKey;
 
  
 
@@ -36,7 +37,6 @@ public class Keybind : MonoBehaviour
         keys.Add("Switch Minimap View", KeyCode.R);
         keys.Add("Interact", KeyCode.V);
         keys.Add("Skip", KeyCode.Tab);
-        //keys.Add("Pause", KeyCode.Escape);
         Debug.Log(keys.ToString());
         LoadFile();
         buttonTexts[0].text = keys["Up"].ToString();
@@ -54,7 +54,6 @@ public class Keybind : MonoBehaviour
         buttonTexts[12].text = keys["Switch Minimap View"].ToString();
         buttonTexts[13].text = keys["Interact"].ToString();
         buttonTexts[14].text = keys["Skip"].ToString();
-        //buttonTexts[15].text = keys["Pause"].ToString();
 
 
     }
@@ -99,10 +98,13 @@ public class Keybind : MonoBehaviour
         if (currentKey != null)
         {
             Event e = Event.current;
-            if (e.isKey)
+            if ((e.isKey || e.isMouse) && e.keyCode != KeyCode.Escape)
             {
                 keys[currentKey.name] = e.keyCode;
                 currentKey.GetComponent<Text>().text = e.keyCode.ToString();
+                currentKey = null;
+            }else if(e.keyCode == KeyCode.Escape)
+            {
                 currentKey = null;
             }
         }
@@ -124,7 +126,6 @@ public class Keybind : MonoBehaviour
         keys["Switch Minimap View"] = KeyCode.R;
         keys["Interact"] = KeyCode.V;
         keys["Skip"] = KeyCode.Tab;
-        //keys["Pause"] = KeyCode.Escape;
         buttonTexts[0].text = keys["Up"].ToString();
         buttonTexts[1].text = keys["Down"].ToString();
         buttonTexts[2].text = keys["Left"].ToString();
@@ -140,7 +141,6 @@ public class Keybind : MonoBehaviour
         buttonTexts[12].text = keys["Switch Minimap View"].ToString();
         buttonTexts[13].text = keys["Interact"].ToString();
         buttonTexts[14].text = keys["Skip"].ToString();
-        //buttonTexts[15].text = keys["Pause"].ToString();
     }
     public void ChangeKey(GameObject clicked)
     {
@@ -148,7 +148,7 @@ public class Keybind : MonoBehaviour
     }
     public void SaveFile()
     {
-        string destination = Application.persistentDataPath + "/control.dat";
+        string destination = Application.persistentDataPath + "/control.lol";
         FileStream file;
 
         if (File.Exists(destination)) file = File.OpenWrite(destination);
@@ -163,7 +163,7 @@ public class Keybind : MonoBehaviour
 
     public void LoadFile()
     {
-        string destination = Application.persistentDataPath + "/control.dat";
+        string destination = Application.persistentDataPath + "/control.lol";
         FileStream file;
 
         if (File.Exists(destination))

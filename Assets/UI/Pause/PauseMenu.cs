@@ -23,7 +23,7 @@ public class PauseMenu : MonoBehaviour {
         hudMenu = false;
     }
     void Update () {
-        if (Input.GetKeyDown(KeyCode.Escape) && canPause)
+        if (Input.GetKeyDown(KeyCode.Escape) && canPause && FindObjectOfType<Keybind>().currentKey == null)
         {
             if (isPaused)
             {

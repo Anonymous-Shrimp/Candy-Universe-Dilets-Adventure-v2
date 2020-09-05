@@ -86,7 +86,9 @@ public class loading : MonoBehaviour
     }
     IEnumerator wait(float seconds)
     {
-        yield return new WaitForSeconds(seconds);
+        yield return new WaitForSeconds(seconds - 0.8f);
+        pause.pauseMenu.SetActive(false);
+        yield return new WaitForSeconds(seconds - 0.2f);
         loadingScreen.SetActive(false);
         if (pause != null)
         {
@@ -100,7 +102,10 @@ public class loading : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        pause.pauseMenu.SetActive(true);
+
         loadingScreen.SetActive(true);
+        
         StartCoroutine(wait(1));
     }
 
