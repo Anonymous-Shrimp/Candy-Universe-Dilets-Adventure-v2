@@ -98,15 +98,55 @@ public class Keybind : MonoBehaviour
         if (currentKey != null)
         {
             Event e = Event.current;
-            if ((e.isKey || e.isMouse) && e.keyCode != KeyCode.Escape)
+            if (e.isKey && e.keyCode != KeyCode.Escape)
             {
                 keys[currentKey.name] = e.keyCode;
                 currentKey.GetComponent<Text>().text = e.keyCode.ToString();
                 currentKey = null;
-            }else if(e.keyCode == KeyCode.Escape)
+            }
+            else if (e.keyCode == KeyCode.Escape)
             {
                 currentKey = null;
+                
             }
+        }
+    }
+    public void moreKeybinds(int g)
+    {
+        KeyCode k = KeyCode.None;
+        if(g == 0)
+        {
+            k = KeyCode.Mouse0;
+        }
+        else if (g == 1)
+        {
+            k = KeyCode.Mouse1;
+        }
+        else if (g == 2)
+        {
+            k = KeyCode.Mouse2;
+        }
+        else if (g == 3)
+        {
+            k = KeyCode.Mouse3;
+        }
+        else if (g == 4)
+        {
+            k = KeyCode.Mouse4;
+        }
+        else if (g == 5)
+        {
+            k = KeyCode.Mouse5;
+        }
+        else if (g == 6)
+        {
+            k = KeyCode.Mouse6;
+        }
+        if(currentKey != null)
+        {
+            keys[currentKey.name] = k;
+            currentKey.GetComponent<Text>().text = k.ToString();
+            currentKey = null;
         }
     }
     public void restoreDefaults()
