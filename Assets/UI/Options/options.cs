@@ -4,6 +4,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Linq;
 
 public class options : MonoBehaviour
 {
@@ -13,7 +16,9 @@ public class options : MonoBehaviour
     public TMP_Dropdown ResolutionDropdown;
     public TMP_Dropdown QualityDropdown;
     public Slider[] volumeSliders;
-
+    public GameObject postProcess;
+    public Toggle fullscreen;
+    public Toggle fx;
 
     private void Start()
     {
@@ -64,6 +69,17 @@ public class options : MonoBehaviour
         QualityDropdown.AddOptions(optionsQ);
         QualityDropdown.RefreshShownValue();
 
+        fullscreen.isOn = Screen.fullScreen;
+
+        QualityDropdown.value = QualitySettings.GetQualityLevel();
+        ResolutionDropdown.value = resolutions.ToList().IndexOf(Screen.currentResolution);
+
+        setFX(true);
+        SetMasterVolume(1);
+        SetSFXVolume(1);
+        SetMusicVolume(1);
+
+        LoadFile();
         
     }
 
@@ -73,6 +89,8 @@ public class options : MonoBehaviour
         SetMasterVolume(volumeSliders[0].value);
         SetMusicVolume(volumeSliders[1].value);
         SetSFXVolume(volumeSliders[2].value);
+        setFX(fx.isOn);
+        SaveFile();
 
     }
     public void SetResolution(int ResolutionIndex)
@@ -102,9 +120,53 @@ public class options : MonoBehaviour
         
     }
 
-
+    public void setFX(bool fx)
+    {
+        postProcess.SetActive(fx);
+    }
     public void SetFullscreen(bool isFullscreen)
     {
         Screen.fullScreen = isFullscreen;
+    }
+    public void SaveFile()
+    {
+        string destination = Application.persistentDataPath + "/options.shr";
+        FileStream file;
+
+        if (File.Exists(destination)) file = File.OpenWrite(destination);
+        else file = File.Create(destination);
+
+        optionData data = new optionData(this);
+
+        BinaryFormatter bf = new BinaryFormatter();
+        bf.Serialize(file, data);
+        file.Close();
+    }
+
+    public void LoadFile()
+    {
+        string destination = Application.persistentDataPath + "/options.shr";
+        FileStream file;
+
+        if (File.Exists(destination))
+        {
+            file = File.OpenRead(destination);
+            BinaryFormatter bf = new BinaryFormatter();
+            optionData data = (optionData)bf.Deserialize(file);
+            file.Close();
+
+            volumeSliders[0].value = data.masterVolume;
+            volumeSliders[1].value = data.musicVolume;
+            volumeSliders[2].value = data.SFXVolume;
+            fx.isOn = data.FX;
+        }
+        else
+        {
+            Debug.LogError("File not found");
+            return;
+        }
+
+
+
     }
 }
