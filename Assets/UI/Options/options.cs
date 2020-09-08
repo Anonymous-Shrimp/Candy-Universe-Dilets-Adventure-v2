@@ -86,10 +86,12 @@ public class options : MonoBehaviour
     private void Update()
     {
         QualityDropdown.value = QualitySettings.GetQualityLevel();
+        ResolutionDropdown.value = resolutions.ToList().IndexOf(Screen.currentResolution);
         SetMasterVolume(volumeSliders[0].value);
         SetMusicVolume(volumeSliders[1].value);
         SetSFXVolume(volumeSliders[2].value);
         setFX(fx.isOn);
+        SetFullscreen(fullscreen.isOn);
         SaveFile();
 
     }
@@ -163,7 +165,12 @@ public class options : MonoBehaviour
         else
         {
             Debug.LogError("File not found");
-            return;
+            volumeSliders[0].value = 1;
+            volumeSliders[1].value = 1;
+            volumeSliders[2].value = 1;
+            fx.isOn = true;
+            fullscreen.isOn = true;
+
         }
 
 

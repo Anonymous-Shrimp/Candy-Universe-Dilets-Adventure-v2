@@ -122,7 +122,8 @@ AudioSource:
   m_GameObject: {fileID: 1130059443358922}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 3501359268628279207, guid: 75873abf85f7e3243add6126e12bf3d5,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 045859b8f16787946924d6a5709e2ef0, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -249,7 +250,8 @@ AudioSource:
   m_GameObject: {fileID: 1398861118191048}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 3501359268628279207, guid: 75873abf85f7e3243add6126e12bf3d5,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 7954dbb875844ef49b0792ef916b9a80, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -470,7 +472,8 @@ AudioSource:
   m_GameObject: {fileID: 1415954461800822}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 5257234721185570869, guid: 75873abf85f7e3243add6126e12bf3d5,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 91770c55cb68f5541ba63002974b1193, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -724,6 +727,7 @@ MonoBehaviour:
   telid: {fileID: 0}
   deadAnim: {fileID: 0}
   cold: 0
+  harshEnvironment: 0
   jumpBarAnim: {fileID: 0}
 --- !u!114 &114584988048618354
 MonoBehaviour:
@@ -852,6 +856,8 @@ MonoBehaviour:
   jumpInput: 1
   m_Jumping: 0
   jumpAdd: 0
+  jump: 0
+  run: 0
 --- !u!54 &54263003291527970
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -877,7 +883,8 @@ AudioSource:
   m_GameObject: {fileID: 1971277829926040}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 3501359268628279207, guid: 75873abf85f7e3243add6126e12bf3d5,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -1567,10 +1574,14 @@ MonoBehaviour:
           m_CallState: 2
   - name: Movement Quest 2
     description: Find the kinema key
-    desciptionType: 0
+    desciptionType: 1
     detailedDescription: By completing this quest, you will get an movement buff/perk.
       The kinema key can be found in the sand, of the northwest of the island.
-    detailedDescriptions: []
+    detailedDescriptions:
+    - By completing this quest, you will get an movement buff/perk. The kinema key
+      can be found in the sand, of the northwest of the island.
+    - You have completed this quest. Go back to Telid or press the Telid Research
+      tab to active the ability.
     questType: 2
     active: 0
     started: 0

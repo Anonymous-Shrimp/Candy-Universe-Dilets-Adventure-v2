@@ -107,7 +107,6 @@ public class Keybind : MonoBehaviour
             else if (e.keyCode == KeyCode.Escape)
             {
                 currentKey = null;
-                
             }
         }
     }

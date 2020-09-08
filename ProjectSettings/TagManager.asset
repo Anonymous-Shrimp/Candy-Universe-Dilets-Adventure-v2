@@ -38,6 +38,7 @@ TagManager:
   - Quest
   - TalkArea
   - DiletHitbox
+  - HarshEnvironment
   layers:
   - Default
   - TransparentFX

@@ -37,13 +37,16 @@ public class QuestPlayer : MonoBehaviour
                 manager.changeProgress(0,1);
             }
         }
-        if(inSunset && FindObjectOfType<TimeCycle>().currentTimeOfDay > 0.73f && FindObjectOfType<TimeCycle>().currentTimeOfDay < 0.75f)
+        if (FindObjectOfType<TimeCycle>() != null)
         {
-            manager.changeProgress(11, 1);
-        }
-        if (FindObjectOfType<TimeCycle>().currentTimeOfDay > 0.2f && FindObjectOfType<TimeCycle>().currentTimeOfDay < 0.77f && manager.getProgress(12) != 0)
-        {
-            manager.changeProgress(12, 0);
+            if (inSunset && FindObjectOfType<TimeCycle>().currentTimeOfDay > 0.73f && FindObjectOfType<TimeCycle>().currentTimeOfDay < 0.75f)
+            {
+                manager.changeProgress(11, 1);
+            }
+            if (FindObjectOfType<TimeCycle>().currentTimeOfDay > 0.2f && FindObjectOfType<TimeCycle>().currentTimeOfDay < 0.77f && manager.getProgress(12) != 0)
+            {
+                manager.changeProgress(12, 0);
+            }
         }
 
 

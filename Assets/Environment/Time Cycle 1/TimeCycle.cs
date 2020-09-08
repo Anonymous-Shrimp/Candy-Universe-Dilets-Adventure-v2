@@ -31,6 +31,7 @@ public class TimeCycle : MonoBehaviour {
         if (dayDisplay != null)
         {
             dayDisplay.gameObject.GetComponent<Text>().text = "Night of Day " + (dayNum - 1).ToString();
+            dayDisplay.gameObject.GetComponent<Text>().text = "Night of Day " + (dayNum - 1).ToString();
         }
 
 

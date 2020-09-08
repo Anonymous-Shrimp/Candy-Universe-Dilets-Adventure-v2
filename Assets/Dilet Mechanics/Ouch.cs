@@ -56,6 +56,8 @@ public class Ouch : MonoBehaviour
     [Space]
     public bool cold = false;
     float coldTimer;
+    public bool harshEnvironment;
+    float harshEnvironmentTimer;
     float regenTimer;
     float jumpPower;
     bool refreshResearchData = false;
@@ -214,7 +216,17 @@ public class Ouch : MonoBehaviour
                 FindObjectOfType<TimeCycle>().currentTimeOfDay = 0.3f;
             }
         }
-       
+        int gatesCompleted = 0;
+        if (water) { gatesCompleted++; }
+        if (fire) { gatesCompleted++; }
+        if (ice) { gatesCompleted++; }
+        if (thunder) { gatesCompleted++; }
+        if (rock) { gatesCompleted++; }
+        if (gatesCompleted != questManager.getProgress(1))
+        {
+            questManager.changeProgress(1, gatesCompleted);
+        }
+
     }
     void Update()
     {
@@ -389,6 +401,16 @@ public class Ouch : MonoBehaviour
                 StartCoroutine(Screenoof(4f));
             }
         }
+        if (harshEnvironment)
+        {
+            harshEnvironmentTimer -= Time.deltaTime;
+            if (harshEnvironmentTimer <= 0)
+            {
+                harshEnvironmentTimer = 10f;
+                health -= 15;
+                StartCoroutine(Screenoof(7f));
+            }
+        }
 
 
         if (questManager != null)
@@ -402,16 +424,7 @@ public class Ouch : MonoBehaviour
             
 
         }
-        int gatesCompleted = 0;
-        if (water) { gatesCompleted++; }
-        if (fire) { gatesCompleted++; }
-        if (ice) { gatesCompleted++; }
-        if (thunder) { gatesCompleted++; }
-        if (rock) { gatesCompleted++; }
-        if(gatesCompleted != questManager.getProgress(1))
-        {
-            questManager.changeProgress(1, gatesCompleted);
-        }
+        
     }
     void OnTriggerEnter(Collider collision)
     {
@@ -431,47 +444,56 @@ public class Ouch : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Fire"))
         {
-
+            Vector3 pos = transform.position;
             inDungeon = true;
             transform.position = new Vector3(transform.position.x + 20, transform.position.y, transform.position.z);
             SavePlayer();
+            transform.position = pos;
             FindObjectOfType<loading>().LoadLevelString("Fire");
         }
         if (collision.gameObject.CompareTag("Ice"))
         {
-            
+            Vector3 pos = transform.position;
             inDungeon = true;
             transform.position = new Vector3(transform.position.x + 2, transform.position.y, transform.position.z);
             SavePlayer();
+            transform.position = pos;
             FindObjectOfType<loading>().LoadLevelString("Ice");
         }
         if (collision.gameObject.CompareTag("Thunder"))
         {
-            
+            Vector3 pos = transform.position;
             inDungeon = true;
             transform.position = new Vector3(transform.position.x + 20, transform.position.y, transform.position.z);
             SavePlayer();
+            transform.position = pos;
             FindObjectOfType<loading>().LoadLevelString("Thunder");
         }
         if (collision.gameObject.CompareTag("Water"))
         {
+            Vector3 pos = transform.position;
             inDungeon = true;
             transform.position = new Vector3(transform.position.x + 5, transform.position.y, transform.position.z);
             SavePlayer();
+            transform.position = pos;
             FindObjectOfType<loading>().LoadLevelString("Water");
         }
         if (collision.gameObject.CompareTag("Rock"))
         {
+            Vector3 pos = transform.position;
             inDungeon = true;
             transform.position = new Vector3(transform.position.x + 20, transform.position.y, transform.position.z);
             SavePlayer();
+            transform.position = pos;
             FindObjectOfType<loading>().LoadLevelString("Rock");
         }
         if (collision.gameObject.CompareTag("Nan"))
         {
+            Vector3 pos = transform.position;
             inDungeon = true;
             transform.position = new Vector3(transform.position.x + 20, transform.position.y, transform.position.z);
             SavePlayer();
+            transform.position = pos;
             FindObjectOfType<loading>().LoadLevelString("Nan");
         }
         if (collision.gameObject.CompareTag("Finish"))
@@ -481,37 +503,52 @@ public class Ouch : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("FireBoss"))
         {
+            Vector3 pos = transform.position;
             LoadPlayer();
             fire = true;
+            health = 100;
             SavePlayer();
+            transform.position = pos;
             FindObjectOfType<loading>().LoadLevelString("Overworld 3");
         }
         if (collision.gameObject.CompareTag("WaterBoss"))
         {
+            Vector3 pos = transform.position;
             LoadPlayer();
+            health = 100;
             water = true;
             SavePlayer();
+            transform.position = pos;
             FindObjectOfType<loading>().LoadLevelString("Overworld 3");
         }
         if (collision.gameObject.CompareTag("ThunderBoss"))
         {
+            Vector3 pos = transform.position;
             LoadPlayer();
+            health = 100;
             thunder = true;
             SavePlayer();
+            transform.position = pos;
             FindObjectOfType<loading>().LoadLevelString("Overworld 3");
         }
         if (collision.gameObject.CompareTag("IceBoss"))
         {
+            Vector3 pos = transform.position;
             LoadPlayer();
+            health = 100;
             ice = true;
             SavePlayer();
+            transform.position = pos;
             FindObjectOfType<loading>().LoadLevelString("Overworld 3");
         }
         if (collision.gameObject.CompareTag("RockBoss"))
         {
+            Vector3 pos = transform.position;
             LoadPlayer();
+            health = 100;
             rock = true;
             SavePlayer();
+            transform.position = pos;
             FindObjectOfType<loading>().LoadLevelString("Overworld 3");
         }
         if (collision.gameObject.CompareTag("NanBoss"))
@@ -528,6 +565,13 @@ public class Ouch : MonoBehaviour
         if (collision.gameObject.CompareTag("Freeze"))
         {
             cold = true;
+        }
+        if (collision.gameObject.CompareTag("HarshEnvironment"))
+        {
+            if(collision.gameObject.GetComponent<HarshEnvironment>() != null)
+            {
+                collision.gameObject.GetComponent<HarshEnvironment>().inArea = true;
+            }
         }
         if (collision.gameObject.CompareTag("Boulder"))
         {
@@ -611,6 +655,21 @@ public class Ouch : MonoBehaviour
         if (collision.gameObject.CompareTag("Freeze"))
         {
             cold = false;
+        }
+        if (collision.gameObject.CompareTag("HarshEnvironment"))
+        {
+            if (collision.gameObject.GetComponent<HarshEnvironment>() != null)
+            {
+                collision.gameObject.GetComponent<HarshEnvironment>().inArea = false;
+            }
+        }
+    }
+    private void OnParticleCollision(GameObject collision)
+    {
+        if (collision.CompareTag("Electricity"))
+        {
+            StartCoroutine(Screenoof(3));
+            health -= 20;
         }
     }
     IEnumerator Screenoof(float Sec)
@@ -721,6 +780,25 @@ public class Ouch : MonoBehaviour
             position.z = data.position[2];
             transform.position = position;
         }
+    }
+    public Ouch loadToVarible()
+    {
+        Ouch playerData = new Ouch();
+        PlayerData data = SaveSystem.LoadPlayer();
+
+        playerData.water = data.water;
+        playerData.thunder = data.thunder;
+        playerData.fire = data.fire;
+        playerData.ice = data.ice;
+        playerData.rock = data.rock;
+        playerData.nan = data.nan;
+        playerData.health = data.health;
+        playerData.start = data.start;
+        playerData.inDungeon = data.inDungeon;
+        playerData.candy.targetAmount = data.candyAmount;
+        playerData.candy.candyAmount = data.candyAmount;
+
+        return playerData;
     }
     public void LoadPlayerAndReload()
     {
