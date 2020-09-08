@@ -17,7 +17,10 @@ public class TerminalControl : MonoBehaviour {
         Scene currentScene = SceneManager.GetActiveScene();
 
         string sceneName = currentScene.name;
-        particleEffect.SetActive(false);
+        if (particleEffect != null)
+        {
+            particleEffect.SetActive(false);
+        }
         
     }
     void Update () {
@@ -34,7 +37,10 @@ public class TerminalControl : MonoBehaviour {
                 StartCoroutine(Waterdrain());
                 terminals = 1;
             }
-            particleEffect.SetActive(true);
+            if (particleEffect != null)
+            {
+                particleEffect.SetActive(true);
+            }
         }
         
 	}

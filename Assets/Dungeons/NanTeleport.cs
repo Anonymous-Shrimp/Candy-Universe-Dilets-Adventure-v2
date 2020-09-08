@@ -9,13 +9,16 @@ public class NanTeleport : MonoBehaviour {
     public bool nanGate = false;
 	// Use this for initialization
 	void Start () {
-        nanTransport.SetActive(false);
+        if (nanTransport != null)
+        {
+            nanTransport.SetActive(false);
+        }
         nanGate = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(dilet.fire && dilet.water && dilet.thunder && dilet.ice && dilet.rock)
+		if(dilet.fire && dilet.water && dilet.thunder && dilet.ice && dilet.rock && nanTransport != null)
         {
             nanGate = true;
             nanTransport.SetActive(true);
