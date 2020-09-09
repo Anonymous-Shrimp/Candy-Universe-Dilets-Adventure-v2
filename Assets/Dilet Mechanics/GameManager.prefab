@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nanTransport: {fileID: 0}
   dilet: {fileID: 0}
+  nanGate: 0
 --- !u!1001 &8505484002079663215
 PrefabInstance:
   m_ObjectHideFlags: 0

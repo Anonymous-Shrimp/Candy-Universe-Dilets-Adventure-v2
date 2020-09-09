@@ -407,7 +407,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 28727
+    m_Bits: 29239
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1976,7 +1976,7 @@ MonoBehaviour:
   Hit: {fileID: 82012118190260122}
   Miss: {fileID: 82027537559618512}
   damage: 4
-  maxDistance: 2
+  maxDistance: 5
   energyBar: {fileID: 0}
   chargedEnergyBar: {fileID: 0}
   multiplier: 1.2

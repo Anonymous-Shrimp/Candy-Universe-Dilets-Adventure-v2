@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AI : MonoBehaviour {
     public Transform target;
@@ -14,6 +15,7 @@ public class AI : MonoBehaviour {
     private Quaternion defaultRot;
     public enum enemySpecialProperty { none,giant, ice, thunder};
     public enemySpecialProperty specialProperty;
+    public UnityEvent onDie;
     Rigidbody rb;
     LookArea area;
     bool hitted = false;
@@ -24,6 +26,8 @@ public class AI : MonoBehaviour {
     public bool madAlerted = false;
     public float turnSpeed = 200f;
     public float walkingSpeed = 5f;
+
+
 
     private bool canDieAgain = false;
     private Animator Anim;
@@ -188,10 +192,16 @@ public class AI : MonoBehaviour {
         {
             FindObjectOfType<QuestManager>().changeProgressByOne(10);
         }
-
+        onDie.Invoke();
+        try { 
         ParticleSystem e = Instantiate(explode, transform.position, transform.rotation).GetComponent<ParticleSystem>();
         e.Play();
         Destroy(e.gameObject, 5);
+        }
+        catch
+        {
+
+        }
         Destroy(gameObject);
     }
     IEnumerator alertBiddies(AI buddy, float delayMin, float delayMax)
