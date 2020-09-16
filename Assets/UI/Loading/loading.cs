@@ -107,6 +107,8 @@ public class loading : MonoBehaviour
         loadingScreen.SetActive(true);
         
         StartCoroutine(wait(1));
+
+        pause.isPaused = false;
     }
 
     // Update is called once per frame

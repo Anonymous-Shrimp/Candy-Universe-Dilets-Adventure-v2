@@ -8224,6 +8224,11 @@ PrefabInstance:
       propertyPath: dilet
       value: 
       objectReference: {fileID: 1853362847}
+    - target: {fileID: 1318015083, guid: f63951c33e5e25f4ba1d1bdd9a48e406, type: 3}
+      propertyPath: sharedProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: 9dcfd9cc79ae30d4dad55406b8df4d3a,
+        type: 2}
     - target: {fileID: 1063361060180284, guid: f63951c33e5e25f4ba1d1bdd9a48e406, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -8770,7 +8775,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh19250
+  m_Name: pb_Mesh206140
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -29671,7 +29676,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh19292
+  m_Name: pb_Mesh206182
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

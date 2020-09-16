@@ -13,8 +13,8 @@ public class options : MonoBehaviour
     public AudioMixer AudioMixer;
     Resolution[] resolutions;
     string[] Qualities;
-    public TMP_Dropdown ResolutionDropdown;
-    public TMP_Dropdown QualityDropdown;
+    //public Dropdown ResolutionDropdown;
+    public Dropdown QualityDropdown;
     public Slider[] volumeSliders;
     public GameObject postProcess;
     public Toggle fullscreen;
@@ -25,20 +25,19 @@ public class options : MonoBehaviour
         float value;
         AudioMixer.GetFloat("masterVolume", out value);
         volumeSliders[0].value = value;
-        
+
         AudioMixer.GetFloat("musicVolume", out value);
         volumeSliders[1].value = value;
         AudioMixer.GetFloat("SFXVolume", out value);
         volumeSliders[2].value = value;
 
 
-        
 
-        int CurrentResolutionIndex = 0;
+       // int CurrentResolutionIndex = 0;
         resolutions = Screen.resolutions;
         Qualities = QualitySettings.names;
 
-        ResolutionDropdown.ClearOptions();
+        //ResolutionDropdown.ClearOptions();
         QualityDropdown.ClearOptions();
 
         List<string> options = new List<string>();
@@ -48,23 +47,26 @@ public class options : MonoBehaviour
         {
             string Option = resolutions[i].width + " x " + resolutions[i].height;
             options.Add(Option);
-
+            /*
             if (resolutions[i].width == Screen.currentResolution.width &&
                 resolutions[i].height == Screen.currentResolution.height)
             {
                 CurrentResolutionIndex = i;
             }
+            */
         }
+        
         for (int i = 0; i < Qualities.Length; i++)
         {
             string OptionQ = Qualities[i];
             optionsQ.Add(OptionQ);
 
         }
-
-        ResolutionDropdown.AddOptions(options);
-        ResolutionDropdown.value = CurrentResolutionIndex;
-        ResolutionDropdown.RefreshShownValue();
+        //print(CurrentResolutionIndex);
+        //ResolutionDropdown.AddOptions(options);
+        //ResolutionDropdown.value = CurrentResolutionIndex;
+        //ResolutionDropdown.RefreshShownValue();
+        
 
         QualityDropdown.AddOptions(optionsQ);
         QualityDropdown.RefreshShownValue();
@@ -72,7 +74,7 @@ public class options : MonoBehaviour
         fullscreen.isOn = Screen.fullScreen;
 
         QualityDropdown.value = QualitySettings.GetQualityLevel();
-        ResolutionDropdown.value = resolutions.ToList().IndexOf(Screen.currentResolution);
+
 
         setFX(true);
         SetMasterVolume(1);
@@ -80,27 +82,31 @@ public class options : MonoBehaviour
         SetMusicVolume(1);
 
         LoadFile();
-        
-    }
 
+       // SetResolution(CurrentResolutionIndex);
+       // ResolutionDropdown.RefreshShownValue();
+    }
+    
     private void Update()
     {
-        QualityDropdown.value = QualitySettings.GetQualityLevel();
-        ResolutionDropdown.value = resolutions.ToList().IndexOf(Screen.currentResolution);
+        SetQuality(QualityDropdown.value);
         SetMasterVolume(volumeSliders[0].value);
         SetMusicVolume(volumeSliders[1].value);
         SetSFXVolume(volumeSliders[2].value);
         setFX(fx.isOn);
-        SetFullscreen(fullscreen.isOn);
+        
         SaveFile();
+        //ResolutionDropdown.value = resolutions.ToList().IndexOf(Screen.currentResolution);
+        //ResolutionDropdown.RefreshShownValue();
 
     }
     public void SetResolution(int ResolutionIndex)
     {
-        Resolution resolution = resolutions[ResolutionIndex];
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        
+        //Resolution resolution = resolutions[ResolutionIndex];
+            //Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        
     }
-
     public void SetMasterVolume(float volume)
     {
         AudioMixer.SetFloat("masterVolume", volume);
@@ -124,7 +130,10 @@ public class options : MonoBehaviour
 
     public void setFX(bool fx)
     {
-        postProcess.SetActive(fx);
+        if (postProcess != null)
+        {
+            postProcess.SetActive(fx);
+        }
     }
     public void SetFullscreen(bool isFullscreen)
     {
@@ -169,7 +178,8 @@ public class options : MonoBehaviour
             volumeSliders[1].value = 1;
             volumeSliders[2].value = 1;
             fx.isOn = true;
-            fullscreen.isOn = true;
+            Screen.fullScreen = true;
+            
 
         }
 
