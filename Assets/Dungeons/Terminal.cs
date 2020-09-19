@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 public class Terminal : MonoBehaviour {
     public TerminalControl terminal;
     public Material material;
     private bool activated;
+    public UnityEvent ending;
     
     void Start()
     {
@@ -19,6 +20,7 @@ public class Terminal : MonoBehaviour {
             StartCoroutine(Fade(1, 0));
             terminal.terminals -= 1;
             activated = true;
+            ending.Invoke();
             //material.DisableKeyword("_Emmision");
         }
     }

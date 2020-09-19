@@ -64,6 +64,11 @@ public class Ouch : MonoBehaviour
     float jumpEnergyReduction;
     float runSpeed;
     public Animator jumpBarAnim;
+    [Space]
+    private Vector2 movement;
+    private Vector2 movementTarget;
+    public float stopSpeed = 2
+        ;
 
     void Awake()
     {
@@ -230,8 +235,65 @@ public class Ouch : MonoBehaviour
     }
     void Update()
     {
-        FindObjectOfType<FirstPersonController>().jump = FindObjectOfType<Keybind>().keys["Jump"];
-        FindObjectOfType<FirstPersonController>().run = FindObjectOfType<Keybind>().keys["Run"];
+        Keybind keybind = FindObjectOfType<Keybind>();
+        FindObjectOfType<FirstPersonController>().jump = keybind.keys["Jump"];
+        FindObjectOfType<FirstPersonController>().run = keybind.keys["Run"];
+        if (Input.GetKey(keybind.keys["Up"]) && !Input.GetKey(keybind.keys["Down"]))
+        {
+            movementTarget.y = 1;
+        }else if (!Input.GetKey(keybind.keys["Up"]) && Input.GetKey(keybind.keys["Down"]))
+        {
+            movementTarget.y = -1;
+        }
+        else if((Input.GetKey(keybind.keys["Up"]) && Input.GetKey(keybind.keys["Down"])))
+        {
+            movementTarget.y = 0;
+        }
+        else if ((!Input.GetKey(keybind.keys["Up"]) && !Input.GetKey(keybind.keys["Down"])))
+        {
+            movementTarget.y = 0;
+        }
+        if (Input.GetKey(keybind.keys["Right"]) && !Input.GetKey(keybind.keys["Left"]))
+        {
+            movementTarget.x = 1;
+        }
+        else if (!Input.GetKey(keybind.keys["Right"]) && Input.GetKey(keybind.keys["Left"]))
+        {
+            movementTarget.x = -1;
+        }
+        else if ((Input.GetKey(keybind.keys["Right"]) && Input.GetKey(keybind.keys["Left"])))
+        {
+            movementTarget.x = 0;
+        }
+        else if ((!Input.GetKey(keybind.keys["Right"]) && !Input.GetKey(keybind.keys["Left"])))
+        {
+            movementTarget.x = 0;
+        }
+        if (Mathf.Abs(movement.y - movementTarget.y) < 0.1)
+        {
+            movement.y = movementTarget.y;
+        }
+        if (Mathf.Abs(movement.x - movementTarget.x) < 0.1)
+        {
+            movement.x = movementTarget.x;
+        }
+        if (movement.x > movementTarget.x)
+        {
+            movement.x -= Time.deltaTime * stopSpeed;
+        }else if (movement.x < movementTarget.x)
+        {
+            movement.x += Time.deltaTime * stopSpeed;
+        }
+        if (movement.y > movementTarget.y)
+        {
+            movement.y -= Time.deltaTime * stopSpeed;
+        }
+        else if (movement.y < movementTarget.y)
+        {
+            movement.y += Time.deltaTime * stopSpeed;
+        }
+        
+        FindObjectOfType<FirstPersonController>().keybindInput = movement;
         if (telid != null && !refreshResearchData)
         {
             bool attack = false;
@@ -580,7 +642,7 @@ public class Ouch : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Candy"))
         {
-            candy.targetAmount += 20;
+            candy.targetAmount += Mathf.RoundToInt(collision.transform.localScale.x * 40);
             GameObject i = Instantiate(candyParticle, collision.transform.position, collision.transform.rotation);
             i.GetComponent<ParticleSystem>().Play();
             Destroy(i, 5f);

@@ -729,6 +729,7 @@ MonoBehaviour:
   cold: 0
   harshEnvironment: 0
   jumpBarAnim: {fileID: 0}
+  stopSpeed: 4
 --- !u!114 &114584988048618354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -858,6 +859,7 @@ MonoBehaviour:
   jumpAdd: 0
   jump: 0
   run: 0
+  keybindInput: {x: 0, y: 0}
 --- !u!54 &54263003291527970
 Rigidbody:
   m_ObjectHideFlags: 0

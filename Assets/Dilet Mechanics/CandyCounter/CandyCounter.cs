@@ -37,12 +37,12 @@ public class CandyCounter : MonoBehaviour
 
         else if (targetAmount > candyAmountApprox)
         {
-            candyAmountApprox += Time.unscaledDeltaTime * Mathf.Abs(targetAmount - candyAmount);
+            candyAmountApprox += Time.unscaledDeltaTime * Mathf.Abs(targetAmount - candyAmount) * 2;
             showValue = true;
         }
         else if(targetAmount < candyAmountApprox)
         {
-            candyAmountApprox -= Time.unscaledDeltaTime * Mathf.Abs(targetAmount - candyAmount);
+            candyAmountApprox -= Time.unscaledDeltaTime * Mathf.Abs(targetAmount - candyAmount) * 2;
             showValue = true;
         }
         else
