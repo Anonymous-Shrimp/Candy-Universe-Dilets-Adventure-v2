@@ -13,6 +13,7 @@ public class Ouch : MonoBehaviour
     
     public float health = 100;
     int maxHealth = 100;
+    public bool godMode = false;
     public GameObject dilet;
     public DiletBar Bar;
     public bool introduction;
@@ -67,8 +68,7 @@ public class Ouch : MonoBehaviour
     [Space]
     private Vector2 movement;
     private Vector2 movementTarget;
-    public float stopSpeed = 2
-        ;
+    public float stopSpeed = 2;
 
     void Awake()
     {
@@ -112,7 +112,8 @@ public class Ouch : MonoBehaviour
             candy.targetAmount = 0;
             candy.candyAmount = 0;
             start = true;
-            
+
+            CheatData.SaveDefault();
             SavePlayer();
         }
         else
@@ -235,6 +236,7 @@ public class Ouch : MonoBehaviour
     }
     void Update()
     {
+        if (godMode) { health = maxHealth; }
         Keybind keybind = FindObjectOfType<Keybind>();
         FindObjectOfType<FirstPersonController>().jump = keybind.keys["Jump"];
         FindObjectOfType<FirstPersonController>().run = keybind.keys["Run"];
