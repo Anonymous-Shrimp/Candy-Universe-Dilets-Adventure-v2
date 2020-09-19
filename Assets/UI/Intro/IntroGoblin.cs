@@ -5,6 +5,7 @@ using UnityEngine;
 public class IntroGoblin : MonoBehaviour
 {
     public AI goblin;
+    bool done = false;
     private void Start()
     {
         goblin = FindObjectOfType<AI>();
@@ -12,9 +13,10 @@ public class IntroGoblin : MonoBehaviour
     }
     private void Update()
     {
-        if(goblin.Health <= 0 || Input.GetKeyDown(FindObjectOfType<Keybind>().keys["Skip"]))
+        if((goblin.Health <= 0 || Input.GetKeyDown(FindObjectOfType<Keybind>().keys["Skip"]))&& !done)
         {
             FindObjectOfType<loading>().LoadLevel(3);
+            done = true;
         }
     }
 }

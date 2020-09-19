@@ -26,7 +26,7 @@ public class CandyCounter : MonoBehaviour
     
     private void Update()
     {
-        anim.SetBool("FadedIn", showValue || Input.GetKey(KeyCode.E));
+        anim.SetBool("FadedIn", showValue || Input.GetKey(FindObjectOfType<Keybind>().keys["Show Candy"]));
         candyText.text = candyAmount.ToString();
         candyAmount = Mathf.RoundToInt(candyAmountApprox);
         if(Mathf.Abs(targetAmount - candyAmountApprox) < 1 && targetAmount != candyAmountApprox)
