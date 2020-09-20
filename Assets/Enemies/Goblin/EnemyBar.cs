@@ -44,5 +44,9 @@ public class EnemyBar : MonoBehaviour
     public void EnemySize(float sizeNormalized)
     {
         target = sizeNormalized;
+        if(target < 0)
+        {
+            target = 0;
+        }
     }
 }

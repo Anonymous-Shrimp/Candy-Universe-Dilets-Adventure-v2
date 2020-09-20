@@ -18,6 +18,7 @@ public class MeleeSystem : MonoBehaviour
     private float chargedEnergyReduction = 0.3f;
     private float chargedDamage;
     public GameObject largeHitbox;
+    public GameObject slapParticle;
     
     // Start is called before the first frame update
     void Start()
@@ -69,6 +70,10 @@ public class MeleeSystem : MonoBehaviour
                             Destroy(g, 1);
                         }
                         hit.transform.SendMessage("ApplyDamage", Mathf.Round(chargedDamage + damage), SendMessageOptions.DontRequireReceiver);
+                        ParticleSystem p = Instantiate(slapParticle, hit.transform.position, hit.transform.rotation).GetComponent<ParticleSystem>();
+                        p.transform.localScale = new Vector3(chargedDamage, chargedDamage, chargedDamage);
+                        p.Play();
+                        Destroy(p.gameObject, 3);
                         Hit.Play();
                     }
                     else

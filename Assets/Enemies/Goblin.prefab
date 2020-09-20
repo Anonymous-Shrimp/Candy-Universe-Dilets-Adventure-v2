@@ -950,16 +950,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   Health: 100
+  damage: 10
   Bar: {fileID: 114240083279932800}
   explode: {fileID: 0}
   targetLookAt: {fileID: 0}
   specialProperty: 0
+  onDie:
+    m_PersistentCalls:
+      m_Calls: []
   hittedCooldown: 3
   cooldown: 0
   mad: 0
   madAlerted: 0
   turnSpeed: 200
   walkingSpeed: 5
+  hurtMaterial: {fileID: 2100000, guid: 2f39a0426b87600488b99aaca7559a97, type: 2}
+  rend: {fileID: 137096892866691612}
   walkingClip: {fileID: -203655887218126122, guid: a5004e7e374b5434b8e5eebf20fa12f0,
     type: 3}
   distanceUntilNotice: 30

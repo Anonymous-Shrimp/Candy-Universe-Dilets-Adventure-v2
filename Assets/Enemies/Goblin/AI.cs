@@ -26,6 +26,9 @@ public class AI : MonoBehaviour {
     public bool madAlerted = false;
     public float turnSpeed = 200f;
     public float walkingSpeed = 5f;
+    public Material hurtMaterial;
+    Material defaultMaterial;
+    public SkinnedMeshRenderer rend;
 
 
 
@@ -46,10 +49,13 @@ public class AI : MonoBehaviour {
         defaultRot = transform.rotation;
         area = GetComponentInChildren<LookArea>();
         explode = GameObject.Find("DeathEnemy");
+        defaultMaterial = rend.material;
     }
     void FixedUpdate()
     {
-        if(rb.velocity.magnitude == 0)
+
+        rend.material.Lerp(rend.material, defaultMaterial, Time.deltaTime * 4);
+        if (rb.velocity.magnitude == 0)
         {
             rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         }
@@ -79,6 +85,7 @@ public class AI : MonoBehaviour {
                 mad = true;
             
         }
+        
 
         else
         {
@@ -134,6 +141,8 @@ public class AI : MonoBehaviour {
     }
     void ApplyDamage(int TheDamage)
     {
+        
+        rend.material = hurtMaterial;
         Health -= TheDamage;
         hitted = true;
         hittedTimer = hittedCooldown;
@@ -153,6 +162,7 @@ public class AI : MonoBehaviour {
     }
     void ApplyNormalDamage(int TheDamage)
     {
+        rend.material = hurtMaterial;
         Health -= TheDamage;
         hitted = true;
         hittedTimer = hittedCooldown;
@@ -216,17 +226,7 @@ public class AI : MonoBehaviour {
     {
         if (other.gameObject.CompareTag("DiletHitbox"))
         {
-            Health -= 3;
-            hitted = true;
-            hittedTimer = hittedCooldown;
-            if (Health <= 0 && !canDieAgain)
-            {
-                canDieAgain = true;
-                FindObjectOfType<CandyCounter>().targetAmount += Random.Range(3, 13);
-                StartCoroutine(death());
-
-
-            }
+            ApplyDamage(3);
         }
     }
 
