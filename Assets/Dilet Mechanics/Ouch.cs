@@ -751,7 +751,7 @@ public class Ouch : MonoBehaviour
     IEnumerator Poyo()
     {
         GameObject.Find("PoyoImage").GetComponent<Animator>().SetTrigger("Poyo");
-        yield return new WaitForSeconds(1.1f);
+        yield return new WaitForSeconds(2f);
         transform.position = new Vector3(-365.293f, 479.477f, 828.8861f);
         
         yield return null;
