@@ -141,7 +141,8 @@ public class options : MonoBehaviour
         if (isFullscreen)
         {
             Resolution maxRes = Screen.resolutions[Screen.resolutions.Length - 1];
-            Screen.SetResolution(maxRes.width, maxRes.height, Screen.fullScreen);
+            print(maxRes);
+            Screen.SetResolution(maxRes.width, maxRes.height, isFullscreen);
         }
     }
     public void SaveFile()

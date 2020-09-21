@@ -13156,11 +13156,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Loading
       objectReference: {fileID: 0}
-    - target: {fileID: 1296236105133732583, guid: d528629f35f417349b96914ee7389151,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1296236105645722026, guid: d528629f35f417349b96914ee7389151,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -13593,7 +13588,7 @@ PrefabInstance:
     - target: {fileID: 4743395504083188431, guid: bcad5ef5ccb7b814e84d2381bbfe4eb4,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 0.0000076293945
       objectReference: {fileID: 0}
     - target: {fileID: 4805529758214981689, guid: bcad5ef5ccb7b814e84d2381bbfe4eb4,
         type: 3}

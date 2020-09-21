@@ -10,7 +10,7 @@ public class loading : MonoBehaviour
     public GameObject loadingScreen;
     public Animator anim;
     public PauseMenu pause;
-
+    public Image[] opacityObjects;
     
 
     public void LoadLevel(int sceneIndex)
@@ -36,15 +36,23 @@ public class loading : MonoBehaviour
             pause.Resume();
         }
 
-        
+        foreach(Image i in opacityObjects)
+        {
+            i.color = new Color(i.color.r, i.color.g, i.color.b, 0);
+        }
+        FindObjectOfType<ToggleHUD>().show = true;
+        FindObjectOfType<ToggleHUD>().canToggle = false;
         loadingScreen.SetActive(true);
+        FindObjectOfType<LoadingPicture>().getRandomSprite();
+        
+        
         if (pause != null)
         {
             pause.canPause = false;
         }
         Debug.Log("Switch scene to " + sceneIndex);
         anim.SetTrigger("FadeOut");
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(6);
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
 
         
