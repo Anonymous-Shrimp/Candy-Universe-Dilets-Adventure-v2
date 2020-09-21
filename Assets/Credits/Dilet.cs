@@ -3,51 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Dilet : MonoBehaviour {
-    public float jumpHeight;
-    public float movementSpeed;
-    public float fastfallSpeed;
-    bool jumpOk = false;
-    public Rigidbody Rigid;
-	// Use this for initialization
-	void Start () {
-        Rigid = GetComponent<Rigidbody>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        if (Input.GetAxis("Horizontal") < 0)
-        {
-            Rigid.AddRelativeForce(Vector3.left * movementSpeed);
-        }
-        if (Input.GetAxis("Horizontal") > 0)
-        {
-            Rigid.AddForce(Vector3.right * movementSpeed);
+    private CharacterController controller;
+    private Vector3 playerVelocity;
+    private bool groundedPlayer;
+    public float playerSpeed = 2.0f;
+    public float jumpHeight = 1.0f;
+    public float gravityValue = -9.81f;
 
-        }
-        if (Input.GetAxis("Vertical") > 0)
-        {
-            if (jumpOk == true)
-            {
-                {
-                    Rigid.AddForce(Vector3.up * jumpHeight * 100);
-                    jumpOk = false;
-                }
-            }
-           
-        }
-        if (Input.GetAxis("Vertical") < 0)
-        {
-            Rigid.AddRelativeForce(Vector3.down * fastfallSpeed * 30);
-        }
-
-    }
-    void OnCollisionEnter(Collision collision)
+    private void Start()
     {
-        if (collision.gameObject.CompareTag("Floor"))
-        {
-            jumpOk = true;
-        }
+        controller = gameObject.GetComponent<CharacterController>();
     }
-   
 
+    void Update()
+    {
+        groundedPlayer = controller.isGrounded;
+        if (groundedPlayer && playerVelocity.y < 0)
+        {
+            playerVelocity.y = 0f;
+        }
+
+        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, 0);
+        controller.Move(move * Time.deltaTime * playerSpeed);
+
+        if (move != Vector3.zero)
+        {
+            gameObject.transform.forward = move;
+        }
+
+        // Changes the height position of the player..
+        if ((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.W)) && groundedPlayer)
+        {
+            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+        }
+
+        playerVelocity.y += gravityValue * Time.deltaTime;
+        controller.Move(playerVelocity * Time.deltaTime);
+    }
 }

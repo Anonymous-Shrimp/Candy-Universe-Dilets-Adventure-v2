@@ -12,11 +12,11 @@ public class Credits : MonoBehaviour {
 	void Update () {
         if (Input.GetButtonDown("Cancel"))
         {
-            Application.LoadLevel(0);
+            FindObjectOfType<loading>().LoadLevel(0);
         }
         if (loadMenu)
         {
-            Application.LoadLevel(0);
+            FindObjectOfType<loading>().LoadLevel(0);
         }
 
     }
