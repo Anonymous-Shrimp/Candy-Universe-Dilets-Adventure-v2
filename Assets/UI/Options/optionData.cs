@@ -1,15 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
+using UnityEngine.Rendering.PostProcessing;
 
 
-[System.Serializable]
+[Serializable]
 public class optionData
 {
     public float masterVolume;
     public float musicVolume;
     public float SFXVolume;
     public bool FX;
+    public float exposure;
 
     public optionData(options o)
     {
@@ -17,5 +17,6 @@ public class optionData
         musicVolume = o.volumeSliders[1].value;
         SFXVolume = o.volumeSliders[2].value;
         FX = o.postProcess.activeInHierarchy;
+        exposure = o.exposureFX.postExposure.value;
     }
 }

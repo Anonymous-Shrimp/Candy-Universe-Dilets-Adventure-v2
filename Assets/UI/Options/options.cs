@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using System.IO;
+using UnityEngine.Rendering.PostProcessing;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Linq;
 
@@ -16,12 +17,16 @@ public class options : MonoBehaviour
     //public Dropdown ResolutionDropdown;
     public Dropdown QualityDropdown;
     public Slider[] volumeSliders;
+    public Slider exposure;
     public GameObject postProcess;
+    public ColorGrading exposureFX;
+    public PostProcessVolume exposureFXObject;
     public Toggle fullscreen;
     public Toggle fx;
 
     private void Start()
     {
+        exposureFX = exposureFXObject.profile.GetSetting<ColorGrading>();
         float value;
         AudioMixer.GetFloat("masterVolume", out value);
         volumeSliders[0].value = value;
@@ -30,10 +35,10 @@ public class options : MonoBehaviour
         volumeSliders[1].value = value;
         AudioMixer.GetFloat("SFXVolume", out value);
         volumeSliders[2].value = value;
+        exposure.value = 0;
 
 
-
-       // int CurrentResolutionIndex = 0;
+        // int CurrentResolutionIndex = 0;
         resolutions = Screen.resolutions;
         Qualities = QualitySettings.names;
 
@@ -72,9 +77,10 @@ public class options : MonoBehaviour
         QualityDropdown.RefreshShownValue();
 
         fullscreen.isOn = Screen.fullScreen;
+        QualityDropdown.value = 4;
+        //QualityDropdown.value = QualitySettings.GetQualityLevel();
 
-        QualityDropdown.value = QualitySettings.GetQualityLevel();
-
+        setExposure(0);
 
         setFX(true);
         SetMasterVolume(1);
@@ -94,7 +100,7 @@ public class options : MonoBehaviour
         SetMusicVolume(volumeSliders[1].value);
         SetSFXVolume(volumeSliders[2].value);
         setFX(fx.isOn);
-        
+        setExposure(exposure.value);
         SaveFile();
         //ResolutionDropdown.value = resolutions.ToList().IndexOf(Screen.currentResolution);
         //ResolutionDropdown.RefreshShownValue();
@@ -127,7 +133,10 @@ public class options : MonoBehaviour
         QualitySettings.SetQualityLevel(qualityIndex);
         
     }
-
+    public void setExposure(float value)
+    {
+        exposureFX.postExposure.value = value;
+    }
     public void setFX(bool fx)
     {
         if (postProcess != null)
@@ -144,6 +153,18 @@ public class options : MonoBehaviour
             print(maxRes);
             Screen.SetResolution(maxRes.width, maxRes.height, isFullscreen);
         }
+    }
+    public void restoreDefualts()
+    {
+       QualityDropdown.value = 4;
+        volumeSliders[0].value = 1;
+        volumeSliders[1].value = 1;
+        volumeSliders[2].value = 1;
+        fx.isOn = true;
+        exposure.value = 0;
+        fullscreen.isOn = true;
+        SetFullscreen(true);
+
     }
     public void SaveFile()
     {
@@ -176,6 +197,7 @@ public class options : MonoBehaviour
             volumeSliders[1].value = data.musicVolume;
             volumeSliders[2].value = data.SFXVolume;
             fx.isOn = data.FX;
+            exposure.value = data.exposure;
         }
         else
         {
@@ -184,6 +206,7 @@ public class options : MonoBehaviour
             volumeSliders[1].value = 1;
             volumeSliders[2].value = 1;
             fx.isOn = true;
+            exposure.value = 0;
             Screen.fullScreen = true;
             
 
