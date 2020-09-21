@@ -13,24 +13,28 @@ public class MeleeSystem : MonoBehaviour
     [Space]
     public Slider energyBar;
     public Slider chargedEnergyBar;
+    public Vector2 chargedEnergyBarPos;
     public float multiplier = 0.3f;
     public float energyReduction = 0.3f;
     private float chargedEnergyReduction = 0.3f;
     private float chargedDamage;
     public GameObject largeHitbox;
     public GameObject slapParticle;
-    
+    float chargedYPos;
+
     // Start is called before the first frame update
     void Start()
     {
         chargedDamage = damage;
         energyBar = GameObject.Find("EnergyBar").GetComponent<Slider>();
         chargedEnergyBar = GameObject.Find("ChargedEnergyBar").GetComponent<Slider>();
+        chargedYPos = chargedEnergyBar.GetComponent<RectTransform>().anchoredPosition.y;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+
         chargedEnergyBar.value = energyBar.value;
         if(Input.GetKey(FindObjectOfType<Keybind>().keys["Slap"]) && !(FindObjectOfType<PauseMenu>().isPaused || FindObjectOfType<PauseMenu>().hudMenu || FindObjectOfType<PauseMenu>().talking) && FindObjectOfType<PauseMenu>().canPause)
         {
@@ -92,6 +96,7 @@ public class MeleeSystem : MonoBehaviour
             chargedDamage = 0;
             chargedEnergyReduction = 0;
         }
-       
+        float xPos = energyBar.value * (Mathf.Abs(chargedEnergyBarPos.x - chargedEnergyBarPos.y)) + chargedEnergyBarPos.x;
+        chargedEnergyBar.GetComponent<RectTransform>().anchoredPosition = new Vector3(xPos, chargedYPos);
     }
 }

@@ -8,7 +8,7 @@ public static class SaveSystem {
     {
         BinaryFormatter formatter = new BinaryFormatter();
 
-        string path = Application.persistentDataPath + "/CandyUniverse.dilet";
+        string path = Application.persistentDataPath + "/progression.dilet";
         FileStream stream = new FileStream (path, FileMode.Create);
         
         PlayerData data = new PlayerData(player, time, ammt, questData, telidData);
@@ -18,7 +18,7 @@ public static class SaveSystem {
     }
     public static PlayerData LoadPlayer()
     {
-        string path = Application.persistentDataPath + "/CandyUniverse.dilet";
+        string path = Application.persistentDataPath + "/progression.dilet";
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
@@ -37,5 +37,10 @@ public static class SaveSystem {
             Debug.LogError("Save File not found in " + path);
             return null; 
         }
+    }
+    public static bool checkFile()
+    {
+        string path = Application.persistentDataPath + "/progression.dilet";
+        return File.Exists(path);
     }
 }

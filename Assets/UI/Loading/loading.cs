@@ -40,8 +40,11 @@ public class loading : MonoBehaviour
         {
             i.color = new Color(i.color.r, i.color.g, i.color.b, 0);
         }
-        FindObjectOfType<ToggleHUD>().show = true;
-        FindObjectOfType<ToggleHUD>().canToggle = false;
+        if (FindObjectOfType<ToggleHUD>())
+        {
+            FindObjectOfType<ToggleHUD>().show = true;
+            FindObjectOfType<ToggleHUD>().canToggle = false;
+        }
         loadingScreen.SetActive(true);
         FindObjectOfType<LoadingPicture>().getRandomSprite();
         
@@ -95,7 +98,10 @@ public class loading : MonoBehaviour
     IEnumerator wait(float seconds)
     {
         yield return new WaitForSeconds(seconds - 0.8f);
-        pause.pauseMenu.SetActive(false);
+        if (pause != null)
+        {
+            pause.pauseMenu.SetActive(false);
+        }
         yield return new WaitForSeconds(seconds - 0.2f);
         loadingScreen.SetActive(false);
         if (pause != null)
@@ -110,13 +116,18 @@ public class loading : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        pause.pauseMenu.SetActive(true);
+        if (pause != null)
+        {
+            pause.pauseMenu.SetActive(true);
+        }
 
         loadingScreen.SetActive(true);
         
         StartCoroutine(wait(1));
-
-        pause.isPaused = false;
+        if (pause != null)
+        {
+            pause.isPaused = false;
+        }
     }
 
     // Update is called once per frame

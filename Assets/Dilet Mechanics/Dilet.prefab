@@ -690,6 +690,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  godMode: 0
   dilet: {fileID: 1971277829926040}
   Bar: {fileID: 0}
   introduction: 0
@@ -1981,9 +1982,12 @@ MonoBehaviour:
   maxDistance: 5
   energyBar: {fileID: 0}
   chargedEnergyBar: {fileID: 0}
+  chargedEnergyBarPos: {x: -229, y: 4.9}
   multiplier: 1.2
   energyReduction: 0.3
   largeHitbox: {fileID: 8933660895364597473, guid: df689a4b841ee3e49af10781f655d63d,
+    type: 3}
+  slapParticle: {fileID: 972558604360341381, guid: cccc1c03d8244de48bac64aab26df6ca,
     type: 3}
 --- !u!1 &6361656101675538846
 GameObject:

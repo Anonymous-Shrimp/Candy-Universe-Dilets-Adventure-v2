@@ -4,10 +4,19 @@ using UnityEngine;
 
 public class AcrossSceneTransfer : MonoBehaviour
 {
+    public static AcrossSceneTransfer instance;
     public float[] data;
     // Start is called before the first frame update
     void Start()
     {
+        if(instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
         DontDestroyOnLoad(gameObject);
     }
 

@@ -25,7 +25,10 @@ public class ToggleHUD : MonoBehaviour
 
         foreach (Canvas c in canvases)
         {
-            c.enabled = show;
+            if (c != null)
+            {
+                c.enabled = show;
+            }
         }
         
     }
