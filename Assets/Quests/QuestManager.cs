@@ -9,6 +9,7 @@ public class QuestManager : MonoBehaviour
 {
     public questDisplay display;
     public List<QuestItem> questItems;
+    public List<Quest> displayQuests;
     Ouch player;
     public GameObject HUDQuestDisplayItem;
     public GameObject HUDParent;
@@ -216,9 +217,15 @@ public class QuestManager : MonoBehaviour
                 QuestItem qi = Instantiate(HUDQuestDisplayItem, HUDParent.transform).GetComponent<QuestItem>();
                 questItems.Add(qi);
                 qi.updateValues(q);
-
+                displayQuests.Add(q);
             }
                 }
+        displayQuests.Sort(sortQuests);
+        for (int i = 0; i < displayQuests.ToArray().Length; i++)
+        {
+            questItems[i].updateValues(displayQuests[i]);
+        }
+        
         List<QuestItem> qs;
         qs = new List<QuestItem>();
         foreach(QuestItem q in questItems)
@@ -248,6 +255,10 @@ public class QuestManager : MonoBehaviour
         yield return new WaitForSeconds(3);
         player.SavePlayer();
         yield return null;
+    }
+    static int sortQuests(Quest q1, Quest q2)
+    {
+        return q1.completed.CompareTo(q2.completed);
     }
     
 }
