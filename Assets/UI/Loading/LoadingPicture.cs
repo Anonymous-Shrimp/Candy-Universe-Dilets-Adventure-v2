@@ -13,24 +13,19 @@ public class LoadingPicture : MonoBehaviour
     void Start()
     {
         image = GetComponent<Image>();
-        if (FindObjectOfType<AcrossSceneTransfer>() != null)
-        {
-            currentSprite = Mathf.RoundToInt(FindObjectOfType<AcrossSceneTransfer>().data[0]);
-        }
-        else
-        {
-            currentSprite = randomSprite();
-        }
+        
+            currentSprite = Mathf.RoundToInt(AcrossSceneTransfer.instance.data[0]);
+        
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         image.sprite = sprites[currentSprite];
-        if(FindObjectOfType<AcrossSceneTransfer>() != null)
-        {
-            FindObjectOfType<AcrossSceneTransfer>().data[0] = currentSprite;
-        }
+        
+            AcrossSceneTransfer.instance.data[0] = currentSprite;
+        
     }
     int randomSprite()
     {

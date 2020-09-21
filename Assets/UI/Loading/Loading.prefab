@@ -34,6 +34,7 @@ RectTransform:
   - {fileID: 1296236104607726434}
   - {fileID: 1296236106388525301}
   - {fileID: 1296236105255207767}
+  - {fileID: 2587541218227666049}
   m_Father: {fileID: 4478355886424196380}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -755,6 +756,131 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &2988979730700970006
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2587541218227666049}
+  - component: {fileID: 3191232246710207445}
+  - component: {fileID: 7618473997944596542}
+  - component: {fileID: 6920875304060199983}
+  - component: {fileID: 5379233364816794462}
+  m_Layer: 5
+  m_Name: Tips
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2587541218227666049
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2988979730700970006}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1296236104487026656}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 19.401, y: -136.31}
+  m_SizeDelta: {x: 655.87537, y: 58.14081}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &3191232246710207445
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2988979730700970006}
+  m_CullTransparentMesh: 0
+--- !u!114 &7618473997944596542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2988979730700970006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 1cd994ad37fc9ec408309ee192647cfd, type: 3}
+    m_FontSize: 30
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 10
+    m_MaxSize: 30
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Tip: You can die'
+--- !u!114 &6920875304060199983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2988979730700970006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c66f774fe500a2640a21c490b7000259, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tips:
+  - Shock Slap does more damage on top of the splash damage
+  - Super speed will deplete melee energy, but it will not exhast if used completely
+  - Mt. Graupel is so cold, it will inflict damage to you over time.
+  - If you get caught in a blizzard or a heatwave, you will be inflicted more damage
+  - Super jump is great for combat and evading goblin attacks
+  - Regeneration is great for the mountain as it's regenration is faster than the
+    damage from the cold
+  - You can see quests and Telid research by pressing the menu key (Change in options
+    menu)
+  - Zooming your camera is great for scouting out enemies ahead
+  - Try to avoid the poyo forest as it is hard to get out once inside.
+  - You can't swim. Avoid deep water
+  - I'm running out of ideas
+  - If you have poison slap activated, try to alternate slaps between enemies
+  - Max health+ triples your max health.
+  - 'An efficent way '
+  - 
+--- !u!114 &5379233364816794462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2988979730700970006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &6745227039514969936
 GameObject:
   m_ObjectHideFlags: 0

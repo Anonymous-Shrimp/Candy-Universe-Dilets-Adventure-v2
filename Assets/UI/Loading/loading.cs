@@ -47,8 +47,9 @@ public class loading : MonoBehaviour
         }
         loadingScreen.SetActive(true);
         FindObjectOfType<LoadingPicture>().getRandomSprite();
-        
-        
+        FindObjectOfType<Tips>().getRandomTip();
+
+
         if (pause != null)
         {
             pause.canPause = false;
