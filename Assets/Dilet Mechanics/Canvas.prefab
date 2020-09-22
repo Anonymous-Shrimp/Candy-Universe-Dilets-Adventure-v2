@@ -11255,7 +11255,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 5
+  m_ScrollSensitivity: 14
   m_Viewport: {fileID: 1840633241479222596}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 4155942203948785898}
@@ -13533,7 +13533,7 @@ PrefabInstance:
     - target: {fileID: 4743395504083188431, guid: bcad5ef5ccb7b814e84d2381bbfe4eb4,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000009536743
+      value: 0.000011444092
       objectReference: {fileID: 0}
     - target: {fileID: 4774789560248026797, guid: bcad5ef5ccb7b814e84d2381bbfe4eb4,
         type: 3}

@@ -470,7 +470,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1415954461800822}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 5257234721185570869, guid: 75873abf85f7e3243add6126e12bf3d5,
     type: 2}
@@ -1003,6 +1003,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   display: {fileID: 0}
   questItems: []
+  displayQuests: []
   HUDQuestDisplayItem: {fileID: 2125617721925014087, guid: 9f98a7abe0b115348800f011183683aa,
     type: 3}
   HUDParent: {fileID: 0}

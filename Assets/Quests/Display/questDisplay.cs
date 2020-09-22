@@ -30,6 +30,8 @@ public class questDisplay : MonoBehaviour
     private float timer = 0f;
     public float disappearTime = 5f;
 
+    int pastshowing;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -87,9 +89,14 @@ public class questDisplay : MonoBehaviour
             }
 
         }
-        else if(!FindObjectOfType<PauseMenu>().hudMenu)
+        else if (!FindObjectOfType<PauseMenu>().hudMenu)
         {
-            FindObjectOfType<FullQuestDisplay>().tab = 0;
+            if (pastshowing < showings)
+            {
+                FindObjectOfType<FullQuestDisplay>().tab = 0;
+                
+            }
+            pastshowing = showings;
         }
 
     }

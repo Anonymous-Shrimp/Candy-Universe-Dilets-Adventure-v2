@@ -283,7 +283,7 @@ public class DebugLog : MonoBehaviour
                             else
                             {
                                 questManager.StartQuest(telidResearch.items[researchIndex].questIndex);
-                                questManager.EndQuest(telidResearch.items[researchIndex].questIndex);
+                                questManager.changeProgress(telidResearch.items[researchIndex].questIndex, questManager.quests[telidResearch.items[researchIndex].questIndex].progressMax);
                                 
                             }
 

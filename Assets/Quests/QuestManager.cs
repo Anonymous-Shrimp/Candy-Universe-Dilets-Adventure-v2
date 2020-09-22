@@ -210,8 +210,10 @@ public class QuestManager : MonoBehaviour
 
         }
         questItems.RemoveRange(0, questItems.ToArray().Length);
-        
-        foreach (Quest q in quests) {
+        List<Quest> qes = quests.ToList();
+        qes.Sort(sortQuests);
+
+        foreach (Quest q in qes) {
             if (q.active || q.completed)
             {
                 QuestItem qi = Instantiate(HUDQuestDisplayItem, HUDParent.transform).GetComponent<QuestItem>();
@@ -220,31 +222,10 @@ public class QuestManager : MonoBehaviour
                 displayQuests.Add(q);
             }
                 }
-        displayQuests.Sort(sortQuests);
-        for (int i = 0; i < displayQuests.ToArray().Length; i++)
-        {
-            questItems[i].updateValues(displayQuests[i]);
-        }
-        
-        List<QuestItem> qs;
-        qs = new List<QuestItem>();
-        foreach(QuestItem q in questItems)
-        {
-            qs.Add(q);
-        }
-        foreach(QuestItem q in qs)
-        {
-            if (q.completed)
-            {
-                questItems.Remove(q);
-                questItems.Add(q);
-            }
-        }
-        
+      
         foreach(QuestItem q in questItems)
         {
             q.gameObject.name = q.title;
-            q.transform.SetAsLastSibling();
         }
         
 
