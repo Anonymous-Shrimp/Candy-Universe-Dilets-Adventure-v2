@@ -236,7 +236,8 @@ public class Ouch : MonoBehaviour
     }
     void Update()
     {
-        if (godMode) { health = maxHealth; }
+        if (godMode || health > maxHealth) { health = maxHealth; }
+
         Keybind keybind = FindObjectOfType<Keybind>();
         FindObjectOfType<FirstPersonController>().jump = keybind.keys["Jump"];
         FindObjectOfType<FirstPersonController>().run = keybind.keys["Run"];

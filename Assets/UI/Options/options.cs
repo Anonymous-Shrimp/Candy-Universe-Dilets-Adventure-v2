@@ -26,6 +26,13 @@ public class options : MonoBehaviour
 
     private void Start()
     {
+        foreach(PostProcessVolume p in FindObjectsOfType<PostProcessVolume>())
+        {
+            if(p.gameObject.name == "Exposure")
+            {
+                exposureFXObject = p;
+            }
+        }
         exposureFX = exposureFXObject.profile.GetSetting<ColorGrading>();
         float value;
         AudioMixer.GetFloat("masterVolume", out value);
