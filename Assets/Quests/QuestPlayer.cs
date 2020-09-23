@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class QuestPlayer : MonoBehaviour
 {
+    
     QuestManager manager;
     public QuestData[] questData;
 

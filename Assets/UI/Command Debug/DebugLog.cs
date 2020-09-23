@@ -278,10 +278,14 @@ public class DebugLog : MonoBehaviour
                         {
                             if (telidResearch.items[researchIndex].questActive)
                             {
-                                questManager.EndQuest(telidResearch.items[researchIndex].questIndex);
+                                FindObjectOfType<FullQuestDisplay>().HUDMenu(true);
+                                FindObjectOfType<FullQuestDisplay>().SwitchTab(1);
+                                questManager.changeProgress(telidResearch.items[researchIndex].questIndex, questManager.quests[telidResearch.items[researchIndex].questIndex].progressMax);
                             }
                             else
                             {
+                                FindObjectOfType<FullQuestDisplay>().HUDMenu(true);
+                                FindObjectOfType<FullQuestDisplay>().SwitchTab(1);
                                 questManager.StartQuest(telidResearch.items[researchIndex].questIndex);
                                 questManager.changeProgress(telidResearch.items[researchIndex].questIndex, questManager.quests[telidResearch.items[researchIndex].questIndex].progressMax);
                                 

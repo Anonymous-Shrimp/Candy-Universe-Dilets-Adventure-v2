@@ -58,6 +58,16 @@ public class QuestManager : MonoBehaviour
     }
     private void Start()
     {
+        if (questProgresses != null)
+        {
+            foreach (Text t in FindObjectsOfType<Text>())
+            {
+                if (t.gameObject.name == "Progress")
+                {
+                    questProgresses = t;
+                }
+            }
+        }
         display = FindObjectOfType<questDisplay>();
         player = GetComponent<Ouch>();
         foreach(Quest q in quests)

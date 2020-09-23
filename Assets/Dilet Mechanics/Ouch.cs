@@ -72,7 +72,7 @@ public class Ouch : MonoBehaviour
 
     void Awake()
     {
-        
+        Bar = FindObjectOfType<DiletBar>();
         runSpeed = GetComponent<FirstPersonController>().m_RunSpeed;
         jumpPower = GetComponent<FirstPersonController>().jumpAdd;
         candy = FindObjectOfType<CandyCounter>();
