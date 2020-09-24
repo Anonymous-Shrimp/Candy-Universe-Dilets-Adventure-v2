@@ -229,6 +229,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1964251593}
   offset: {x: 0, y: 0, z: 10}
+--- !u!1 &350071628
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 350071629}
+  - component: {fileID: 350071630}
+  m_Layer: 0
+  m_Name: PlatformerExit
+  m_TagString: Quest
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &350071629
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350071628}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 98.82, y: 87.36, z: -39.66}
+  m_LocalScale: {x: 5.888198, y: 36.432697, z: 22.856644}
+  m_Children: []
+  m_Father: {fileID: 2458503087688020881}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &350071630
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350071628}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &355953901
 GameObject:
   m_ObjectHideFlags: 0
@@ -3235,6 +3279,7 @@ MonoBehaviour:
   endParticle: {fileID: 7887116501206881198, guid: a1c891a9e233fe04489509ff225b902d,
     type: 3}
   cam: {fileID: 2099720287}
+  canControl: 0
 --- !u!95 &1964251598
 Animator:
   serializedVersion: 3
@@ -3539,16 +3584,16 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 420811501}
+        m_MethodName: changeActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!1 &2458503087298644264
 GameObject:
@@ -3559,6 +3604,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2458503087298644265}
+  - component: {fileID: 420811501}
   m_Layer: 0
   m_Name: 2D Platformer
   m_TagString: Untagged
@@ -3582,6 +3628,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &420811501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2458503087298644264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7f2053ec48d9174db97626b2acd60e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isActive: 0
+  Camera: {fileID: 2099720284}
+  playerPlatformer: {fileID: 1964251597}
 --- !u!1 &2458503087481323081
 GameObject:
   m_ObjectHideFlags: 0
@@ -3803,6 +3864,7 @@ Transform:
   - {fileID: 1391851050464504208}
   - {fileID: 1391851050435939751}
   - {fileID: 1391851049796948791}
+  - {fileID: 350071629}
   m_Father: {fileID: 2458503087298644265}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -80,6 +80,10 @@ public class QuestPlayer : MonoBehaviour
             {
                 inSunset = true;
             }
+            if (other.gameObject.name == "PlatformerExit")
+            {
+                FindObjectOfType<ToggleActive>().changeActive(false);
+            }
         }
     }
     private void OnTriggerExit(Collider other)

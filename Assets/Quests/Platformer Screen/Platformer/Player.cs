@@ -23,6 +23,7 @@ namespace platformQuest
         float camStart;
         float sizeTarget;
         Animator anim;
+        public bool canControl;
         // Start is called before the first frame update
         void Start()
         {
@@ -45,10 +46,10 @@ namespace platformQuest
             //     cam.orthographicSize += Time.deltaTime;
             // }
             Vector2 movement = new Vector2(0,0);
-            if (Input.GetKey(KeyCode.RightArrow))
+            if (Input.GetKey(KeyCode.RightArrow) && canControl)
             {
                 movement.x = 1;
-            }else if (Input.GetKey(KeyCode.LeftArrow))
+            }else if (Input.GetKey(KeyCode.LeftArrow) && canControl)
             {
                 movement.x = -1;
             }
@@ -65,7 +66,7 @@ namespace platformQuest
                 jumpTime -= Time.deltaTime;
             }
             transform.Translate(movement * movementSpeed * Time.deltaTime);
-            if (Input.GetKey(KeyCode.UpArrow) && (jumpTime > 0 || canJump)) 
+            if (Input.GetKey(KeyCode.UpArrow) && canControl && (jumpTime > 0 || canJump)) 
             {
                 rigid.AddRelativeForce(Vector2.up * jumpSpeed * 100);
                 canJump = false;

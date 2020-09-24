@@ -88,27 +88,27 @@ public class QuestManager : MonoBehaviour
             {
                 quests[questIndex].active = true;
                 quests[questIndex].started = true;
-            }
+            
             quests[questIndex].startingAction.Invoke();
             quests[questIndex].activeDuringQuest.Invoke();
-            if (display != null)
-            {
-                string progressText;
-                if (quests[questIndex].progress == 0)
+                if (display != null)
                 {
-                    progressText = "New Quest!";
-                }
-                else if (quests[questIndex].progress >= quests[questIndex].progressMax)
-                {
-                    progressText = "Completed!";
-                }
-                else
-                {
-                    progressText = quests[questIndex].progress.ToString() + " / " + quests[questIndex].progressMax.ToString();
-                }
+                    string progressText;
+                    if (quests[questIndex].progress == 0)
+                    {
+                        progressText = "New Quest!";
+                    }
+                    else if (quests[questIndex].progress >= quests[questIndex].progressMax)
+                    {
+                        progressText = "Completed!";
+                    }
+                    else
+                    {
+                        progressText = quests[questIndex].progress.ToString() + " / " + quests[questIndex].progressMax.ToString();
+                    }
 
-                display.addShowing(quests[questIndex].name, quests[questIndex].description, progressText, quests[questIndex].questType);
-
+                    display.addShowing(quests[questIndex].name, quests[questIndex].description, progressText, quests[questIndex].questType);
+                }
             }
             else
             {
