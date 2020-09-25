@@ -68,7 +68,7 @@ namespace platformQuest
             transform.Translate(movement * movementSpeed * Time.deltaTime);
             if (Input.GetKey(KeyCode.UpArrow) && canControl && (jumpTime > 0 || canJump)) 
             {
-                rigid.AddRelativeForce(Vector2.up * jumpSpeed * 100);
+                rigid.AddRelativeForce(Vector2.up * jumpSpeed * 150 * Time.deltaTime);
                 canJump = false;
             }
             anim.SetBool("Grounded", canJump);
