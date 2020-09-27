@@ -51,8 +51,8 @@ MonoBehaviour:
     endTimestamp: 0
     largeImageKey: big
     largeImageText: To play go to https://anonymous-shrimp.itch.io/candy-universe
-    smallImageKey: small
-    smallImageText: To play go to https://anonymous-shrimp.itch.io/candy-universe
+    smallImageKey: 
+    smallImageText: 
     partyId: 
     partySize: 0
     partyMax: 0
@@ -98,4 +98,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1c10f7c58b890a4d8fac96d76956fb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detail: Detail Test
+  state: State Test

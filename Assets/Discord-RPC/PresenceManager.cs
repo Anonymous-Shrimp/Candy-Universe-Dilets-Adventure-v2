@@ -138,8 +138,11 @@ namespace DiscordPresence
 
         void OnDisable()
         {
-            Debug.Log("Discord: shutdown");
-            DiscordRpc.Shutdown();
+            if (!Application.isLoadingLevel)
+            {
+                Debug.Log("Discord: shutdown");
+                DiscordRpc.Shutdown();
+            }
         }
 
         void OnDestroy()

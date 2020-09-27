@@ -623,7 +623,7 @@ public class Ouch : MonoBehaviour
         if (collision.gameObject.CompareTag("Electricity"))
         {
             
-            Rigid.AddRelativeForce(Vector3.back * 100);
+            Rigid.AddRelativeForce(Vector3.back * 150);
             StartCoroutine(Screenoof(2));
             health -= 10;
         }

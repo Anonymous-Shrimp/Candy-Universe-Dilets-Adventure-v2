@@ -8,10 +8,13 @@ using System;
 public class PresenceUpdater : MonoBehaviour
 {
     public string state = "";
+    public int startTime;
     // Start is called before the first frame update
     void Start()
     {
-        
+        DateTime epochStart = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        int cur_time = (int)(DateTime.UtcNow - epochStart).TotalSeconds;
+        startTime = cur_time;
     }
 
     // Update is called once per frame
@@ -33,6 +36,6 @@ public class PresenceUpdater : MonoBehaviour
             state = "In " + sceneName;
         }
         print(state);
-        PresenceManager.UpdatePresence(detail: detail, state: state);
+        PresenceManager.UpdatePresence(detail: detail, state: state, start: startTime);
     }
 }
