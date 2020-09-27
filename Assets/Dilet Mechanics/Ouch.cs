@@ -10,8 +10,8 @@ using System.Linq;
 
 public class Ouch : MonoBehaviour
 {
-    
-    public float health = 100;
+    #region variables
+    [Range(0,300)]public float health = 100;
     int maxHealth = 100;
     public bool godMode = false;
     public GameObject dilet;
@@ -69,6 +69,8 @@ public class Ouch : MonoBehaviour
     private Vector2 movement;
     private Vector2 movementTarget;
     public float stopSpeed = 2;
+    #endregion
+
 
     void Awake()
     {
@@ -359,6 +361,7 @@ public class Ouch : MonoBehaviour
         {
             
             deadAnim.SetTrigger("Dead");
+            FindObjectOfType<PauseMenu>().cursorLockOverride = true;
             FindObjectOfType<PauseMenu>().canPause = false;
         }
         if(telidData.movement == "Super Run")
@@ -447,6 +450,7 @@ public class Ouch : MonoBehaviour
                 start = true;
                 SavePlayer();
                 deadAnim.SetTrigger("Dead");
+                FindObjectOfType<PauseMenu>().cursorLockOverride = true;
                 FindObjectOfType<PauseMenu>().canPause = false;
             }
         }
@@ -498,6 +502,7 @@ public class Ouch : MonoBehaviour
         {
             deadAnim.SetTrigger("Dead");
             FindObjectOfType<PauseMenu>().canPause = false;
+            FindObjectOfType<PauseMenu>().cursorLockOverride = true;
         }
         if (collision.gameObject.CompareTag("GoblinBox"))
         {

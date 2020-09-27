@@ -17,10 +17,13 @@ public class PauseMenu : MonoBehaviour {
     public GameObject optionsMenu;
     public int[] lowpass = { 5000, 300 };
     public AudioMixer mixer;
+    bool cursorLock;
+    public bool cursorLockOverride;
     private void Start()
     {
         isPaused = false;
         hudMenu = false;
+        cursorLockOverride = false;
     }
     void Update () {
         if (Input.GetKeyDown(KeyCode.Escape) && canPause && FindObjectOfType<Keybind>().currentKey == null)
@@ -36,8 +39,7 @@ public class PauseMenu : MonoBehaviour {
         }
         if ((isPaused || hudMenu || talking) && canPause)
         {
-            Cursor.visible = true;
-            Screen.lockCursor = false;
+            cursorLock = false;
             Time.timeScale = 0f;
             mixer.SetFloat("lowpass", lowpass[1]);
 
@@ -46,18 +48,26 @@ public class PauseMenu : MonoBehaviour {
         {
             if (canPause)
             {
-                Cursor.visible = false;
-                Screen.lockCursor = true;
+                
+               cursorLock = true;
                 Time.timeScale = 1f;
                 mixer.SetFloat("lowpass", lowpass[0]);
             }
             else
             {
-                Cursor.visible = !hideOnCantPause;
-                Screen.lockCursor = hideOnCantPause;
+                cursorLock = hideOnCantPause;
                 Time.timeScale = 1f;
                 mixer.SetFloat("lowpass", lowpass[0]);
             }
+        }
+        Cursor.visible = !(cursorLock && !cursorLockOverride);
+        if (cursorLock && !cursorLockOverride)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
         }
 	}
     public void unFreezeEverything()
