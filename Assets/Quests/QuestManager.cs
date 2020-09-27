@@ -245,7 +245,10 @@ public class QuestManager : MonoBehaviour
     IEnumerator saveAfterTime()
     {
         yield return new WaitForSeconds(3);
-        player.SavePlayer();
+        
+            player.SavePlayer();
+        
+        
         yield return null;
     }
     static int sortQuests(Quest q1, Quest q2)

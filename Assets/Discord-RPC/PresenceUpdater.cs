@@ -35,7 +35,6 @@ public class PresenceUpdater : MonoBehaviour
         {
             state = "In " + sceneName;
         }
-        print(state);
         PresenceManager.UpdatePresence(detail: detail, state: state, start: startTime);
     }
 }

@@ -759,8 +759,13 @@ public class Ouch : MonoBehaviour
     }
     public void SavePlayer()
     {
+        string sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
         Debug.Log("Saved Player");
-        SaveSystem.SavePlayer(this, timeInPlace, candy.targetAmount, questData.ToArray(), telidData);
+        if (!(sceneName == "Fire" || sceneName == "Water" || sceneName == "Thunder" || sceneName == "Rock" || sceneName == "Ice" || sceneName == "Nan"))
+        {
+            
+            SaveSystem.SavePlayer(this, timeInPlace, candy.targetAmount, questData.ToArray(), telidData);
+        }
 
     }
 
