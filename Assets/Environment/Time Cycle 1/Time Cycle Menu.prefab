@@ -65,5 +65,6 @@ PrefabInstance:
       propertyPath: secondsInFullDay
       value: 60
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 479370682, guid: 5719bf3dedb4db5448d71ab193d60a62, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5719bf3dedb4db5448d71ab193d60a62, type: 3}

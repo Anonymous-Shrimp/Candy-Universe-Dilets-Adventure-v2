@@ -244,7 +244,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 28.70001, z: 0}
   followingCharacter: 1
-  zoomOutPos: {x: 0, y: 3351, z: 1193}
+  zoomOutPos: {x: 0, y: 2806.9, z: 1193}
   camSizeNormal: 65
   camSizeZoom: 1320
   cam: {fileID: 8837322739863887548}
