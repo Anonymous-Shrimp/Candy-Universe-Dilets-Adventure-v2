@@ -20,9 +20,9 @@
 using System;
 using UnityEngine;
 
-//#if UNITY_EDITOR
+#if UNITY_EDITOR
 using UnityEditor;
-//#endif
+#endif
 
 namespace AuraAPI
 {
@@ -508,7 +508,7 @@ namespace AuraAPI
     }
 
     #region Custom gizmo drawer
-//#if UNITY_EDITOR 
+#if UNITY_EDITOR 
     /// <summary>
     /// Allows to draw custom gizmos for AuraVolume objects
     /// </summary>
@@ -835,6 +835,6 @@ namespace AuraAPI
             CustomGizmo.DrawCone(component.transform.localToWorldMatrix, Vector3.zero, Quaternion.identity, new Vector3(xy, xy, z), color, GetThickness(component.transform.position));
         }
     }
-//#endif
+#endif
     #endregion
 }
